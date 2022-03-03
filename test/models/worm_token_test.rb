@@ -1,6 +1,6 @@
 require "test_helper"
 
-class WormTokenTest < ActiveSupport::TestCase
+class WormPieceTest < ActiveSupport::TestCase
   # test "the truth" do
   #   assert true
   # end

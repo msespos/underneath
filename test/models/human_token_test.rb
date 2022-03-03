@@ -1,6 +1,6 @@
 require "test_helper"
 
-class HumanTokenTest < ActiveSupport::TestCase
+class HumanTest < ActiveSupport::TestCase
   # test "the truth" do
   #   assert true
   # end

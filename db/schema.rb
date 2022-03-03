@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_03_03_031326) do
+ActiveRecord::Schema.define(version: 2022_03_03_031552) do
 
   create_table "cards", force: :cascade do |t|
     t.integer "x_position"
@@ -28,7 +28,7 @@ ActiveRecord::Schema.define(version: 2022_03_03_031326) do
     t.integer "turn"
   end
 
-  create_table "human_tokens", force: :cascade do |t|
+  create_table "humans", force: :cascade do |t|
     t.boolean "aliveness"
     t.integer "x_position"
     t.integer "y_position"

@@ -1,3 +1,3 @@
 class HumanToken < ApplicationRecord
-  belongs_to :board
+  belongs_to :game
 end

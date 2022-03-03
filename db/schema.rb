@@ -10,9 +10,19 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_03_03_023201) do
+ActiveRecord::Schema.define(version: 2022_03_03_023454) do
 
   create_table "boards", force: :cascade do |t|
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "cards", force: :cascade do |t|
+    t.integer "x_position"
+    t.integer "y_position"
+    t.string "terrain"
+    t.string "face_up_or_down"
+    t.boolean "has_bomb"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end

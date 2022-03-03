@@ -1,0 +1,15 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  x_position: 1
+  y_position: 1
+  terrain: MyString
+  face_up_or_down: MyString
+  has_bomb: false
+
+two:
+  x_position: 1
+  y_position: 1
+  terrain: MyString
+  face_up_or_down: MyString
+  has_bomb: false

@@ -1,0 +1,2 @@
+class WormToken < ApplicationRecord
+end

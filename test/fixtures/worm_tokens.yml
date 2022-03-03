@@ -1,0 +1,11 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  aliveness: false
+  x-position: 
+  y-position: 
+
+two:
+  aliveness: false
+  x-position: 
+  y-position: 

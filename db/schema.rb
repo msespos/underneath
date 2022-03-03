@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_03_03_021124) do
+ActiveRecord::Schema.define(version: 2022_03_03_022349) do
 
   create_table "boards", force: :cascade do |t|
     t.datetime "created_at", precision: 6, null: false
@@ -21,6 +21,14 @@ ActiveRecord::Schema.define(version: 2022_03_03_021124) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.integer "turn"
+  end
+
+  create_table "worm_tokens", force: :cascade do |t|
+    t.boolean "aliveness"
+    t.integer "x_position"
+    t.integer "y_position"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
   end
 
 end

@@ -1,0 +1,2 @@
+class HumanToken < ApplicationRecord
+end

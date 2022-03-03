@@ -12,11 +12,6 @@
 
 ActiveRecord::Schema.define(version: 2022_03_03_023847) do
 
-  create_table "boards", force: :cascade do |t|
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-  end
-
   create_table "cards", force: :cascade do |t|
     t.integer "x_position"
     t.integer "y_position"

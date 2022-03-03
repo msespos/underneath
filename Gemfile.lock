@@ -62,6 +62,7 @@ GEM
       zeitwerk (~> 2.3)
     addressable (2.8.0)
       public_suffix (>= 2.0.2, < 5.0)
+    awesome_print (1.9.2)
     bindex (0.8.1)
     bootsnap (1.10.3)
       msgpack (~> 1.2)
@@ -206,6 +207,7 @@ PLATFORMS
   x86_64-darwin-19
 
 DEPENDENCIES
+  awesome_print (~> 1.8)
   bootsnap (>= 1.4.4)
   byebug
   capybara (>= 3.26)

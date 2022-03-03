@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_03_03_023847) do
+ActiveRecord::Schema.define(version: 2022_03_03_031326) do
 
   create_table "cards", force: :cascade do |t|
     t.integer "x_position"
@@ -37,7 +37,7 @@ ActiveRecord::Schema.define(version: 2022_03_03_023847) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
-  create_table "worm_tokens", force: :cascade do |t|
+  create_table "worm_pieces", force: :cascade do |t|
     t.boolean "aliveness"
     t.integer "x_position"
     t.integer "y_position"

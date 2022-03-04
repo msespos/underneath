@@ -1,0 +1,2 @@
+module Printable
+end

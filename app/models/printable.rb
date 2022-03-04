@@ -13,7 +13,7 @@ module Printable
             board[j][i] = 'C'
           end
         end
-        if worm_piece.x_position == i and worm_piece.y_position == j
+        if worm.x_position == i and worm.y_position == j
           board[j][i] = 'W'
         end
       end

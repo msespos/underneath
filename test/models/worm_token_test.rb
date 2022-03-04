@@ -1,6 +1,6 @@
 require "test_helper"
 
-class WormPieceTest < ActiveSupport::TestCase
+class WormTest < ActiveSupport::TestCase
   # test "the truth" do
   #   assert true
   # end

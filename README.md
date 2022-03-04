@@ -1,6 +1,6 @@
 # README
 
-Worm is a two player online board game, pitting four humans against one subterranean worm. One player controls the humans' movement (on the surface), and the other player controls the worm's (below the surface, and breaking through to the surface every four turns). The humans win if at least one human defeats the worm with a bomb when it surfaces. The worm wins if it eats all of the humans over four different turns when it surfaces.
+Underneath is a two player online board game, pitting four humans against one subterranean worm. One player controls the humans' movement (on the surface), and the other player controls the worm's (below the surface, and breaking through to the surface every four turns). The humans win if at least one human defeats the worm with a bomb when it surfaces. The worm wins if it eats all of the humans over four different turns when it surfaces.
 
 The board is an 8x8 grid. The humans start spread out along one corner of the board, and the worm starts below ground in the opposite corner. Throughout the game, the humans and the worm have different views, so that no player ever sees the complete picture of the other's moves. What each player can see depends on the other's position(s) as well as whether the worm is surfacing that turn.
 

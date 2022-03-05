@@ -1,6 +1,6 @@
 module Printable
   def print_state
-    board = Array.new(8) { Array.new(8) { '-' } }
+    board = Array.new(Game::BOARD_SIZE) { Array.new(Game::BOARD_SIZE) { '-' } }
     board.each_with_index do |row, y|
       row.each_with_index do |column, x|
         humans.each do |h|

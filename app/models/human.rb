@@ -7,6 +7,7 @@ class Human < ApplicationRecord
   end
 
   def on_board?
-    (0..7).include?(x_position) && (0..7).include?(y_position)
+    (0..Game::BOARD_SIZE - 1).include?(x_position) &&
+    (0..Game::BOARD_SIZE - 1).include?(y_position)
   end
 end

@@ -13,3 +13,16 @@
  *= require_tree .
  *= require_self
  */
+
+body {
+    background-color:  #14110c;
+    color:  #cdbfa4;
+    font-family: 'Syne Mono', monospace;
+}
+
+h1 {
+    letter-spacing: 0.55em;
+    margin-top: 6vh;
+    margin-bottom: 6vh;
+    text-align: center;
+}

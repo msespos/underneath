@@ -1,0 +1,15 @@
+<div class="flex flex-col items-center justify-center m-4">
+
+	<div class="info-line flex flow-root max-w-md w-11/12">
+		<div class="float-left">
+			Game <%= @game.id %>
+		</div>
+		<div class="float-right">
+			<%= link_to "Exit", games_path %>
+		</div>
+	</div>
+
+	<div class="max-w-md w-11/12">
+	<%= react_component("HelloWorld", { greeting: "Hello from react-rails." }) %>
+	</div>
+</div>

@@ -1,0 +1,17 @@
+<h1 class="mb-4 text-center text-3xl m-20 mb-20">Underneath</h1>
+
+<div class="flex justify-center">
+	<div class="max-w-xl object-center">
+		<% if @games.empty? %>
+			No games available.
+		<% else %>
+			<% @games.each do |g| %>
+				<div>
+					Game <%= g.id %>: 
+					<%= link_to "Play", g %>
+				</div>
+			<% end %>
+		<% end %>
+
+	</div>
+</div>

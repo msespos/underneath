@@ -21,8 +21,10 @@ body {
 }
 
 h1 {
+    font-variant: small-caps;
     letter-spacing: 0.55em;
-    margin-top: 6vh;
-    margin-bottom: 6vh;
-    text-align: center;
+}
+
+a {
+    color: #cf4221;
 }

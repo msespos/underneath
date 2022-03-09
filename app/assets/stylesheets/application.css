@@ -28,3 +28,16 @@ h1 {
 a {
     color: #cf4221;
 }
+
+.board_square {
+    font-size: 125%;
+    padding-top: 8px;
+}
+.board_square.human_0 {
+    background-color: #291d10;
+}
+
+.board_square.human_1 {
+    background-color: #1F1100;
+}
+

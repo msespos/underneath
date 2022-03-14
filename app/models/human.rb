@@ -10,4 +10,8 @@ class Human < ApplicationRecord
     (0..Game::BOARD_SIZE - 1).include?(x_position) &&
     (0..Game::BOARD_SIZE - 1).include?(y_position)
   end
+
+  def print_label
+    'H'
+  end
 end

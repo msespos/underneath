@@ -20,17 +20,8 @@ function renderHuman(index, x, y, per_row) {
 
 class Humans extends React.Component {
   render () {
-    const humanPieces = [{
-      'index': 1, 
-      'position_x': 7,
-      'position_y': 3
-    }, {
-      'index': 2,
-      'position_x': 2,
-      'position_y': 6
-    }];
     const output = [];
-    humanPieces.forEach(piece => {
+    this.props.pieces.forEach(piece => {
       output.push(
         renderHuman(piece['index'],
           piece['position_x'],

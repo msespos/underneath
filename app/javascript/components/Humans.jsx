@@ -24,8 +24,8 @@ class Humans extends React.Component {
     this.props.pieces.forEach(piece => {
       output.push(
         renderHuman(piece['index'],
-          piece['position_x'],
-          piece['position_y'],
+          piece['x_position'],
+          piece['y_position'],
           8)
       );
     });

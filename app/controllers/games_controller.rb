@@ -10,7 +10,26 @@ class GamesController < ApplicationController
   end
 
   def show
+    # TODO: assign me a game, and show that one only
     @game = Game.find(1)
+  end
+
+  # temporary function for proof of concept
+  def move
+    Rails.logger.info("Server moving #{params}")
+    @game = Game.find(1)
+    if @game.humans.any?
+      human = @game.humans.first
+      human.x_position = rand(8) + 1
+      human.y_position = rand(8) + 1
+      human.save!
+    end
+    GameChannel.broadcast_to(@game, {
+      game: @game,
+      humans: @game.humans
+    })
+    Rails.logger.info("Finished move!")
+    render :json => { :success => 1 }
   end
 
 end

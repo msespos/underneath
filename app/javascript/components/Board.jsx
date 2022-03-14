@@ -1,14 +1,14 @@
 import React from "react"
 import PropTypes from "prop-types"
 
-function renderSquare(key, per_row, side, parity) {
+function renderSquare(i, j, per_row, side, parity) {
   const width_percent = 100/per_row + '%'
   return (
-    <div key={key}
+    <div key={'square_' + i + '_' + j}
          className={'board_square float-left text-center align-middle ' + side + '_' + parity}
          style={{width: width_percent,
                  height: width_percent}}>
-    🚶
+    
     </div>
     )
 }
@@ -19,8 +19,7 @@ class Board extends React.Component {
     for (var i = 0; i < 8; i++) {
       for (var j = 0; j < 8; j++) {
         squares.push(
-            renderSquare('square_' + i + '_' + j, 
-                         8, 
+            renderSquare(i, j, 8,
                          'human', 
                          (i + j) % 2))
       }
@@ -34,6 +33,5 @@ class Board extends React.Component {
 }
 
 Board.propTypes = {
-  greeting: PropTypes.string
 };
 export default Board

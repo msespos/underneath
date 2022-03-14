@@ -41,3 +41,8 @@ a {
     background-color: #1F1100;
 }
 
+.human {
+    transition-property: left, top;
+    transition-duration: 0.3s;
+}
+

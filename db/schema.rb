@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_03_04_183556) do
+ActiveRecord::Schema.define(version: 2022_03_15_003406) do
 
   create_table "cards", force: :cascade do |t|
     t.integer "x_position"
@@ -33,10 +33,9 @@ ActiveRecord::Schema.define(version: 2022_03_04_183556) do
     t.boolean "aliveness"
     t.integer "x_position"
     t.integer "y_position"
-    t.integer "number_of_bombs"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.bigint "game_id"
+    t.integer "game_id"
   end
 
   create_table "worms", force: :cascade do |t|

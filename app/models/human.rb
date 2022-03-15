@@ -10,11 +10,6 @@ class Human < Piece
     'H'
   end
 
-  def valid_move?(start_square, finish_square)
-    on_board?(start_square) && on_board?(finish_square) &&
-    one_move_away?(start_square, finish_square)
-  end
-
   def one_move_away?(a, b)
     x_distance(a, b) == 1 && y_distance(a, b) == 0 ||
     x_distance(a, b) == 0 && y_distance(a, b) == 1 ||

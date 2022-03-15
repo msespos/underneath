@@ -13,4 +13,9 @@ class Piece < ApplicationRecord
   def y_distance(start_square, finish_square)
     (start_square[1] - finish_square[1]).abs
   end
+
+  def valid_move?(start_square, finish_square)
+    on_board?(start_square) && on_board?(finish_square) &&
+    one_move_away?(start_square, finish_square)
+  end
 end

@@ -14,15 +14,9 @@ class Piece < ApplicationRecord
     (start_square[1] - finish_square[1]).abs
   end
 
-  def one_square_away?(a, b)
-    x_distance(a, b) == 1 && y_distance(a, b) == 0 ||
-    x_distance(a, b) == 0 && y_distance(a, b) == 1 ||
-    x_distance(a, b) == 1 && y_distance(a, b) == 1
-  end
-
-  def two_squares_away?(a, b)
-    x_distance(a, b) == 2 && y_distance(a, b) == 0 ||
-    x_distance(a, b) == 0 && y_distance(a, b) == 2 ||
-    x_distance(a, b) == 2 && y_distance(a, b) == 2
+  def n_squares_away?(a, b, n)
+    x_distance(a, b) == n && y_distance(a, b) == 0 ||
+    x_distance(a, b) == 0 && y_distance(a, b) == n ||
+    x_distance(a, b) == n && y_distance(a, b) == n
   end
 end

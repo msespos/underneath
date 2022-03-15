@@ -1,4 +1,4 @@
-class Worm < ApplicationRecord
+class Worm < Piece
   belongs_to :game
 
   def print_label

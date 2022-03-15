@@ -14,8 +14,15 @@ class Piece < ApplicationRecord
     (start_square[1] - finish_square[1]).abs
   end
 
-  def valid_move?(start_square, finish_square)
-    on_board?(start_square) && on_board?(finish_square) &&
-    one_move_away?(start_square, finish_square)
+  def one_square_away?(a, b)
+    x_distance(a, b) == 1 && y_distance(a, b) == 0 ||
+    x_distance(a, b) == 0 && y_distance(a, b) == 1 ||
+    x_distance(a, b) == 1 && y_distance(a, b) == 1
+  end
+
+  def two_squares_away?(a, b)
+    x_distance(a, b) == 2 && y_distance(a, b) == 0 ||
+    x_distance(a, b) == 0 && y_distance(a, b) == 2 ||
+    x_distance(a, b) == 2 && y_distance(a, b) == 2
   end
 end

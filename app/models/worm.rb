@@ -5,10 +5,11 @@ class Worm < Piece
     'W'
   end
 
-  def one_move_away?(a, b)
-    (x_distance(a, b) == 1 || x_distance(a, b) == 2) && y_distance(a, b) == 0 ||
-    x_distance(a, b) == 0 && (y_distance(a, b) == 1 || y_distance(a, b) == 2) ||
-    x_distance(a, b) == 1 && y_distance(a, b) == 1 ||
-    x_distance(a, b) == 2 && y_distance(a, b) == 2
+  def valid_move?(start_square, finish_square)
+    on_board?(start_square) && on_board?(finish_square) &&
+    (one_square_away?(start_square, finish_square) ||
+     two_squares_away?(start_square, finish_square)) &&
+    !same_direction_as_last_move(start_square, finish_square, last_move) &&
+    !opposite_direction_as_last_move(start_square, finish_square, last_move)
   end
 end

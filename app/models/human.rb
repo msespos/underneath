@@ -1,4 +1,4 @@
-class Human < ApplicationRecord
+class Human < Piece
   belongs_to :game
 
   def move(x, y)
@@ -6,12 +6,18 @@ class Human < ApplicationRecord
     self.y_position += y
   end
 
-  def on_board?
-    (0..Game::BOARD_SIZE - 1).include?(x_position) &&
-    (0..Game::BOARD_SIZE - 1).include?(y_position)
-  end
-
   def print_label
     'H'
+  end
+
+  def valid_move?(start_square, finish_square)
+    on_board?(start_square) && on_board?(finish_square) &&
+    one_move_away?(start_square, finish_square)
+  end
+
+  def one_move_away?(a, b)
+    x_distance(a, b) == 1 && y_distance(a, b) == 0 ||
+    x_distance(a, b) == 0 && y_distance(a, b) == 1 ||
+    x_distance(a, b) == 1 && y_distance(a, b) == 1
   end
 end

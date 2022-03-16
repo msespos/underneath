@@ -9,25 +9,43 @@ class Worm < Piece
     on_board?(start_square) && on_board?(finish_square) &&
     (n_squares_away?(start_square, finish_square, 1) ||
     n_squares_away?(start_square, finish_square, 2)) &&
-    !same_direction_as_last_move(start_square, finish_square) &&
-    !opposite_direction_as_last_move(start_square, finish_square)
+    !same_direction_as_last_move?(start_square, finish_square) &&
+    !opposite_direction_as_last_move?(start_square, finish_square)
   end
 
-  def same_direction_as_last_move(start_square, finish_square)
-    x_component(start_square, finish_square) * last_move_x_direction > 0 &&
-    y_component(start_square, finish_square) * last_move_y_direction > 0
+  def same_direction_as_last_move?(start_square, finish_square)
   end
 
-  def opposite_direction_as_last_move(start_square, finish_square)
-    x_component(start_square, finish_square) * last_move_x_direction < 0 &&
-    y_component(start_square, finish_square) * last_move_y_direction < 0
+  def opposite_direction_as_last_move?(start_square, finish_square)
   end
 
-  def x_component(start_square, finish_square)
-    finish_square[0] - start_square[0]
+  def difference_vector(start_square, finish_square)
+    [finish_square[0] - start_square[0], finish_square[1] - start_square[1]]
   end
 
-  def y_component(start_square, finish_square)
-    finish_square[1] - start_square[1]
+  def move_angle(difference_vector)
+    if difference_vector[0] == 0
+      if difference_vector[1] > 0
+        return 90
+      else
+        return 270
+      end
+    elsif difference_vector[0] > 0
+      if difference_vector[1] > 0
+        return 45
+      elsif difference_vector[1] == 0
+        return 0
+      else
+        return 315
+      end
+    else
+      if difference_vector[1] > 0
+        return 135
+      elsif difference_vector[1] == 0
+        return 180
+      else
+        return 225
+      end
+    end
   end
 end

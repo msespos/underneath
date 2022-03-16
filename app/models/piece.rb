@@ -11,8 +11,4 @@ class Piece < ApplicationRecord
     yd = (start_square[1] - finish_square[1]).abs
     xd == n && yd == 0 || xd == 0 && yd == n || xd == n && yd == n
   end
-
-  def move_direction(move)
-    [move[1][0] - move[0][0], move[1][1] - move[0][1]]
-  end
 end

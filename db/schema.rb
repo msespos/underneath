@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_03_15_003406) do
+ActiveRecord::Schema.define(version: 2022_03_16_144355) do
 
   create_table "cards", force: :cascade do |t|
     t.integer "x_position"
@@ -45,6 +45,8 @@ ActiveRecord::Schema.define(version: 2022_03_15_003406) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.bigint "game_id"
+    t.integer "last_move_x_direction"
+    t.integer "last_move_y_direction"
   end
 
 end

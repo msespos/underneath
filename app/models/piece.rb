@@ -6,17 +6,13 @@ class Piece < ApplicationRecord
     (0..Game::BOARD_SIZE - 1).include?(square[1])
   end
 
-  def x_distance(start_square, finish_square)
-    (start_square[0] - finish_square[0]).abs
+  def n_squares_away?(start_square, finish_square, n)
+    xd = (start_square[0] - finish_square[0]).abs
+    yd = (start_square[1] - finish_square[1]).abs
+    xd == n && yd == 0 || xd == 0 && yd == n || xd == n && yd == n
   end
 
-  def y_distance(start_square, finish_square)
-    (start_square[1] - finish_square[1]).abs
-  end
-
-  def n_squares_away?(a, b, n)
-    x_distance(a, b) == n && y_distance(a, b) == 0 ||
-    x_distance(a, b) == 0 && y_distance(a, b) == n ||
-    x_distance(a, b) == n && y_distance(a, b) == n
+  def move_direction(move)
+    [move[1][0] - move[0][0], move[1][1] - move[0][1]]
   end
 end

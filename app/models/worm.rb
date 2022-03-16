@@ -7,20 +7,20 @@ class Worm < Piece
 
   def valid_move?(start_square, finish_square)
     on_board?(start_square) && on_board?(finish_square) &&
-    n_squares_away?(start_square, finish_square, 1) ||
-    n_squares_away?(start_square, finish_square, 2) &&
+    (n_squares_away?(start_square, finish_square, 1) ||
+    n_squares_away?(start_square, finish_square, 2)) &&
     !same_direction_as_last_move(start_square, finish_square) &&
-    !opposite_direction_as_last_move(start_square, finish_square, last_move_direction)
+    !opposite_direction_as_last_move(start_square, finish_square)
   end
 
   def same_direction_as_last_move(start_square, finish_square)
-    x_component(start_square, finish_square) == last_move_x_direction &&
-    y_component(start_square, finish_square) == last_move_y_direction
+    x_component(start_square, finish_square) * last_move_x_direction > 0 &&
+    y_component(start_square, finish_square) * last_move_y_direction > 0
   end
 
   def opposite_direction_as_last_move(start_square, finish_square)
-    x_component(start_square, finish_square) == -1 * last_move_x_direction &&
-    y_component(start_square, finish_square) == -1 * last_move_y_direction
+    x_component(start_square, finish_square) * last_move_x_direction < 0 &&
+    y_component(start_square, finish_square) * last_move_y_direction < 0
   end
 
   def x_component(start_square, finish_square)

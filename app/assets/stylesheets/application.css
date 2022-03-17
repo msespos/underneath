@@ -47,7 +47,7 @@ a {
 }
 
 .turn-strip {
-    color:  #766554;
+    color:  #72605e;
 }
 
 .turn-strip-l-mask {
@@ -59,6 +59,6 @@ a {
 }
 
 .turn-strip-cursor {
-    border: 1px solid #766554;
+    border: 1.5px solid #72605e;
     border-radius: 50%;
 }

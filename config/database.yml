@@ -11,15 +11,14 @@ default: &default
 
 development:
   <<: *default
-  database: underneath_development_postgresql
-
+  database: underneath_development
 # Warning: The database defined as "test" will be erased and
 # re-generated from your development database when you run "rake".
 # Do not set this db to the same as development or production.
 test:
   <<: *default
-  database: underneath_test_postgresql
+  database: underneath_test
 
 production:
   <<: *default
-  database: underneath_production_postgresql
+  database: underneath_production

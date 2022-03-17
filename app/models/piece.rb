@@ -14,4 +14,12 @@ class Piece < ApplicationRecord
                2
              end
   end
+
+  def valid_moves_from(start_square)
+    (0..Game::BOARD_SIZE).each do |x|
+      (0..Game::BOARD_SIZE).each do |y|
+        puts x.to_s + ', ' + y.to_s if valid_move?([x - start_square[0], y - start_square[1]])
+      end
+    end
+  end
 end

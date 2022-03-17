@@ -46,3 +46,19 @@ a {
     transition-duration: 0.3s;
 }
 
+.turn-strip {
+    color:  #766554;
+}
+
+.turn-strip-l-mask {
+    background-image: linear-gradient(to right, rgba(20,17,12,1), rgba(0,0,0,0));
+}
+
+.turn-strip-r-mask {
+    background-image: linear-gradient(to left, rgba(20,17,12,1), rgba(0,0,0,0));
+}
+
+.turn-strip-cursor {
+    border: 1px solid #766554;
+    border-radius: 50%;
+}

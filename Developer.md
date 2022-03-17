@@ -8,6 +8,7 @@ Rails 6, ruby, npm, node, yarn
 ## Steps to get this working
 bundle install
 rake db:migrate
+yarn install
 
 ## Not sure if these are needed
 rails webpacker:install

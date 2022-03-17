@@ -1,5 +1,4 @@
 class GamesController < ApplicationController
-
   def index
     # TODO: show maybe all games?
     #  or all "open" games + games that closed
@@ -23,6 +22,10 @@ class GamesController < ApplicationController
       human.x_position = rand(8) + 1
       human.y_position = rand(8) + 1
       human.save!
+    end
+    if @game.turn
+      @game.turn += 1
+      @game.save!
     end
     GameChannel.broadcast_to(@game, {
       game: @game,

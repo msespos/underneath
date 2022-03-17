@@ -4,6 +4,7 @@ import actionCable from 'actioncable'
 
 import Board from "./Board"
 import Humans from "./Humans"
+import TurnStrip from "./TurnStrip"
 
 // submit move to server
 const tempMove = () => {
@@ -25,6 +26,7 @@ class Field extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
+      game: props.game,
       humanPieces: props.humanPieces
     };
 
@@ -43,17 +45,22 @@ class Field extends React.Component {
       received(data) {
         // Called when there's incoming data on the websocket for this channel
         console.log("Received some data: ", data);
-        ref.setState({humanPieces: data.humans});
+        ref.setState({
+          game: data.game,
+          humanPieces: data.humans
+        });
       }
     });
 
   }
 
   render () {
+    console.log(this.state);
   	return (
   		<div>
   			<Humans pieces={this.state.humanPieces}/>
   			<Board />
+        <TurnStrip turn={this.state.game.turn}/>
         <div>
           <button onClick={tempMove}>Move!</button>
         </div>

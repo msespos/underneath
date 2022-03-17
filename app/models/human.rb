@@ -10,8 +10,13 @@ class Human < Piece
     'H'
   end
 
-  def valid_move?(start_square, finish_square)
-    on_board?(start_square) && on_board?(finish_square) &&
-    n_squares_away?(start_square, finish_square, 1)
+  def valid_move?(v)
+    on_board?(v[0]) && on_board?(v[1]) && kings_move?(v) &&
+    number_of_squares_away(v) == 1
+  end
+
+  def kings_move?(v)
+    v[0] == 0 && [-1, 1].include?(v[1]) || v[1] == 0 && [-1, 1].include?(v[0]) ||
+    [-1, 1].include?(v[0]) && v[0].abs == v[1].abs
   end
 end

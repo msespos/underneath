@@ -12,6 +12,9 @@
 
 ActiveRecord::Schema.define(version: 2022_03_16_144355) do
 
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
+
   create_table "cards", force: :cascade do |t|
     t.integer "x_position"
     t.integer "y_position"
@@ -35,7 +38,7 @@ ActiveRecord::Schema.define(version: 2022_03_16_144355) do
     t.integer "y_position"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.integer "game_id"
+    t.bigint "game_id"
   end
 
   create_table "worms", force: :cascade do |t|

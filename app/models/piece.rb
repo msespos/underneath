@@ -7,10 +7,11 @@ class Piece < ApplicationRecord
   end
 
   def number_of_squares_away(v)
-    # use distance formula and rounding to return 1 or 2 given v
-
-    # xd = (start_square[0] - finish_square[0]).abs
-    # yd = (start_square[1] - finish_square[1]).abs
-    # xd == n && yd == 0 || xd == 0 && yd == n || xd == n && yd == n
+    d = Math.sqrt(v[0] ** 2 + v[1] ** 2)
+    move_d = if d < 2
+               1
+             else
+               2
+             end
   end
 end

@@ -23,25 +23,25 @@ class Worm < Piece
     [finish_square[0] - start_square[0], finish_square[1] - start_square[1]]
   end
 
-  def move_angle(difference_vector)
-    if difference_vector[0] == 0
-      if difference_vector[1] > 0
+  def angle(v)
+    if v[0] == 0
+      if v[1] > 0
         return 90
       else
         return 270
       end
-    elsif difference_vector[0] > 0
-      if difference_vector[1] > 0
+    elsif v[0] > 0
+      if v[1] > 0
         return 45
-      elsif difference_vector[1] == 0
+      elsif v[1] == 0
         return 0
       else
         return 315
       end
     else
-      if difference_vector[1] > 0
+      if v[1] > 0
         return 135
-      elsif difference_vector[1] == 0
+      elsif v[1] == 0
         return 180
       else
         return 225

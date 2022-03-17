@@ -5,22 +5,24 @@ class Worm < Piece
     'W'
   end
 
-  def valid_move?(start_square, finish_square)
-    on_board?(start_square) && on_board?(finish_square) &&
-    (n_squares_away?(start_square, finish_square, 1) ||
-    n_squares_away?(start_square, finish_square, 2)) &&
-    !same_direction_as_last_move?(start_square, finish_square) &&
-    !opposite_direction_as_last_move?(start_square, finish_square)
+  def valid_move?(v)
+    on_board?(v[0]) && on_board?(v[1]) && queens_move?(v) &&
+    (number_of_squares_away(v) == 1 || number_of_squares_away(v) == 2) &&
+    !same_direction_as_last_move?(v) && !opposite_direction_as_last_move?(v)
   end
 
-  def same_direction_as_last_move?(start_square, finish_square)
+  def queens_move?(v)
+    v[0] == 0 && [-2, -1, 1, 2].include?(v[1]) ||
+    v[1] == 0 && [-2, -1, 1, 2].include?(v[0]) ||
+    [-2, -1, 1, 2].include?(v[0]) && v[0].abs == v[1].abs
   end
 
-  def opposite_direction_as_last_move?(start_square, finish_square)
+  def same_direction_as_last_move?(v)
+    angle(v) == angle([last_move_x_direction, last_move_y_direction])
   end
 
-  def difference_vector(start_square, finish_square)
-    [finish_square[0] - start_square[0], finish_square[1] - start_square[1]]
+  def opposite_direction_as_last_move?(v)
+    (angle(v) - angle([last_move_x_direction, last_move_y_direction])).abs == 180
   end
 
   def angle(v)

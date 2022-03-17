@@ -1,4 +1,7 @@
+require 'securerandom'
+
 class GamesController < ApplicationController
+  before_action :require_cookie
   def index
     # TODO: show maybe all games?
     #  or all "open" games + games that closed
@@ -15,7 +18,6 @@ class GamesController < ApplicationController
 
   # temporary function for proof of concept
   def move
-    Rails.logger.info("Server moving #{params}")
     @game = Game.find(1)
     if @game.humans.any?
       human = @game.humans.first
@@ -31,8 +33,16 @@ class GamesController < ApplicationController
       game: @game,
       humans: @game.humans
     })
-    Rails.logger.info("Finished move!")
     render :json => { :success => 1 }
   end
 
+  private
+
+  def require_cookie
+    unless cookies['player_id']
+      cookies.permanent['player_id'] ||= SecureRandom.uuid
+    end
+    @player_id = cookies['player_id']
+    Rails.logger.info("Player_id #{@player_id}!")
+  end
 end

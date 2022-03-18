@@ -1,18 +1,12 @@
 class Human < Piece
   belongs_to :game
 
-  def move(x, y)
-    self.x_position += x
-    self.y_position += y
-  end
-
   def print_label
     'H'
   end
 
   def valid_move?(v)
-    on_board?(v[0]) && on_board?(v[1]) && kings_move?(v) &&
-    number_of_squares_away(v) == 1
+    start_and_finish_on_board?(v) && kings_move?(v) && number_of_squares_away(v) == 1
   end
 
   def kings_move?(v)

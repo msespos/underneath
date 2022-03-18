@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_03_18_000534) do
+ActiveRecord::Schema.define(version: 2022_03_18_004446) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
@@ -36,7 +36,7 @@ ActiveRecord::Schema.define(version: 2022_03_18_000534) do
   end
 
   create_table "humans", force: :cascade do |t|
-    t.boolean "aliveness"
+    t.boolean "alive"
     t.integer "x_position"
     t.integer "y_position"
     t.datetime "created_at", precision: 6, null: false
@@ -45,7 +45,7 @@ ActiveRecord::Schema.define(version: 2022_03_18_000534) do
   end
 
   create_table "worms", force: :cascade do |t|
-    t.boolean "aliveness"
+    t.boolean "alive"
     t.integer "x_position"
     t.integer "y_position"
     t.datetime "created_at", precision: 6, null: false

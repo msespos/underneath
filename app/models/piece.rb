@@ -1,6 +1,20 @@
 class Piece < ApplicationRecord
   self.abstract_class = true
 
+  def validate_and_move(v)
+    move(v) if valid_move?(v)
+  end
+
+  def move(v)
+    self.x_position += v[0]
+    self.y_position += v[1]
+  end
+
+  def start_and_finish_on_board?(v)
+    on_board?([x_position, y_position]) &&
+    on_board?([x_position + v[0], y_position + v[1]]) &&
+  end
+
   def on_board?(square)
     (0..Game::BOARD_SIZE - 1).include?(square[0]) &&
     (0..Game::BOARD_SIZE - 1).include?(square[1])

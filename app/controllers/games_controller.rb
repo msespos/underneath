@@ -29,6 +29,7 @@ class GamesController < ApplicationController
       @game.turn += 1
       @game.save!
     end
+    # Rails.logger.info("Broadcasting #{@game} #{@game.turn}")
     GameChannel.broadcast_to(@game, {
       game: @game,
       humans: @game.humans

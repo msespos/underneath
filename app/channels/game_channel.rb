@@ -1,7 +1,7 @@
 class GameChannel < ApplicationCable::Channel
   def subscribed
     # stream_from "some_channel"
-    @game = Game.find_by(params[:id])
+    @game = Game.find(params[:id])
     stream_for @game
   end
 
@@ -9,10 +9,12 @@ class GameChannel < ApplicationCable::Channel
     # Any cleanup needed when channel is unsubscribed
   end
 
+  # TODO: instead of sending separate moves...
+  #  Should instead transmit turns over the WebSocket
   def received(data)
-    GameChannel.broadcast_to(@game, {
-      game: @game,
-      humans: @game.humans
-    })
+    # GameChannel.broadcast_to(@game, {
+    #   game: @game,
+    #   humans: @game.humans
+    # })
   end
 end

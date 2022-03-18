@@ -12,7 +12,7 @@ class Piece < ApplicationRecord
 
   def start_and_finish_on_board?(v)
     on_board?([x_position, y_position]) &&
-    on_board?([x_position + v[0], y_position + v[1]]) &&
+    on_board?([x_position + v[0], y_position + v[1]])
   end
 
   def on_board?(square)

@@ -29,9 +29,6 @@ class Game < ApplicationRecord
   def reset
     turn = 1
     phase = "human 1"
-    (humans + cards + [worm]).each do |item|
-      item.x_position = nil
-      item.y_position = nil
-    end
+    (humans + cards + [worm]).map(&:destroy)
   end
 end

@@ -25,4 +25,13 @@ class Game < ApplicationRecord
 
   def set_up_cards
   end
+
+  def reset
+    turn = 1
+    phase = "human 1"
+    (humans + cards + [worm]).each do |item|
+      item.x_position = nil
+      item.y_position = nil
+    end
+  end
 end

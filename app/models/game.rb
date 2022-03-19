@@ -20,7 +20,7 @@ class Game < ApplicationRecord
   end
 
   def set_up_worm
-    Worm.create!([{ alive: true, x_position: 7, y_position: 7, game_id: self.id }])
+    Worm.create!({ alive: true, x_position: 7, y_position: 7, game_id: self.id })
   end
 
   def set_up_cards

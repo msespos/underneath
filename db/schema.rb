@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_03_18_015450) do
+ActiveRecord::Schema.define(version: 2022_03_19_210224) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
@@ -19,12 +19,11 @@ ActiveRecord::Schema.define(version: 2022_03_18_015450) do
   create_table "cards", force: :cascade do |t|
     t.integer "x_position"
     t.integer "y_position"
-    t.string "terrain"
-    t.string "face_up_or_down"
-    t.boolean "has_bomb"
+    t.string "type"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.bigint "game_id"
+    t.boolean "face_up"
   end
 
   create_table "games", force: :cascade do |t|

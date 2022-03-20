@@ -5,8 +5,8 @@ function renderHuman(index, x, y, per_row) {
   // TODO: 0.2/0.3 is a little hackish to account for 
   //  height/width of the actual playing piece.
   //  Make this measurement more precise!
-  const top = (100 * (x-1 + 0.25)/per_row) + '%';
-  const left = (100 * (y - 1 + 0.33)/per_row) + '%';
+  const top = (100 * (x + 0.25)/per_row) + '%';
+  const left = (100 * (y + 0.33)/per_row) + '%';
   return (
     <div key={'human_' + index}
          className='human'
@@ -23,7 +23,7 @@ class Humans extends React.Component {
     const output = [];
     this.props.pieces.forEach(piece => {
       output.push(
-        renderHuman(piece['index'],
+        renderHuman(piece['play_order'],
           piece['x_position'],
           piece['y_position'],
           8)

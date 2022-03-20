@@ -4,6 +4,6 @@ module Printable
     all_pieces.each do |item|
       board[item.y_position][item.x_position] = item.print_label
     end
-    puts board.reverse.map { |e| e.join(' ') }
+    puts board.map { |e| e.join(' ') }
   end
 end

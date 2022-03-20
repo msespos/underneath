@@ -21,8 +21,8 @@ class GamesController < ApplicationController
     @game = Game.find(1)
     if @game.humans.any?
       human = @game.humans.first
-      human.x_position = rand(8) + 1
-      human.y_position = rand(8) + 1
+      human.x_position = rand(8)
+      human.y_position = rand(8)
       human.save!
     end
     if @game.turn

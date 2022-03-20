@@ -12,6 +12,10 @@ class Game < ApplicationRecord
     set_up_cards
   end
 
+  def all_pieces
+    humans + cards + (worm ? [worm] : [])
+  end
+
   def set_up_humans
     [[1, 0, 1], [2, 0, 3], [3, 1, 0], [4, 3, 0]].each do |p|
       humans.create({ alive: true, x_position: p[1], y_position: p[2],
@@ -29,7 +33,7 @@ class Game < ApplicationRecord
   def reset
     self.turn = 1
     self.phase = "human 1"
-    (humans + cards + [worm]).map(&:destroy)
     self.save
+    all_pieces.map { |i| i.destroy }
   end
 end

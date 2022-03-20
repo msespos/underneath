@@ -6,14 +6,22 @@ class Game < ApplicationRecord
 
   BOARD_SIZE = 8.freeze
 
+  def all_pieces
+    humans + cards + (worm ? [worm] : [])
+  end
+
   def set_up
+    reset
     set_up_humans
     set_up_worm
     set_up_cards
   end
 
-  def all_pieces
-    humans + cards + (worm ? [worm] : [])
+  def reset
+    self.turn = 1
+    self.phase = "human 1"
+    self.save
+    all_pieces.map { |i| i.destroy }
   end
 
   def set_up_humans
@@ -28,12 +36,5 @@ class Game < ApplicationRecord
   end
 
   def set_up_cards
-  end
-
-  def reset
-    self.turn = 1
-    self.phase = "human 1"
-    self.save
-    all_pieces.map { |i| i.destroy }
   end
 end

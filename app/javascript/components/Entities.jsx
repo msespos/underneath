@@ -35,6 +35,24 @@ class Entities extends React.Component {
           8)
       );
     });
+    const worm = this.props.details.worm;
+    output.push(
+      renderEntity('worm',
+        worm['play_order'],
+        worm['x_position'],
+        worm['y_position'],
+        8)
+    );
+    this.props.details.cards.forEach(piece => {
+      output.push(
+        renderEntity('card',
+          piece['play_order'],
+          piece['x_position'],
+          piece['y_position'],
+          8)
+      );
+    });
+
     return (
       <div className="w-96 h-96 flow-root"
            style={{position: 'absolute'}}>

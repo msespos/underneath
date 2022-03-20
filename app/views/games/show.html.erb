@@ -12,7 +12,9 @@
 	<div class="max-w-md w-96 h-96">
 	<%= react_component("Field", { 
 		game: @game,
-		humanPieces: @game.humans
+		entities: {'humans': @game.humans,
+				   'worm': @game.worm,
+				   'cards': @game.cards }
 	}) %>
 	</div>
 </div>

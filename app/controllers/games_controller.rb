@@ -32,7 +32,9 @@ class GamesController < ApplicationController
     # Rails.logger.info("Broadcasting #{@game} #{@game.turn}")
     GameChannel.broadcast_to(@game, {
       game: @game,
-      humans: @game.humans
+      entities: {humans: @game.humans,
+                 worm: @game.worm,
+                 cards: @game.cards} 
     })
     render :json => { :success => 1 }
   end

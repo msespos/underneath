@@ -3,7 +3,7 @@ import PropTypes from "prop-types"
 import actionCable from 'actioncable'
 
 import Board from "./Board"
-import Humans from "./Humans"
+import Entities from "./Entities"
 import TurnStrip from "./TurnStrip"
 
 // submit move to server
@@ -27,7 +27,7 @@ class Field extends React.Component {
     super(props);
     this.state = {
       game: props.game,
-      humanPieces: props.humanPieces
+      entities: props.entities
     };
 
     const ref = this;
@@ -45,10 +45,7 @@ class Field extends React.Component {
       received(data) {
         // Called when there's incoming data on the websocket for this channel
         console.log("Received some data: ", data);
-        ref.setState({
-          game: data.game,
-          humanPieces: data.humans
-        });
+        ref.setState(data);
       }
     });
 
@@ -58,7 +55,7 @@ class Field extends React.Component {
     console.log(this.state);
   	return (
   		<div>
-  			<Humans pieces={this.state.humanPieces}/>
+  			<Entities details={this.state.entities}/>
   			<Board />
         <TurnStrip turn={this.state.game.turn}/>
         <div>

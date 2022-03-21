@@ -133,7 +133,7 @@ RSpec.describe Worm, type: :model do
       end
     end
   end
-  describe '#queens_move?' do
+  describe '#angle' do
     context "when the vector is at 45 degrees" do
       it 'returns 45' do
         angle_measure = worm1.send(:angle, [2, 2])

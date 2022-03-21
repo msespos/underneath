@@ -29,19 +29,24 @@ class TurnStrip extends React.Component {
     }
     // 96/2 - 7/2 = 89/2 = 89/8 rem
     return (
-      <div className="turn-strip h-8 pt-2">
-        <div className="flex w-96 overflow-hidden"
-             style={{position: "absolute"}}>
-          <div className="turn-strip-l-mask w-48 h-7"
-               style={{position: 'absolute', left: 0}} />
-          <div className="turn-strip-r-mask w-48 h-7"
-               style={{position: 'absolute', right: 0}} />
-          <div className="turn-strip-cursor w-6 h-6" 
-               style={{position: 'absolute', left: '11.175rem'}} />
-          <div className="flex flex-no-wrap w-96 custom-horiz-scroll overflow-hidden"
-               ref={this.ref}>
-            {turnIndicators}
+      <div className="turn-strip h-10 pt-2">
+        <div className="h-7">
+          <div className="flex w-96 overflow-hidden"
+               style={{position: "absolute"}}>
+            <div className="turn-strip-l-mask w-48 h-7"
+                 style={{position: 'absolute', left: 0}} />
+            <div className="turn-strip-r-mask w-48 h-7"
+                 style={{position: 'absolute', right: 0}} />
+            <div className="turn-strip-cursor w-6 h-6" 
+                 style={{position: 'absolute', left: '11.175rem'}} />
+            <div className="flex flex-no-wrap w-96 custom-horiz-scroll overflow-hidden"
+                 ref={this.ref}>
+              {turnIndicators}
+            </div>
           </div>
+        </div>
+        <div className="text-xs h-2 text-center">
+          {this.props.phase}
         </div>
       </div>
     );

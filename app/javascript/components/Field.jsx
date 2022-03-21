@@ -57,7 +57,8 @@ class Field extends React.Component {
   		<div>
   			<Entities details={this.state.entities}/>
   			<Board />
-        <TurnStrip turn={this.state.game.turn}/>
+        <TurnStrip turn={this.state.game.turn} 
+                   phase={this.state.game.phase} />
         <div>
           <button onClick={tempMove}>Move!</button>
         </div>

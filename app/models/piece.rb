@@ -29,11 +29,13 @@ class Piece < ApplicationRecord
              end
   end
 
-  def valid_moves_from(start_square)
-    (0..Game::BOARD_SIZE).each do |x|
-      (0..Game::BOARD_SIZE).each do |y|
-        puts x.to_s + ', ' + y.to_s if valid_move?([x - start_square[0], y - start_square[1]])
+  def valid_moves
+    valid_moves = []
+    (0..Game::BOARD_SIZE - 1).each do |x|
+      (0..Game::BOARD_SIZE - 1).each do |y|
+        valid_moves << [x, y] if valid_move?([x - x_position, y - y_position])
       end
     end
+    valid_moves
   end
 end

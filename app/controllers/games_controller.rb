@@ -3,22 +3,31 @@ require 'securerandom'
 class GamesController < ApplicationController
   before_action :require_cookie
   def index
-    # TODO: show maybe all games?
-    #  or all "open" games + games that closed
-    #  in the last day or something like that 
-    @games = []
-    g = Game.all.last
-    @games = [g] if g
+    # TODO: show _my_ {open + recently finished} games
+    @games = Game.all.order('created_at DESC')
   end
 
   def show
     # TODO: assign me a game, and show that one only
-    @game = Game.find(1)
+    @game = Game.find(params[:id])
+  end
+
+  def create
+    @game = Game.new
+    if params[:side] == 'human'
+      @game.human_player_id = cookies['player_id']
+    elsif params[:side] == 'worm'
+      @game.worm_player_id = cookies['player_id']
+    end
+    @game.save!
+    @game.set_up
+
+    redirect_to @game
   end
 
   # temporary function for proof of concept
   def move
-    @game = Game.find(1)
+    @game = Game.find(params[:game_id])
     if @game.humans.any?
       human = @game.humans.first
       human.x_position = rand(8)

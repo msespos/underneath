@@ -2,9 +2,7 @@
 
 <div class="flex justify-center">
 	<div class="max-w-xl object-center">
-		<% if @games.empty? %>
-			No games available.
-		<% else %>
+		<% if !@games.empty? %>
 			<% @games.each do |g| %>
 				<div>
 					Game <%= g.id %>: 
@@ -12,6 +10,20 @@
 				</div>
 			<% end %>
 		<% end %>
-
+		<div>
+			<div class="float-left">
+				Create new game:
+			</div>
+			<div class="float-left">
+				<%= link_to image_tag("/img/human.png"),
+						'/games?side=human',
+						method: :post %>
+			</div>
+			<div class="float-left">
+			<%= link_to image_tag("/img/worm.png"),
+					'/games?side=worm',
+					method: :post %>
+			</div>
+		</div>
 	</div>
 </div>

@@ -22,11 +22,7 @@ class Piece < ApplicationRecord
 
   def number_of_squares_away(v)
     d = Math.sqrt(v[0] ** 2 + v[1] ** 2)
-    move_d = if d < 2
-               1
-             else
-               2
-             end
+    d < 2 ? 1 : 2
   end
 
   def valid_moves

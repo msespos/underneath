@@ -6,6 +6,11 @@ class Worm < Piece
   end
 
   def valid_move?(v)
+    valid_move_geometry?(v) && target_square_not_a_rock?(v) &&
+    target_square_not_an_active_bomb?(v)
+  end
+
+  def valid_move_geometry?(v)
     start_and_finish_on_board?(v) && queens_move?(v) &&
     (number_of_squares_away(v) == 1 || number_of_squares_away(v) == 2) &&
     !same_direction_as_last_move?(v) && !opposite_direction_as_last_move?(v)
@@ -49,5 +54,25 @@ class Worm < Piece
         return 225
       end
     end
+  end
+
+  def target_square_not_a_rock?(v)
+    Card.where(game_id: game.id).each do |c|
+      if x_position + v[0] == c.x_position && y_position + v[1] == c.y_position &&
+        c.card_type == 'rock'
+        return false
+      end
+    end
+    true
+  end
+
+  def target_square_not_an_active_bomb?(v)
+    Card.where(game_id: game.id).each do |c|
+      if x_position + v[0] == c.x_position && y_position + v[1] == c.y_position &&
+        c.card_type == 'bomb' && c.face_up == true
+        return false
+      end
+    end
+    true
   end
 end

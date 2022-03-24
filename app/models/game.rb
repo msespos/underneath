@@ -32,7 +32,9 @@ class Game < ApplicationRecord
   end
 
   def set_up_worm
-    create_worm({ alive: true, x_position: 7, y_position: 7, game_id: self.id })
+    create_worm({ alive: true, x_position: 7, y_position: 7,
+                  last_move_x_direction: 0, last_move_y_direction: 0,
+                  game_id: self.id })
   end
 
   def set_up_cards

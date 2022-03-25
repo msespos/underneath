@@ -1,0 +1,2 @@
+class Blank < Card
+end

@@ -44,7 +44,7 @@ class Game < ApplicationRecord
       card_positions[i] = [0, i % 8]
     end
     # set x-coordinates of all squares on board
-    card_positions.each_with_index do |_,i|
+    card_positions.each_with_index do |_, i|
       card_positions[i][0] = (i / 8).floor
     end
     # remove non-card squares
@@ -60,7 +60,7 @@ class Game < ApplicationRecord
     (0..47).each do |i|
       cards.create({ x_position: card_positions[i][0],
                      y_position: card_positions[i][1],
-                     card_type: shuffled_card_types[i],
+                     type: shuffled_card_types[i],
                      face_up: false })
     end
   end

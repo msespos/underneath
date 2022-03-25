@@ -53,8 +53,8 @@ class Game < ApplicationRecord
                       [1, 0], [1, 1], [1, 3], [2, 0], [3, 0], [3, 1], [4, 0],
                       [6, 6], [6, 7], [7, 6], [7, 7]]
     # create and shuffle list of card types
-    all_card_types = Array.new(12) { 'blank' } + Array.new(12) { 'rock' } +
-                     Array.new(24) { 'rock' }
+    all_card_types = Array.new(12) { 'Blank' } + Array.new(12) { 'Bomb' } +
+                     Array.new(24) { 'Rock' }
     shuffled_card_types = all_card_types.shuffle
     # create cards from card positions and shuffled card types
     (0..47).each do |i|

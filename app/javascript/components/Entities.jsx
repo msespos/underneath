@@ -26,6 +26,19 @@ function renderEntity(type, index, x, y, per_row) {
 class Entities extends React.Component {
   render () {
     const output = [];
+
+    var i = 0;
+    this.props.details.cards.forEach(piece => {
+      output.push(
+        renderEntity('card',
+          i,
+          piece['x_position'],
+          piece['y_position'],
+          8)
+      );
+      i = i + 1;
+    });
+
     this.props.details.humans.forEach(piece => {
       output.push(
         renderEntity('human',
@@ -35,6 +48,7 @@ class Entities extends React.Component {
           8)
       );
     });
+
     const worm = this.props.details.worm;
     output.push(
       renderEntity('worm',
@@ -43,15 +57,6 @@ class Entities extends React.Component {
         worm['y_position'],
         8)
     );
-    this.props.details.cards.forEach(piece => {
-      output.push(
-        renderEntity('card',
-          piece['play_order'],
-          piece['x_position'],
-          piece['y_position'],
-          8)
-      );
-    });
 
     return (
       <div className="w-96 h-96 flow-root"

@@ -7,11 +7,10 @@ import Entities from "./Entities"
 import TurnStrip from "./TurnStrip"
 
 // submit move to server
-const tempMove = () => {
-  console.log("clicked Move!");
+const tempMove = (gameId) => {
   const csrf = document.querySelector("meta[name='csrf-token']").getAttribute("content");
   const body = JSON.stringify({'detail': 'the move, in some format'});
-  fetch('/games/1/move', {
+  fetch('/games/' + gameId + '/move', {
     method: 'POST',
     credentials: 'same-origin',
     headers: {
@@ -31,7 +30,7 @@ class Field extends React.Component {
     };
 
     const ref = this;
-    App.cable.subscriptions.create({channel: "GameChannel", id: "1"}, 
+    App.cable.subscriptions.create({channel: "GameChannel", id: props.game.id}, 
     {
       connected() {
         // Called when the subscription is ready for use on the server
@@ -52,7 +51,6 @@ class Field extends React.Component {
   }
 
   render () {
-    console.log(this.state);
   	return (
   		<div>
   			<Entities details={this.state.entities}/>
@@ -60,7 +58,7 @@ class Field extends React.Component {
         <TurnStrip turn={this.state.game.turn} 
                    phase={this.state.game.phase} />
         <div>
-          <button onClick={tempMove}>Move!</button>
+          <button onClick={(e) => tempMove(this.state.game.id, e)}>Move!</button>
         </div>
   		</div>
   	);

@@ -8,7 +8,7 @@ class Game < ApplicationRecord
   BOARD_SIZE = 8.freeze
 
   def all_pieces
-    humans + cards + (worm ? [worm] : [])
+    humans + cards + (worm ? [worm] : []) + active_bombs
   end
 
   def set_up

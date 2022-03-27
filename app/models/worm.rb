@@ -68,9 +68,9 @@ class Worm < Piece
   end
 
   def target_square_not_an_active_bomb?(v)
-    Card.where(game_id: game.id).each do |c|
-      if x_position + v[0] == c.x_position && y_position + v[1] == c.y_position &&
-        c.type == 'Bomb' && c.face_up == true
+    ActiveBomb.where(game_id: game.id).each do |b|
+      if x_position + v[0] == b.x_position && y_position + v[1] == b.y_position &&
+        b.type == 'Bomb' && b.face_up == true
         return false
       end
     end

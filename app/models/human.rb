@@ -5,6 +5,14 @@ class Human < Piece
     'H'
   end
 
+  def valid_bomb_placement?(v)
+    game.humans_bombs > 0 && valid_move?(v)
+  end
+
+  def place_bomb(v)
+    
+  end
+
   def valid_move?(v)
     valid_move_geometry?(v) && target_square_not_a_human?(v)
   end

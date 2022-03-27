@@ -1,0 +1,2 @@
+class ActiveBomb < ApplicationRecord
+end

@@ -10,7 +10,10 @@ class Human < Piece
   end
 
   def place_bomb(v)
-    
+    if valid_bomb_placement?(v)
+      ActiveBomb.create({ x_position: x_position + v[0],
+                          y_position: y_position + v[1] })
+    end
   end
 
   def valid_move?(v)

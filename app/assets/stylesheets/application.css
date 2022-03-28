@@ -46,6 +46,11 @@ a {
     transition-duration: 0.3s;
 }
 
+.valid_move_square {
+    background-color: rgba(98,177,222,0.45);
+}
+
+
 .turn-strip {
     color:  #72605e;
 }

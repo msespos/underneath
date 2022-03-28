@@ -4,6 +4,7 @@ import actionCable from 'actioncable'
 
 import Board from "./Board"
 import Entities from "./Entities"
+import Controls from "./Controls"
 import TurnStrip from "./TurnStrip"
 
 // submit move to server
@@ -26,7 +27,8 @@ class Field extends React.Component {
     super(props);
     this.state = {
       game: props.game,
-      entities: props.entities
+      entities: props.entities,
+      validMoves: props.validMoves
     };
 
     const ref = this;
@@ -54,6 +56,7 @@ class Field extends React.Component {
   	return (
   		<div>
   			<Entities details={this.state.entities}/>
+        <Controls validMoves={this.state.validMoves}/>
   			<Board />
         <TurnStrip turn={this.state.game.turn} 
                    phase={this.state.game.phase} />

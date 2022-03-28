@@ -11,6 +11,7 @@ class GamesController < ApplicationController
     # TODO: assign me a game, and show that one only
     @game = Game.find(params[:id])
     @valid_moves = current_valid_moves
+    @active = current_active_piece
   end
 
   def create
@@ -27,18 +28,23 @@ class GamesController < ApplicationController
   end
 
   # temporary function for proof of concept
+  # should maybe generalize to taking a turn
   def move
     @game = Game.find(params[:game_id])
-    if @game.humans.any?
-      human = @game.humans.first
-      human.x_position = rand(8)
-      human.y_position = rand(8)
-      human.save!
-    end
-    if @game.turn
-      @game.turn += 1
-      @game.save!
-    end
+
+    # TODO: confirm can play this game & this side
+
+    piece = current_active_piece
+    piece.x_position += params[:delta_x]
+    piece.y_position += params[:delta_y]
+    piece.save!
+
+    @game.turn += 1
+
+    # TODO: advance phase
+
+    @game.save!
+
     broadcast!
     render :json => { :success => 1 }
   end
@@ -47,26 +53,31 @@ class GamesController < ApplicationController
 
   # TODO: need two versions of this, one for each side
   def broadcast!
-    # Rails.logger.info("Broadcasting #{@game} #{@game.turn}")
-  
+    # Rails.logger.info("Broadcasting: #{@game.id} #{@game.turn} #{current_active_piece}")
+    
     GameChannel.broadcast_to(@game, {
       game: @game,
       entities: {humans: @game.humans,
                  worm: @game.worm,
                  cards: @game.cards},
+      # TODO: only send if permitted
+      active: current_active_piece, 
       valid_moves: current_valid_moves 
     })
   end
 
-  def current_valid_moves
+  def current_active_piece
     phase, phase_index = @game.phase.split(' ')
-    active = if phase == 'human'
+    if phase == 'human'
       @game.humans.first { |p| p.play_order == phase_index.to_i }
-    else
+    elsif phase == 'worm'
       @game.worm
     end
-    active.valid_moves
- end
+  end
+
+  def current_valid_moves
+    current_active_piece.reload.valid_moves
+  end
 
   def require_cookie
     unless cookies['player_id']

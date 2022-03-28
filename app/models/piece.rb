@@ -8,6 +8,7 @@ class Piece < ApplicationRecord
   def move(v)
     self.x_position += v[0]
     self.y_position += v[1]
+    self.save
   end
 
   def start_and_finish_on_board?(v)

@@ -4,7 +4,7 @@ import PropTypes from "prop-types"
 
 // submit move to server
 const sendMove = (gameId, deltaX, deltaY) => {
-  console.log('move ' + deltaX + ', ' + deltaY);
+  // console.log('move ' + deltaX + ', ' + deltaY);
   const csrf = document.querySelector("meta[name='csrf-token']").getAttribute("content");
   const body = JSON.stringify({'delta_x': deltaX,
                                'delta_y': deltaY});

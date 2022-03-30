@@ -27,7 +27,6 @@ class GamesController < ApplicationController
     redirect_to @game
   end
 
-  # temporary function for proof of concept
   # should maybe generalize to taking a turn
   def move
     @game = Game.find(params[:game_id])
@@ -39,10 +38,7 @@ class GamesController < ApplicationController
     piece.y_position += params[:delta_y]
     piece.save!
 
-    @game.turn += 1
-
-    # TODO: advance phase
-
+    advance_phase(@game)
     @game.save!
 
     broadcast!
@@ -50,6 +46,19 @@ class GamesController < ApplicationController
   end
 
   private
+
+  # move something like this to model?
+  def advance_phase(game)
+    phases = ['human 1', 'human 2', 'human 3', 'human 4', 'worm']
+    idx = phases.index(game.phase)
+    if idx == phases.length - 1
+      game = phases[0]
+      game.turn += 1
+    else
+      game.phase = phases[idx + 1]
+    end
+    game
+  end
 
   # TODO: need two versions of this, one for each side
   def broadcast!
@@ -60,6 +69,7 @@ class GamesController < ApplicationController
       entities: {humans: @game.humans,
                  worm: @game.worm,
                  cards: @game.cards},
+
       # TODO: only send if permitted
       active: current_active_piece, 
       valid_moves: current_valid_moves 
@@ -69,7 +79,7 @@ class GamesController < ApplicationController
   def current_active_piece
     phase, phase_index = @game.phase.split(' ')
     if phase == 'human'
-      @game.humans.first { |p| p.play_order == phase_index.to_i }
+      @game.humans.detect { |p| p.play_order == phase_index.to_i }
     elsif phase == 'worm'
       @game.worm
     end

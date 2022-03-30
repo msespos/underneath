@@ -3,6 +3,7 @@ class GameChannel < ApplicationCable::Channel
     # stream_from "some_channel"
     @game = Game.find(params[:id])
     stream_for @game
+    # TODO: when we reconnect, rebroadcast automatically
   end
 
   def unsubscribed

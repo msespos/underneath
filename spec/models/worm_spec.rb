@@ -18,14 +18,6 @@ RSpec.describe Worm, type: :model do
         expect(queens_move_or_not).to eq(true)
       end
       it 'returns true' do
-        queens_move_or_not = worm1.send(:queens_move?, [1, -1])
-        expect(queens_move_or_not).to eq(true)
-      end
-      it 'returns true' do
-        queens_move_or_not = worm1.send(:queens_move?, [2, 2])
-        expect(queens_move_or_not).to eq(true)
-      end
-      it 'returns true' do
         queens_move_or_not = worm1.send(:queens_move?, [-2, 2])
         expect(queens_move_or_not).to eq(true)
       end
@@ -44,15 +36,7 @@ RSpec.describe Worm, type: :model do
         expect(queens_move_or_not).to eq(false)
       end
       it 'returns false' do
-        queens_move_or_not = worm1.send(:queens_move?, [2, -1])
-        expect(queens_move_or_not).to eq(false)
-      end
-      it 'returns false' do
         queens_move_or_not = worm1.send(:queens_move?, [3, 0])
-        expect(queens_move_or_not).to eq(false)
-      end
-      it 'returns false' do
-        queens_move_or_not = worm1.send(:queens_move?, [-4, -4])
         expect(queens_move_or_not).to eq(false)
       end
     end
@@ -64,15 +48,7 @@ RSpec.describe Worm, type: :model do
         expect(same_direction_or_not).to eq(true)
       end
       it 'returns true' do
-        same_direction_or_not = worm1.send(:same_direction_as_last_move?, [1, 1])
-        expect(same_direction_or_not).to eq(true)
-      end
-      it 'returns true' do
         same_direction_or_not = worm2.send(:same_direction_as_last_move?, [0, 1])
-        expect(same_direction_or_not).to eq(true)
-      end
-      it 'returns true' do
-        same_direction_or_not = worm2.send(:same_direction_as_last_move?, [0, 2])
         expect(same_direction_or_not).to eq(true)
       end
     end
@@ -82,15 +58,7 @@ RSpec.describe Worm, type: :model do
         expect(same_direction_or_not).to eq(false)
       end
       it 'returns false' do
-        same_direction_or_not = worm1.send(:same_direction_as_last_move?, [0, 1])
-        expect(same_direction_or_not).to eq(false)
-      end
-      it 'returns false' do
         same_direction_or_not = worm2.send(:same_direction_as_last_move?, [1, 1])
-        expect(same_direction_or_not).to eq(false)
-      end
-      it 'returns false' do
-        same_direction_or_not = worm2.send(:same_direction_as_last_move?, [-1, 2])
         expect(same_direction_or_not).to eq(false)
       end
     end
@@ -102,14 +70,6 @@ RSpec.describe Worm, type: :model do
         expect(opposite_direction_or_not).to eq(true)
       end
       it 'returns true' do
-        opposite_direction_or_not = worm1.send(:opposite_direction_as_last_move?, [-2, -2])
-        expect(opposite_direction_or_not).to eq(true)
-      end
-      it 'returns true' do
-        opposite_direction_or_not = worm2.send(:opposite_direction_as_last_move?, [0, -1])
-        expect(opposite_direction_or_not).to eq(true)
-      end
-      it 'returns true' do
         opposite_direction_or_not = worm2.send(:opposite_direction_as_last_move?, [0, -2])
         expect(opposite_direction_or_not).to eq(true)
       end
@@ -117,14 +77,6 @@ RSpec.describe Worm, type: :model do
     context "when the vector is not the opposite direction as the last move" do
       it 'returns false' do
         opposite_direction_or_not = worm1.send(:opposite_direction_as_last_move?, [2, 2])
-        expect(opposite_direction_or_not).to eq(false)
-      end
-      it 'returns false' do
-        opposite_direction_or_not = worm1.send(:opposite_direction_as_last_move?, [1, 0])
-        expect(opposite_direction_or_not).to eq(false)
-      end
-      it 'returns false' do
-        opposite_direction_or_not = worm2.send(:opposite_direction_as_last_move?, [0, 1])
         expect(opposite_direction_or_not).to eq(false)
       end
       it 'returns false' do

@@ -82,6 +82,16 @@ class Game < ApplicationRecord
     end
   end
 
+  def worms_view_state
+    { active_bombs: active_bombs, rocks: rocks_data }
+  end
+
+  def rocks_data
+    cards.where(type: 'Rock').map do |c|
+      c = { x_position: c.x_position, y_position: c.y_position }
+    end
+  end
+
   def advance_phase
     phases = ['human 1', 'human 2', 'human 3', 'human 4', 'worm']
     idx = phases.index(phase)

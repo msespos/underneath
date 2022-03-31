@@ -96,10 +96,11 @@ class Game < ApplicationRecord
     phases = ['human 1', 'human 2', 'human 3', 'human 4', 'worm']
     idx = phases.index(phase)
     if idx == phases.length - 1
-      phase = phases[0]
-      turn += 1
+      self.phase = phases[0]
+      self.turn += 1
     else
-      phase = phases[idx + 1]
+      self.phase = phases[idx + 1]
     end
+    self.save
   end
 end

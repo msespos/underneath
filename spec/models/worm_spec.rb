@@ -135,8 +135,7 @@ RSpec.describe Worm, type: :model do
   end
   describe '#target_square_not_a_rock?' do
     before do
-      game1.cards << card1
-      game1.cards << card2
+      game1.cards << [card1, card2]
     end
 
     context 'when the target square is not a rock' do

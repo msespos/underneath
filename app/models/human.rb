@@ -12,7 +12,8 @@ class Human < Piece
   def place_bomb(v)
     if valid_bomb_placement?(v)
       ActiveBomb.create({ x_position: x_position + v[0],
-                          y_position: y_position + v[1] })
+                          y_position: y_position + v[1],
+                          game_id: game.id })
     end
   end
 
@@ -30,7 +31,7 @@ class Human < Piece
   end
 
   def target_square_not_a_human?(v)
-    Human.where(game_id: game.id).each do |h|
+    game.humans.each do |h|
       if x_position + v[0] == h.x_position && y_position + v[1] == h.y_position
         return false
       end

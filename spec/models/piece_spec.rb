@@ -64,25 +64,25 @@ RSpec.describe Piece, type: :model do
       end
     end
   end
-  describe '#number_of_squares_away' do
-    context 'when it is one square away' do
+  describe '#number_of_king_moves_away' do
+    context 'when it is one move away' do
       it 'returns 1' do
-        number_of_squares = human_00.send(:number_of_squares_away, [0, 1])
-        expect(number_of_squares).to eq(1)
+        number_of_king_moves = human_00.send(:number_of_king_moves_away, [0, 1])
+        expect(number_of_king_moves).to eq(1)
       end
       it 'returns 1' do
-        number_of_squares = human_00.send(:number_of_squares_away, [-1, 1])
-        expect(number_of_squares).to eq(1)
+        number_of_king_moves = human_00.send(:number_of_king_moves_away, [-1, 1])
+        expect(number_of_king_moves).to eq(1)
       end
     end
-    context 'when it is two squares away' do
+    context 'when it is two moves away' do
       it 'returns 2' do
-        number_of_squares = human_00.send(:number_of_squares_away, [2, 0])
-        expect(number_of_squares).to eq(2)
+        number_of_king_moves = human_00.send(:number_of_king_moves_away, [2, 0])
+        expect(number_of_king_moves).to eq(2)
       end
       it 'returns 2' do
-        number_of_squares = human_00.send(:number_of_squares_away, [-2, 2])
-        expect(number_of_squares).to eq(2)
+        number_of_king_moves = human_00.send(:number_of_king_moves_away, [-2, 2])
+        expect(number_of_king_moves).to eq(2)
       end
     end
   end

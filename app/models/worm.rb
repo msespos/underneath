@@ -13,7 +13,7 @@ class Worm < Piece
   def valid_move_geometry?(v)
     start_and_finish_on_board?(v) &&
     queens_move?(v) &&
-    number_of_squares_away(v).in?([1, 2]) &&
+    number_of_king_moves_away(v).in?([1, 2]) &&
     (last_move.nil? ||
      !same_direction?(v, last_move) && !opposite_direction?(v, last_move))
   end

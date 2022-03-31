@@ -22,7 +22,7 @@ class Human < Piece
   end
 
   def valid_move_geometry?(v)
-    start_and_finish_on_board?(v) && kings_move?(v) && number_of_squares_away(v) == 1
+    start_and_finish_on_board?(v) && kings_move?(v) && number_of_king_moves_away(v) == 1
   end
 
   def kings_move?(v)

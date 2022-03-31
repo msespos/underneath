@@ -21,9 +21,8 @@ class Piece < ApplicationRecord
     (0..Game::BOARD_SIZE - 1).include?(square[1])
   end
 
-  def number_of_squares_away(v)
-    d = Math.sqrt(v[0] ** 2 + v[1] ** 2)
-    d < 2 ? 1 : 2
+  def number_of_king_moves_away(v)
+    v[0].abs > v[1].abs ? v[0].abs : v[1].abs
   end
 
   def valid_moves

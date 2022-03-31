@@ -75,9 +75,8 @@ class Worm < Piece
   end
 
   def target_square_not_an_active_bomb?(v)
-    ActiveBomb.where(game_id: game.id).each do |b|
-      if x_position + v[0] == b.x_position && y_position + v[1] == b.y_position &&
-        b.type == 'Bomb' && b.face_up == true
+    game.active_bombs.each do |b|
+      if x_position + v[0] == b.x_position && y_position + v[1] == b.y_position
         return false
       end
     end

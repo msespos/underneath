@@ -1,8 +1,16 @@
 require 'rails_helper'
 
 RSpec.describe Worm, type: :model do
-  subject(:worm1) { described_class.new(last_move_x_direction: nil, last_move_y_direction: nil) }
-  subject(:worm2) { described_class.new(last_move_x_direction: 2, last_move_y_direction: 2) }
+  subject(:game1) { Game.new(id: 1) }
+  subject(:worm1) { described_class.new(x_position: 7, y_position: 7,
+                                        last_move_x_direction: nil,
+                                        last_move_y_direction: nil) }
+  subject(:worm2) { described_class.new(last_move_x_direction: 2,
+                                        last_move_y_direction: 2) }
+  subject(:card1) { Card.new(x_position: 5, y_position: 5, type: 'Rock') }
+  subject(:card2) { Card.new(x_position: 7, y_position: 5, type: 'Blank') }
+  subject(:active_bomb1) { ActiveBomb.new(x_position: 5, y_position: 7) }
+
   describe '#queens_move?' do
     context "when the vector is a queen's move" do
       it 'returns true' do
@@ -122,6 +130,47 @@ RSpec.describe Worm, type: :model do
       it 'returns 315' do
         angle_measure = worm1.send(:angle, [2, -2])
         expect(angle_measure).to eq(315)
+      end
+    end
+  end
+  describe '#target_square_not_a_rock?' do
+    before do
+      game1.cards << card1
+      game1.cards << card2
+    end
+
+    context 'when the target square is not a rock' do
+      it 'returns true' do
+        allow(worm1).to receive(:game).and_return(game1)
+        not_a_rock = worm1.send(:target_square_not_a_rock?, [0, -2])
+        expect(not_a_rock).to eq(true)
+      end
+    end
+    context 'when the target square is a rock' do
+      it 'returns false' do
+        allow(worm1).to receive(:game).and_return(game1)
+        not_a_rock = worm1.send(:target_square_not_a_rock?, [-2, -2])
+        expect(not_a_rock).to eq(false)
+      end
+    end
+  end
+  describe '#target_square_not_an_active_bomb?' do
+    before do
+      game1.active_bombs << active_bomb1
+    end
+
+    context 'when the target square is not an active bomb' do
+      it 'returns true' do
+        allow(worm1).to receive(:game).and_return(game1)
+        not_an_active_bomb = worm1.send(:target_square_not_an_active_bomb?, [-2, -2])
+        expect(not_an_active_bomb).to eq(true)
+      end
+    end
+    context 'when the target square is an active bomb' do
+      it 'returns false' do
+        allow(worm1).to receive(:game).and_return(game1)
+        not_an_active_bomb = worm1.send(:target_square_not_an_active_bomb?, [-2, 0])
+        expect(not_an_active_bomb).to eq(false)
       end
     end
   end

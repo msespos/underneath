@@ -38,7 +38,7 @@ class GamesController < ApplicationController
     piece.y_position += params[:delta_y]
     piece.save!
 
-    advance_phase(@game)
+    @game.advance_phase
     @game.save!
 
     broadcast!
@@ -46,19 +46,6 @@ class GamesController < ApplicationController
   end
 
   private
-
-  # move something like this to model?
-  def advance_phase(game)
-    phases = ['human 1', 'human 2', 'human 3', 'human 4', 'worm']
-    idx = phases.index(game.phase)
-    if idx == phases.length - 1
-      game = phases[0]
-      game.turn += 1
-    else
-      game.phase = phases[idx + 1]
-    end
-    game
-  end
 
   # TODO: need two versions of this, one for each side
   def broadcast!

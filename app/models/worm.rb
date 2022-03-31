@@ -18,16 +18,16 @@ class Worm < Piece
      !same_direction?(v, last_move) && !opposite_direction?(v, last_move))
   end
 
-  def last_move
-    return nil if last_move_x_direction.nil?
-
-    [last_move_x_direction, last_move_y_direction]
-  end
-
   def queens_move?(v)
     v[0] == 0 && [-2, -1, 1, 2].include?(v[1]) ||
     v[1] == 0 && [-2, -1, 1, 2].include?(v[0]) ||
     [-2, -1, 1, 2].include?(v[0]) && v[0].abs == v[1].abs
+  end
+
+  def last_move
+    return nil if last_move_x_direction.nil?
+
+    [last_move_x_direction, last_move_y_direction]
   end
 
   def same_direction?(v, w)

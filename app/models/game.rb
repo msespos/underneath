@@ -64,4 +64,32 @@ class Game < ApplicationRecord
                      face_up: false })
     end
   end
+
+  def humans_view_state
+    { humans: humans, active_bombs: active_bombs, face_up_cards: face_up_cards_data,
+      face_down_cards: face_down_cards_data }
+  end
+
+  def face_up_cards_data
+    cards.where(face_up: true).map do |c|
+      c = { x_position: c.x_position, y_position: c.y_position, type: c.type }
+    end
+  end
+
+  def face_down_cards_data
+    cards.where(face_up: false).map do |c|
+      c = { x_position: c.x_position, y_position: c.y_position }
+    end
+  end
+
+  def advance_phase
+    phases = ['human 1', 'human 2', 'human 3', 'human 4', 'worm']
+    idx = phases.index(phase)
+    if idx == phases.length - 1
+      phase = phases[0]
+      turn += 1
+    else
+      phase = phases[idx + 1]
+    end
+  end
 end

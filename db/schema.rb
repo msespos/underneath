@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_03_27_233455) do
+ActiveRecord::Schema.define(version: 2022_04_01_190958) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
@@ -42,6 +42,7 @@ ActiveRecord::Schema.define(version: 2022_03_27_233455) do
     t.uuid "worm_player_id"
     t.string "phase"
     t.integer "humans_bombs"
+    t.string "last_revealed_card_message"
   end
 
   create_table "humans", force: :cascade do |t|

@@ -6,7 +6,6 @@ class Card < ApplicationRecord
   end
 
   def reveal
-    # ADD LAST REVEALED CARD MESSAGE FIELD TO GAME
     if type == 'Rock'
       self.face_up = true
       game.last_revealed_card_message = 'Rock revealed'
@@ -14,11 +13,11 @@ class Card < ApplicationRecord
       game.humans_bombs += 1
       self.x_position = nil
       self.y_position = nil
-      game.last_revealed_card_message = 'Bomb added to inventory'
+      game.last_revealed_card_message = 'Bomb added to inventory and card discarded'
     else
       self.x_position = nil
       self.y_position = nil
-      game.last_revealed_card_message = 'Blank revealed'
+      game.last_revealed_card_message = 'Blank revealed and discarded'
     end
     self.save
     game.save

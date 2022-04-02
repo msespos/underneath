@@ -21,6 +21,7 @@ class Game < ApplicationRecord
   def reset
     self.turn = 1
     self.phase = "human 1"
+    self.last_revealed_card_message = nil
     self.save
     all_pieces.map { |i| i.destroy }
   end
@@ -63,6 +64,53 @@ class Game < ApplicationRecord
                      type: shuffled_card_types[i],
                      face_up: false })
     end
+  end
+
+  # refactor into smaller methods
+  def play_turn(type, v)
+    if type == 'place bomb' && phase == 'worm'
+      raise StandardError, 'Worm cannot place bomb'
+    end
+
+    active_piece = if phase == "worm"
+                     worm
+                   else
+                     humans.where(play_order: phase.split(' ')[-1].to_i).first
+                   end
+
+    if type == 'move'
+      if active_piece.valid_move?(v)
+        active_piece.move(v)
+      else
+        raise StandardError, 'Invalid move'
+      end
+    else
+      if active_piece.valid_bomb_placement?(v)
+        active_piece.place_bomb(v)
+      else
+        raise StandardError, 'Invalid bomb placement'
+      end
+    end
+
+    # idea: add card_on_square? that returns card or nil
+    if type == 'move'
+      cards.each do |c|
+        c.reveal if c.x_position == active_piece.x_position && c.y_position == active_piece.y_position
+      end
+    end
+
+    # maybe add human_on_square? or even create a general on_square? method
+    humans.each do |h|
+      if h.x_position == worm.x_position && h.y_position == worm.y_position
+        h.alive = false
+      end
+    end
+
+    # still need to check win conditions
+      # worm wins if all humans dead
+      # humans win if worm “trapped”?
+
+    advance_phase
   end
 
   def humans_view_state

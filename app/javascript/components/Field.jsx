@@ -12,9 +12,11 @@ class Field extends React.Component {
     super(props);
     this.state = {
       game: props.game,
+      worm: props.worm,
       humans: props.humans,
       face_up_cards: props.face_up_cards,
       face_down_cards: props.face_down_cards,
+      rocks: props.rocks,
       valid_moves: props.valid_moves,
       active: props.active
     };
@@ -43,7 +45,9 @@ class Field extends React.Component {
   render () {
   	return (
   		<div>
-  			<Entities humans={this.state.humans}
+  			<Entities worm={this.state.worm}
+                  humans={this.state.humans}
+                  rocks={this.state.rocks}
                   face_down_cards={this.state.face_down_cards}
                   face_up_cards={this.state.face_up_cards} />
         <Controls gameId={this.state.game.id} 

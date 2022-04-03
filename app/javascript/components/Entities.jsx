@@ -42,7 +42,10 @@ class Entities extends React.Component {
     }
 
     if (this.props.face_up_cards || this.props.rocks) {
-      const rocks = this.props.face_up_cards + this.props.rocks;
+      var rocks = (this.props.face_up_cards || []);
+      if (this.props.rocks) {
+        rocks = rocks.concat(this.props.rocks);
+      }
       rocks.forEach(piece => {
         output.push(
           renderEntity('rock',

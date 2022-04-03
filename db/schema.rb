@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_04_01_190958) do
+ActiveRecord::Schema.define(version: 2022_04_03_160628) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
@@ -64,6 +64,7 @@ ActiveRecord::Schema.define(version: 2022_04_01_190958) do
     t.bigint "game_id"
     t.integer "last_move_x_direction"
     t.integer "last_move_y_direction"
+    t.boolean "emergent"
   end
 
 end

@@ -124,7 +124,7 @@ class Game < ApplicationRecord
     { humans: humans,
       active_bombs: active_bombs,
       face_up_cards: face_up_cards_data,
-      face_down_cards: face_down_cards_data
+      face_down_cards: face_down_cards_data,
       valid_moves: valid_moves }
   end
 

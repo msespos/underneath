@@ -17,8 +17,13 @@ class GamesController < ApplicationController
   def show
     # TODO: assign me a game, and show that one only
     @game = Game.find(params[:id])
-    @valid_moves = current_valid_moves
-    @active = current_active_piece
+    if player_side == "human"
+      @state = @game.humans_view_state
+    elsif player_side == "worm"
+      @state = @game.worm_view_state
+    end
+    # @valid_moves = current_valid_moves
+    # @active = current_active_piece
   end
 
   def create
@@ -71,7 +76,12 @@ class GamesController < ApplicationController
   def broadcast!
     Rails.logger.info("Broadcasting: #{@game.id} #{@game.turn}")
 
-    GameChannel.broadcast_to("game:#{game.to_gid_param}:human", @game.human_view_state)
+    GameChannel.broadcast_to("game:#{@game.to_gid_param}:human", 
+      {game: @game}.merge(@game.humans_view_state))
+
+    GameChannel.broadcast_to("game:#{@game.to_gid_param}:worm", 
+      {game: @game}.merge(@game.worm_view_state))
+
     # GameChannel.broadcast_to("game:#{game.to_gid_param}:worm", @game.human_view_state)
 
     # GameChannel.broadcast_to(@game, {
@@ -106,4 +116,13 @@ class GamesController < ApplicationController
     @player_id = cookies['player_id']
     Rails.logger.info("Player_id #{@player_id}!")
   end
+
+  def player_side
+    if @game.human_player_id == @player_id
+      'human'
+    elsif @game.worm=_player_id == @player_id
+      'worm'
+    end
+  end
+
 end

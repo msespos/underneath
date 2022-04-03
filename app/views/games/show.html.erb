@@ -10,14 +10,7 @@
 	</div>
 
 	<div class="max-w-md w-96 h-96">
-	<%= react_component("Field", { 
-		game: @game,
-		entities: {'humans': @game.humans,
-				   'worm': @game.worm,
-				   'cards': @game.cards },
-		valid_moves: @valid_moves,
-		active: @active
-	}) %>
+	<%= react_component("Field", { game: @game }.merge(@state)) %>
 	</div>
 </div>
 

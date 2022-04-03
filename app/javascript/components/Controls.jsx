@@ -42,20 +42,22 @@ class Controls extends React.Component {
   render () {
     const output = [];
 
-    var i = 0;
-    this.props.valid_moves.forEach(target => {
-      output.push(
-        renderTarget('valid_move',
-          i,
-          target[0],
-          target[1],
-          8,
-          this.props.gameId,
-          this.props.active.x_position,
-          this.props.active.y_position)
-      );
-      i = i + 1;
-    });
+    if (this.props.valid_moves) {
+      var i = 0;
+      this.props.valid_moves.forEach(target => {
+        output.push(
+          renderTarget('valid_move',
+            i,
+            target[0],
+            target[1],
+            8,
+            this.props.gameId,
+            this.props.active.x_position,
+            this.props.active.y_position)
+        );
+        i = i + 1;
+      });
+    }
 
     return (
       <div className="w-96 h-96 flow-root"

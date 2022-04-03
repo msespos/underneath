@@ -2,7 +2,17 @@ class Card < ApplicationRecord
   belongs_to :game
 
   def print_label
-    'C'
+    if type == 'Rock' && self.face_up == true && human_on_card?
+      '®'
+    elsif type == 'Rock' && self.face_up == true
+      'R'
+    else
+      'C'
+    end
+  end
+
+  def human_on_card?
+    game.humans.detect { |h| h.x_position == x_position && h.y_position == y_position }
   end
 
   def reveal

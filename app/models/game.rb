@@ -66,17 +66,19 @@ class Game < ApplicationRecord
     end
   end
 
+  def active_piece
+    if phase == "worm"
+      worm
+    else
+      humans.where(play_order: phase.split(' ')[-1].to_i).first
+    end
+  end
+
   # refactor into smaller methods
   def play_turn(type, v)
     if type == 'place bomb' && phase == 'worm'
       raise StandardError, 'Worm cannot place bomb'
     end
-
-    active_piece = if phase == "worm"
-                     worm
-                   else
-                     humans.where(play_order: phase.split(' ')[-1].to_i).first
-                   end
 
     if type == 'move'
       if active_piece.valid_move?(v)
@@ -136,7 +138,8 @@ class Game < ApplicationRecord
   end
 
   def worms_view_state
-    { active_bombs: active_bombs,
+    { worm: worm,
+      active_bombs: active_bombs,
       rocks: rocks_data }
   end
 

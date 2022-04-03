@@ -74,6 +74,10 @@ class Game < ApplicationRecord
     end
   end
 
+  def active_piece_side
+    phase == 'worm' ? 'worm' : 'humans'
+  end
+
   # refactor into smaller methods
   def play_turn(type, v)
     if type == 'place bomb' && phase == 'worm'
@@ -116,10 +120,12 @@ class Game < ApplicationRecord
   end
 
   def humans_view_state
+    valid_moves = active_piece.valid_moves if active_piece_side == 'humans'
     { humans: humans,
       active_bombs: active_bombs,
       face_up_cards: face_up_cards_data,
-      face_down_cards: face_down_cards_data }
+      face_down_cards: face_down_cards_data
+      valid_moves: valid_moves }
   end
 
   def face_up_cards_data
@@ -138,9 +144,11 @@ class Game < ApplicationRecord
   end
 
   def worms_view_state
+    valid_moves = active_piece.valid_moves if active_piece_side == 'worm'
     { worm: worm,
       active_bombs: active_bombs,
-      rocks: rocks_data }
+      rocks: rocks_data,
+      valid_moves: valid_moves }
   end
 
   def rocks_data

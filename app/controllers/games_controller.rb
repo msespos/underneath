@@ -20,7 +20,7 @@ class GamesController < ApplicationController
     if player_side == "human"
       @state = @game.humans_view_state
     elsif player_side == "worm"
-      @state = @game.worm_view_state
+      @state = @game.worms_view_state
     end
     # @valid_moves = current_valid_moves
     # @active = current_active_piece
@@ -80,7 +80,7 @@ class GamesController < ApplicationController
       {game: @game}.merge(@game.humans_view_state))
 
     GameChannel.broadcast_to("game:#{@game.to_gid_param}:worm", 
-      {game: @game}.merge(@game.worm_view_state))
+      {game: @game}.merge(@game.worms_view_state))
 
     # GameChannel.broadcast_to("game:#{game.to_gid_param}:worm", @game.human_view_state)
 
@@ -120,7 +120,7 @@ class GamesController < ApplicationController
   def player_side
     if @game.human_player_id == @player_id
       'human'
-    elsif @game.worm=_player_id == @player_id
+    elsif @game.worm_player_id == @player_id
       'worm'
     end
   end

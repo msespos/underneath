@@ -41,6 +41,20 @@ class Entities extends React.Component {
       });
     }
 
+    if (this.props.face_up_cards || this.props.rocks) {
+      const rocks = this.props.face_up_cards + this.props.rocks;
+      rocks.forEach(piece => {
+        output.push(
+          renderEntity('rock',
+            i,
+            piece['x_position'],
+            piece['y_position'],
+            8)
+        );
+        i = i + 1;
+      });
+    }
+
     if (this.props.humans) {
       this.props.humans.forEach(piece => {
         output.push(

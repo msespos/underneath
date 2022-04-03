@@ -5,8 +5,12 @@
 		<% if !@games.empty? %>
 			<% @games.each do |g| %>
 				<div>
-					Game <%= g.id %>: 
-					<%= link_to "Play", g %>
+					Game <%= g.id %>:
+					<% if @player_id.in? [g.worm_player_id, g.human_player_id] %>
+						<%= link_to "Play", g %>
+					<% else %>
+						<%= link_to "Join", "/games/#{g.id}/join", method: :post %>
+					<% end %>
 				</div>
 			<% end %>
 		<% end %>

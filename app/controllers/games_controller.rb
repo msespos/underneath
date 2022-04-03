@@ -2,9 +2,16 @@ require 'securerandom'
 
 class GamesController < ApplicationController
   before_action :require_cookie
+
   def index
     # TODO: show _my_ {open + recently finished} games
     @games = Game.all.order('created_at DESC')
+
+    # TODO: clean this up
+    @games = @games.select do |g| 
+      players = [g.worm_player_id, g.human_player_id]
+      (@player_id.in?(players) || nil.in?(players)) && players.any?
+    end
   end
 
   def show
@@ -24,6 +31,19 @@ class GamesController < ApplicationController
     @game.save!
     @game.set_up
 
+    redirect_to @game
+  end
+
+  def join
+    @game = Game.find(params[:game_id])
+    if @game.human_player_id.nil?
+      @game.human_player_id = @player_id
+    elsif @game.worm_player_id.nil?
+      @game.worm_player_id = @player_id
+    else
+      raise Exception.new "Can't join game #{params[:id]}"
+    end
+    @game.save!
     redirect_to @game
   end
 
@@ -49,18 +69,21 @@ class GamesController < ApplicationController
 
   # TODO: need two versions of this, one for each side
   def broadcast!
-    # Rails.logger.info("Broadcasting: #{@game.id} #{@game.turn} #{current_active_piece}")
-    
-    GameChannel.broadcast_to(@game, {
-      game: @game,
-      entities: {humans: @game.humans,
-                 worm: @game.worm,
-                 cards: @game.cards},
+    Rails.logger.info("Broadcasting: #{@game.id} #{@game.turn}")
 
-      # TODO: only send if permitted
-      active: current_active_piece, 
-      valid_moves: current_valid_moves 
-    })
+    GameChannel.broadcast_to("game:#{game.to_gid_param}:human", @game.human_view_state)
+    # GameChannel.broadcast_to("game:#{game.to_gid_param}:worm", @game.human_view_state)
+
+    # GameChannel.broadcast_to(@game, {
+    #   game: @game,
+    #   entities: {humans: @game.humans,
+    #              worm: @game.worm,
+    #              cards: @game.cards},
+
+    #   # TODO: only send if permitted
+    #   active: current_active_piece, 
+    #   valid_moves: current_valid_moves 
+    # })
   end
 
   def current_active_piece

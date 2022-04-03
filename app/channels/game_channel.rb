@@ -2,7 +2,14 @@ class GameChannel < ApplicationCable::Channel
   def subscribed
     # stream_from "some_channel"
     @game = Game.find(params[:id])
-    stream_for @game
+    side = if @game.human_player_id == current_player_id
+      'human'
+    elsif @game.worm_player_id == current_player_id
+      'worm'
+    else
+      ''
+    end
+    stream_from "game:#{@game.to_gid_param}:#{side}"
     # TODO: when we reconnect, rebroadcast automatically
   end
 
@@ -18,4 +25,5 @@ class GameChannel < ApplicationCable::Channel
     #   humans: @game.humans
     # })
   end
+
 end

@@ -125,6 +125,7 @@ class Game < ApplicationRecord
       active_bombs: active_bombs,
       face_up_cards: face_up_cards_data,
       face_down_cards: face_down_cards_data,
+      active_piece: active_piece,
       valid_moves: valid_moves }
   end
 
@@ -148,6 +149,7 @@ class Game < ApplicationRecord
     { worm: worm,
       active_bombs: active_bombs,
       rocks: rocks_data,
+      active_piece: active_piece,
       valid_moves: valid_moves }
   end
 

@@ -74,12 +74,12 @@ class GamesController < ApplicationController
 
   # TODO: need two versions of this, one for each side
   def broadcast!
-    Rails.logger.info("Broadcasting: #{@game.id} #{@game.turn}")
-
-    GameChannel.broadcast_to("game:#{@game.to_gid_param}:human", 
+    ActionCable.server.broadcast(
+      "game:#{@game.to_gid_param}:human",
       {game: @game}.merge(@game.humans_view_state))
 
-    GameChannel.broadcast_to("game:#{@game.to_gid_param}:worm", 
+    ActionCable.server.broadcast(
+      "game:#{@game.to_gid_param}:worm",
       {game: @game}.merge(@game.worms_view_state))
 
     # GameChannel.broadcast_to("game:#{game.to_gid_param}:worm", @game.human_view_state)

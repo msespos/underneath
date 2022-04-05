@@ -2,7 +2,10 @@ import React from "react"
 import PropTypes from "prop-types"
 
 
-var arrows = [...Array(3)].map(e => Array(3));
+var arrows = {};
+arrows[0] = {};
+arrows[-1] = {};
+arrows[1] = {};
 arrows[0][-1]  = '←';
 arrows[0][+1]  = '→';
 arrows[-1][0]  = '↑';
@@ -14,7 +17,6 @@ arrows[+1][-1] = '↙';
 
 // submit move to server
 const sendMove = (gameId, deltaX, deltaY) => {
-  // console.log('move ' + deltaX + ', ' + deltaY);
   const csrf = document.querySelector("meta[name='csrf-token']").getAttribute("content");
   const body = JSON.stringify({'delta_x': deltaX,
                                'delta_y': deltaY});
@@ -43,7 +45,7 @@ function renderTarget(type, index, x, y, perRow, gameId, activeX, activeY) {
                  left: left,
                  width: size,
                  height: size}}
-         onClick={(e) => sendMove(gameId, x - activeX, y - activeY, e)}>
+         onClick={(e) => sendMove(gameId, x-activeX, y-activeY, e)}>
     </div>
     )
 }
@@ -54,6 +56,8 @@ class Controls extends React.Component {
 
     if (this.props.valid_moves) {
       var i = 0;
+      var sx = this.props.active_piece.x_position;
+      var sy = this.props.active_piece.y_position;
       this.props.valid_moves.forEach(target => {
         output.push(
           renderTarget('valid_move',
@@ -62,8 +66,8 @@ class Controls extends React.Component {
             target[1],
             8,
             this.props.gameId,
-            this.props.active.x_position,
-            this.props.active.y_position)
+            this.props.active_piece.x_position,
+            this.props.active_piece.y_position)
         );
         i = i + 1;
       });

@@ -18,7 +18,7 @@ class Field extends React.Component {
       face_down_cards: props.face_down_cards,
       rocks: props.rocks,
       valid_moves: props.valid_moves,
-      active: props.active
+      active_piece: props.active_piece
     };
 
     const ref = this;
@@ -52,7 +52,7 @@ class Field extends React.Component {
                   face_up_cards={this.state.face_up_cards} />
         <Controls gameId={this.state.game.id} 
                   valid_moves={this.state.valid_moves}
-                  active={this.state.active} />
+                  active_piece={this.state.active_piece} />
   			<Board />
         <TurnStrip turn={this.state.game.turn} 
                    phase={this.state.game.phase} />

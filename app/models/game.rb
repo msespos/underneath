@@ -78,12 +78,20 @@ class Game < ApplicationRecord
     phase == 'worm' ? 'worm' : 'humans'
   end
 
-  # refactor into smaller methods
   def play_turn(type, v)
     if type == 'place bomb' && phase == 'worm'
       raise StandardError, 'Worm cannot place bomb'
     end
+    move_or_place_bomb(type, v)
+    item_on_square(cards, active_piece).reveal if item_on_square(cards, active_piece)
 
+    item_on_square(humans, worm).alive = false if item_on_square(humans, worm)
+
+    # still need to check win conditions here
+    advance_phase
+  end
+
+  def move_or_place_bomb(type, v)
     if type == 'move'
       if active_piece.valid_move?(v)
         active_piece.move(v)
@@ -97,26 +105,12 @@ class Game < ApplicationRecord
         raise StandardError, 'Invalid bomb placement'
       end
     end
+  end
 
-    # idea: add card_on_square? that returns card or nil
-    if type == 'move'
-      cards.each do |c|
-        c.reveal if c.x_position == active_piece.x_position && c.y_position == active_piece.y_position
-      end
+  def item_on_square(items, piece)
+    items.detect do |i|
+      i.x_position == piece.x_position && i.y_position == piece.y_position
     end
-
-    # maybe add human_on_square? or even create a general on_square? method
-    humans.each do |h|
-      if h.x_position == worm.x_position && h.y_position == worm.y_position
-        h.alive = false
-      end
-    end
-
-    # still need to check win conditions
-      # worm wins if all humans dead
-      # humans win if worm “trapped”?
-
-    advance_phase
   end
 
   def humans_view_state

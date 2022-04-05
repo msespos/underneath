@@ -2,6 +2,16 @@ import React from "react"
 import PropTypes from "prop-types"
 
 
+var arrows = [...Array(3)].map(e => Array(3));
+arrows[0][-1]  = '←';
+arrows[0][+1]  = '→';
+arrows[-1][0]  = '↑';
+arrows[+1][0]  = '↓';
+arrows[-1][-1] = '↖';
+arrows[-1][+1] = '↗';
+arrows[+1][+1] = '↘';
+arrows[+1][-1] = '↙';
+
 // submit move to server
 const sendMove = (gameId, deltaX, deltaY) => {
   // console.log('move ' + deltaX + ', ' + deltaY);

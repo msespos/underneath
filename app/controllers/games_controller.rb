@@ -22,8 +22,6 @@ class GamesController < ApplicationController
     elsif player_side == "worm"
       @state = @game.worms_view_state
     end
-    # @valid_moves = current_valid_moves
-    # @active = current_active_piece
   end
 
   def create
@@ -58,14 +56,9 @@ class GamesController < ApplicationController
 
     # TODO: confirm can play this game & this side
 
-    piece = current_active_piece
-    piece.x_position += params[:delta_x]
-    piece.y_position += params[:delta_y]
-    piece.save!
-
-    @game.advance_phase
-    @game.save!
-
+    @game.play_turn('move',[params[:delta_x],params[:delta_y]])
+    @game.reload
+    
     broadcast!
     render :json => { :success => 1 }
   end
@@ -81,32 +74,6 @@ class GamesController < ApplicationController
     ActionCable.server.broadcast(
       "game:#{@game.to_gid_param}:worm",
       {game: @game}.merge(@game.worms_view_state))
-
-    # GameChannel.broadcast_to("game:#{game.to_gid_param}:worm", @game.human_view_state)
-
-    # GameChannel.broadcast_to(@game, {
-    #   game: @game,
-    #   entities: {humans: @game.humans,
-    #              worm: @game.worm,
-    #              cards: @game.cards},
-
-    #   # TODO: only send if permitted
-    #   active: current_active_piece, 
-    #   valid_moves: current_valid_moves 
-    # })
-  end
-
-  def current_active_piece
-    phase, phase_index = @game.phase.split(' ')
-    if phase == 'human'
-      @game.humans.detect { |p| p.play_order == phase_index.to_i }
-    elsif phase == 'worm'
-      @game.worm
-    end
-  end
-
-  def current_valid_moves
-    current_active_piece.reload.valid_moves
   end
 
   def require_cookie

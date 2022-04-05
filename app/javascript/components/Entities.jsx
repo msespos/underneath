@@ -6,6 +6,9 @@ function renderEntity(type, index, x, y, per_row) {
   //  Pieces are 32px square
   //  Assume rem=16px
   // hard-coding per_row to 8 for the moment
+  if (x == null) {
+    return '';  // undefined coords = off board
+  }
   const squareSize = 16*96/(4*per_row);
   const pieceOffset = (squareSize - 32)/2/(96*16/4);
 

@@ -41,9 +41,9 @@ a {
     background-color: #1F1100;
 }
 
-.human {
+.human, .worm {
     transition-property: left, top;
-    transition-duration: 0.3s;
+    transition-duration: 0.4s;
 }
 
 .valid_move_square {

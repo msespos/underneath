@@ -6,9 +6,9 @@ class Worm < Piece
   end
 
   def move(v)
-    super(v)
     self.last_move_x_direction = v[0]
     self.last_move_y_direction = v[1]
+    super(v)
   end
 
   def valid_move?(v)

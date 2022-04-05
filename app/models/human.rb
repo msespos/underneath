@@ -10,7 +10,6 @@ class Human < Piece
       ActiveBomb.create({ x_position: x_position + v[0],
                           y_position: y_position + v[1],
                           game_id: game.id })
-      # should this decrementing happen elsewhere?
       game.humans_bombs -= 1
     end
   end

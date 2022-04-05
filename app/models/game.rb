@@ -21,6 +21,7 @@ class Game < ApplicationRecord
   def reset
     self.turn = 1
     self.phase = "human 1"
+    self.humans_bombs = 0
     self.last_revealed_card_message = nil
     self.save
     all_pieces.map { |i| i.destroy }
@@ -85,7 +86,10 @@ class Game < ApplicationRecord
     move_or_place_bomb(type, v)
     item_on_square(cards, active_piece).reveal if item_on_square(cards, active_piece)
 
-    item_on_square(humans, worm).alive = false if item_on_square(humans, worm)
+   if item_on_square(humans, worm)
+    item_on_square(humans, worm).alive = false
+    item_on_square(humans, worm).save
+   end
 
     # still need to check win conditions here
     advance_phase

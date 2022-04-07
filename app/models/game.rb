@@ -83,31 +83,39 @@ class Game < ApplicationRecord
     if type == 'place bomb' && phase == 'worm'
       raise StandardError, 'Worm cannot place bomb'
     end
-    move_or_place_bomb(type, v)
+
+    if type == 'move'
+      move(v)
+    elsif type == 'place bomb'
+      place_bomb(v)
+    else
+      raise StandardError, 'Incorrect type'
+    end
+
     item_on_square(cards, active_piece).reveal if item_on_square(cards, active_piece)
 
-   if item_on_square(humans, worm)
-    item_on_square(humans, worm).alive = false
-    item_on_square(humans, worm).save
-   end
+    if item_on_square(humans, worm)
+      item_on_square(humans, worm).alive = false
+      item_on_square(humans, worm).save
+    end
 
     # still need to check win conditions here
     advance_phase
   end
 
-  def move_or_place_bomb(type, v)
-    if type == 'move'
-      if active_piece.valid_move?(v)
-        active_piece.move(v)
-      else
-        raise StandardError, 'Invalid move'
-      end
+  def move(v)
+    if active_piece.valid_move?(v)
+      active_piece.move(v)
     else
-      if active_piece.valid_bomb_placement?(v)
-        active_piece.place_bomb(v)
-      else
-        raise StandardError, 'Invalid bomb placement'
-      end
+      raise StandardError, 'Invalid move'
+    end
+  end
+
+  def place_bomb(v)
+    if active_piece.valid_bomb_placement?(v)
+      active_piece.place_bomb(v)
+    else
+      raise StandardError, 'Invalid bomb placement'
     end
   end
 

@@ -1,11 +1,13 @@
 import React from "react"
 import PropTypes from "prop-types"
 
-function renderEntity(type, index, x, y, per_row) {
+function renderEntity(type, index, piece, per_row) {
   // offset calculates how to center the piece
   //  Pieces are 32px square
   //  Assume rem=16px
   // hard-coding per_row to 8 for the moment
+  const x = piece['x_position'];
+  const y = piece['y_position'];
   if (x == null) {
     return '';  // undefined coords = off board
   }
@@ -34,11 +36,7 @@ class Entities extends React.Component {
     if (this.props.face_down_cards) {
       this.props.face_down_cards.forEach(piece => {
         output.push(
-          renderEntity('card',
-            i,
-            piece['x_position'],
-            piece['y_position'],
-            8)
+          renderEntity('card', i, piece, 8)
         );
         i = i + 1;
       });
@@ -49,13 +47,20 @@ class Entities extends React.Component {
       if (this.props.rocks) {
         rocks = rocks.concat(this.props.rocks);
       }
+      i = 0;
       rocks.forEach(piece => {
         output.push(
-          renderEntity('rock',
-            i,
-            piece['x_position'],
-            piece['y_position'],
-            8)
+          renderEntity('rock', i, piece, 8)
+        );
+        i = i + 1;
+      });
+    }
+
+    if (this.props.active_bombs) {
+      i = 0;
+      this.props.active_bombs.forEach(piece => {
+        output.push(
+          renderEntity('active_bomb', i, piece, 8)
         );
         i = i + 1;
       });
@@ -64,11 +69,7 @@ class Entities extends React.Component {
     if (this.props.humans) {
       this.props.humans.forEach(piece => {
         output.push(
-          renderEntity('human',
-            piece['play_order'],
-            piece['x_position'],
-            piece['y_position'],
-            8)
+          renderEntity('human', piece['play_order'], piece, 8)
         );
       });
     }
@@ -76,11 +77,7 @@ class Entities extends React.Component {
     if (this.props.worm) {
       const worm = this.props.worm;
       output.push(
-        renderEntity('worm',
-          worm['play_order'],
-          worm['x_position'],
-          worm['y_position'],
-          8)
+        renderEntity('worm', 1, worm, 8)
       );
     } 
 

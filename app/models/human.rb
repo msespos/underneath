@@ -1,3 +1,5 @@
+require 'matrix'
+
 class Human < Piece
   belongs_to :game
 

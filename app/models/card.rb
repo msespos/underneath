@@ -1,3 +1,5 @@
+require 'matrix'
+
 class Card < ApplicationRecord
   belongs_to :game
 

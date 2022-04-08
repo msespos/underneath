@@ -1,3 +1,5 @@
+require 'matrix'
+
 class Worm < Piece
   belongs_to :game
 

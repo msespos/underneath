@@ -1,3 +1,5 @@
+require 'matrix'
+
 class Game < ApplicationRecord
   has_one :worm, dependent: :destroy
   has_many :humans, dependent: :destroy

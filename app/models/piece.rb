@@ -1,3 +1,5 @@
+require 'matrix'
+
 class Piece < ApplicationRecord
   self.abstract_class = true
 

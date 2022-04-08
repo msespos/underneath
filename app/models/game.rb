@@ -168,6 +168,14 @@ class Game < ApplicationRecord
 
   def advance_phase
     phases = ['human 1', 'human 2', 'human 3', 'human 4', 'worm']
+    simple_advance_phase(phases)
+    while human_by_phase && !human_by_phase.alive
+      simple_advance_phase(phases)
+    end
+    self.save
+  end
+
+  def simple_advance_phase(phases)
     idx = phases.index(phase)
     if idx == phases.length - 1
       self.phase = phases[0]
@@ -175,12 +183,5 @@ class Game < ApplicationRecord
     else
       self.phase = phases[idx + 1]
     end
-    if human_by_phase
-      while !human_by_phase.alive
-        idx = phases.index(phase)
-        self.phase = phases[idx + 1]
-      end
-    end
-    self.save
   end
 end

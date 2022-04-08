@@ -129,13 +129,13 @@ class Game < ApplicationRecord
     valid_moves = active_piece.valid_moves if active_piece_side == 'humans'
     { humans: humans,
       active_bombs: active_bombs,
-      face_up_cards: face_up_cards_data,
-      face_down_cards: face_down_cards_data,
+      face_up_cards: face_up_cards_locations,
+      face_down_cards: face_down_cards_locations,
       active_piece: active_piece,
       valid_moves: valid_moves }
   end
 
-  def face_up_cards_data
+  def face_up_cards_locations
     cards.where(face_up: true).map do |c|
       c = { x_position: c.x_position,
             y_position: c.y_position,
@@ -143,7 +143,7 @@ class Game < ApplicationRecord
     end
   end
 
-  def face_down_cards_data
+  def face_down_cards_locations
     cards.where(face_up: false).map do |c|
       c = { x_position: c.x_position,
             y_position: c.y_position }
@@ -154,12 +154,12 @@ class Game < ApplicationRecord
     valid_moves = active_piece.valid_moves if active_piece_side == 'worm'
     { worm: worm,
       active_bombs: active_bombs,
-      rocks: rocks_data,
+      rocks: rocks_locations,
       active_piece: active_piece,
       valid_moves: valid_moves }
   end
 
-  def rocks_data
+  def rocks_locations
     cards.where(type: 'Rock').map do |c|
       c = { x_position: c.x_position,
             y_position: c.y_position }

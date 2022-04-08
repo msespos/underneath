@@ -70,6 +70,28 @@ class Worm < Piece
     end
   end
 
+  def humans_in_view
+    humans_in_view = []
+    game.humans.each do |h|
+      squares_in_view.each do |s|
+        humans_in_view << h if h.x_position == s[0] && h.y_position == s[1]
+      end
+    end
+    humans_in_view
+  end
+
+  def squares_in_view
+    squares_in_view = []
+    (-2..2).each do |x|
+      (-2..2).each do |y|
+        if on_board?([x_position + x, y_position + y])
+          squares_in_view << [x_position + x, y_position + y]
+        end
+      end
+    end
+    squares_in_view
+  end
+
   def target_square_not_a_rock?(v)
     game.cards.each do |c|
       if x_position + v[0] == c.x_position && y_position + v[1] == c.y_position &&

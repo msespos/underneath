@@ -16,9 +16,10 @@ function renderEntity(type, index, piece, per_row) {
 
   const top = (100 * (x/per_row + pieceOffset)) + '%';
   const left = (100 * (y/per_row + pieceOffset)) + '%';
+
   return (
     <div key={type + '_' + index}
-         className={type}
+         className={'entity ' + type + ' ' + type + '_' + index}
          style={{position: 'absolute',
                  top: top,
                  left: left}}>
@@ -67,9 +68,12 @@ class Entities extends React.Component {
     }
 
     if (this.props.humans) {
-      this.props.humans.forEach(piece => {
+      // we have to have a consistent order so animations to work!
+      // otherwise, the items reorder in the DOM, breaking animations
+      var humans = this.props.humans.sort((a, b) => a['play_order'] - b['play_order']);
+      humans.forEach(piece => {
         output.push(
-          renderEntity('human', piece['play_order'], piece, 8)
+          renderEntity('human', piece['play_order'], piece, 8, 'jitter')
         );
       });
     }

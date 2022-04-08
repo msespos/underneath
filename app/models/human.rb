@@ -21,7 +21,8 @@ class Human < Piece
   def valid_move?(v)
     valid_move_geometry?(v) &&
     target_square_not_a_human?(v) &&
-    target_square_not_an_active_bomb?(v)
+    target_square_not_an_active_bomb?(v) &&
+    !moving_from_rock_to_rock?(v)
   end
 
   def valid_move_geometry?(v)
@@ -52,6 +53,30 @@ class Human < Piece
       end
     end
     true
+  end
+
+  def moving_from_rock_to_rock?(v)
+    return false unless on_rock?
+
+    game.cards.each do |c|
+      if c.x_position == x_position + v[0] &&
+         c.y_position == y_position + v[1] &&
+         c.type == 'Rock'
+        return true
+      end
+    end
+    false
+  end
+
+  def on_rock?
+    game.cards.each do |c|
+      if c.x_position == x_position &&
+         c.y_position == y_position &&
+         c.type == 'Rock'
+        return true
+      end
+    end
+    false
   end
 
   def die!

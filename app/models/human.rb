@@ -58,23 +58,14 @@ class Human < Piece
   end
 
   def moving_from_rock_to_rock?(v)
-    return false unless on_rock?
+    rocks = game.cards.where(type: 'Rock', face_up: true)
+    return false unless game.item_on_square(rocks, position)
 
     game.cards.each do |c|
       if c.x_position == x_position + v[0] &&
          c.y_position == y_position + v[1] &&
-         c.type == 'Rock'
-        return true
-      end
-    end
-    false
-  end
-
-  def on_rock?
-    game.cards.each do |c|
-      if c.x_position == x_position &&
-         c.y_position == y_position &&
-         c.type == 'Rock'
+         c.type == 'Rock' &&
+         c.face_up == true
         return true
       end
     end

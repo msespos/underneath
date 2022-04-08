@@ -1,6 +1,10 @@
 class Piece < ApplicationRecord
   self.abstract_class = true
 
+  def position
+    Vector[x_position, y_position]
+  end
+
   def validate_and_move(v)
     move(v) if valid_move?(v)
   end

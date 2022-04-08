@@ -73,23 +73,9 @@ class Worm < Piece
   def humans_in_view
     humans_in_view = []
     game.humans.each do |h|
-      squares_in_view.each do |s|
-        humans_in_view << h if h.x_position == s[0] && h.y_position == s[1]
-      end
+      humans_in_view << h if h.number_of_king_moves_away(h.position - position) <= 2
     end
     humans_in_view
-  end
-
-  def squares_in_view
-    squares_in_view = []
-    (-2..2).each do |x|
-      (-2..2).each do |y|
-        if on_board?([x_position + x, y_position + y])
-          squares_in_view << [x_position + x, y_position + y]
-        end
-      end
-    end
-    squares_in_view
   end
 
   def target_square_not_a_rock?(v)

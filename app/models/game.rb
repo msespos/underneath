@@ -71,8 +71,12 @@ class Game < ApplicationRecord
     if phase == "worm"
       worm
     else
-      humans.where(play_order: phase.split(' ')[-1].to_i).first
+      human_by_phase
     end
+  end
+
+  def human_by_phase
+    humans.where(play_order: phase.split(' ')[-1].to_i).first
   end
 
   def active_piece_side
@@ -92,12 +96,8 @@ class Game < ApplicationRecord
       raise StandardError, 'Incorrect type'
     end
 
-    item_on_square(cards, active_piece).reveal if item_on_square(cards, active_piece)
-
-    if item_on_square(humans, worm)
-      item_on_square(humans, worm).alive = false
-      item_on_square(humans, worm).save
-    end
+    item_on_square(cards, active_piece)&.reveal
+    item_on_square(humans, worm)&.die!
 
     # still need to check win conditions here
     advance_phase
@@ -174,6 +174,12 @@ class Game < ApplicationRecord
       self.turn += 1
     else
       self.phase = phases[idx + 1]
+    end
+    if human_by_phase
+      while !human_by_phase.alive
+        idx = phases.index(phase)
+        self.phase = phases[idx + 1]
+      end
     end
     self.save
   end

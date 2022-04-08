@@ -53,4 +53,11 @@ class Human < Piece
     end
     true
   end
+
+  def die!
+    self.alive = false
+    self.x_position = nil
+    self.y_position = nil
+    self.save
+  end
 end

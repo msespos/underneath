@@ -137,16 +137,16 @@ class Game < ApplicationRecord
 
   def face_up_cards_locations
     cards.where(face_up: true).map do |c|
-      c = { x_position: c.x_position,
-            y_position: c.y_position,
-            type: c.type }
+      { x_position: c.x_position,
+        y_position: c.y_position,
+        type: c.type }
     end
   end
 
   def face_down_cards_locations
     cards.where(face_up: false).map do |c|
-      c = { x_position: c.x_position,
-            y_position: c.y_position }
+      { x_position: c.x_position,
+        y_position: c.y_position }
     end
   end
 
@@ -161,8 +161,8 @@ class Game < ApplicationRecord
 
   def rocks_locations
     cards.where(type: 'Rock').map do |c|
-      c = { x_position: c.x_position,
-            y_position: c.y_position }
+      { x_position: c.x_position,
+        y_position: c.y_position }
     end
   end
 

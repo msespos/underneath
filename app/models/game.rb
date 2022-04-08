@@ -98,8 +98,8 @@ class Game < ApplicationRecord
       raise StandardError, 'Incorrect type'
     end
 
-    item_on_square(cards, active_piece)&.reveal unless phase == 'worm'
-    item_on_square(humans, worm)&.die!
+    item_on_square(cards, active_piece.position)&.reveal unless phase == 'worm'
+    item_on_square(humans, worm.position)&.die!
 
     # still need to check win conditions here
     advance_phase
@@ -121,9 +121,9 @@ class Game < ApplicationRecord
     end
   end
 
-  def item_on_square(items, piece)
+  def item_on_square(items, position)
     items.detect do |i|
-      i.x_position == piece.x_position && i.y_position == piece.y_position
+      i.x_position == position[0] && i.y_position == position[1]
     end
   end
 

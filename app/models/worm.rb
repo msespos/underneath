@@ -89,4 +89,16 @@ class Worm < Piece
     end
     true
   end
+
+  def squares_in_view
+    squares_in_view = []
+    (-2..2).each do |x|
+      (-2..2).each do |y|
+        if on_board?([x_position + x, y_position + y])
+          squares_in_view << [x_position + x, y_position + y]
+        end
+      end
+    end
+    squares_in_view
+  end
 end

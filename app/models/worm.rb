@@ -14,7 +14,8 @@ class Worm < Piece
   end
 
   def valid_move?(v)
-    valid_move_geometry?(v) && target_square_not_a_rock?(v) &&
+    valid_move_geometry?(v) &&
+    target_square_not_a_rock?(v) &&
     target_square_not_an_active_bomb?(v)
   end
 
@@ -72,14 +73,6 @@ class Worm < Piece
     end
   end
 
-  def humans_in_view
-    humans_in_view = []
-    game.humans.each do |h|
-      humans_in_view << h if h.number_of_king_moves_away(h.position - position) <= 2
-    end
-    humans_in_view
-  end
-
   def target_square_not_a_rock?(v)
     game.cards.each do |c|
       if x_position + v[0] == c.x_position && y_position + v[1] == c.y_position &&
@@ -88,6 +81,14 @@ class Worm < Piece
       end
     end
     true
+  end
+
+  def humans_in_view
+    humans_in_view = []
+    game.humans.each do |h|
+      humans_in_view << h if h.number_of_king_moves_away(h.position - position) <= 2
+    end
+    humans_in_view
   end
 
   def squares_in_view

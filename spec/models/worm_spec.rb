@@ -29,6 +29,10 @@ RSpec.describe Worm, type: :model do
         queens_move_or_not = worm1.send(:queens_move?, [-2, 2])
         expect(queens_move_or_not).to eq(true)
       end
+      it 'returns true' do
+        queens_move_or_not = worm1.send(:queens_move?, [3, 0])
+        expect(queens_move_or_not).to eq(true)
+      end
     end
     context "when the vector is not a queen's move" do
       it 'returns false' do
@@ -41,10 +45,6 @@ RSpec.describe Worm, type: :model do
       end
       it 'returns false' do
         queens_move_or_not = worm1.send(:queens_move?, [2, 1])
-        expect(queens_move_or_not).to eq(false)
-      end
-      it 'returns false' do
-        queens_move_or_not = worm1.send(:queens_move?, [3, 0])
         expect(queens_move_or_not).to eq(false)
       end
     end

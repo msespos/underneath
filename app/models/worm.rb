@@ -28,9 +28,9 @@ class Worm < Piece
   end
 
   def queens_move?(v)
-    v[0] == 0 && [-2, -1, 1, 2].include?(v[1]) ||
-    v[1] == 0 && [-2, -1, 1, 2].include?(v[0]) ||
-    [-2, -1, 1, 2].include?(v[0]) && v[0].abs == v[1].abs
+    v[0] == 0 && v[1] != 0 ||
+    v[1] == 0 && v[0] != 0 ||
+    v[0] != 0 && v[0].abs == v[1].abs
   end
 
   def last_move

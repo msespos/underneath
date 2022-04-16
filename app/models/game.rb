@@ -46,10 +46,10 @@ class Game < ApplicationRecord
     card_positions = card_positions -
                      [[0, 0], [0, 1], [0, 2], [0, 3], [0, 4],
                       [1, 0], [1, 1], [1, 3], [2, 0], [3, 0], [3, 1], [4, 0],
-                      [6, 6], [6, 7], [7, 6], [7, 7]]
-    all_card_types = ['Blank'] * 12 + ['Bomb'] * 12 + ['Rock'] * 12
+                      [5, 5], [5, 7], [6, 6], [6, 7], [7, 5], [7, 6], [7, 7]]
+    all_card_types = ['Blank'] * 12 + ['Bomb'] * 12 + ['Rock'] * 21
     shuffled_card_types = all_card_types.shuffle
-    (0..47).each do |i|
+    (0..44).each do |i|
       cards.create({ x_position: card_positions[i][0],
                      y_position: card_positions[i][1],
                      type: shuffled_card_types[i],

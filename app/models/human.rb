@@ -23,7 +23,7 @@ class Human < Piece
   def valid_move?(v)
     valid_move_geometry?(v) &&
     target_square_not_a_human?(v) &&
-    target_square_not_an_active_bomb?(v) &&
+    !active_bomb?(v) &&
     !moving_from_rock_to_rock?(v)
   end
 

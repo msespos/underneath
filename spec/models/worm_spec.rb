@@ -153,7 +153,7 @@ RSpec.describe Worm, type: :model do
       end
     end
   end
-  describe '#target_square_not_an_active_bomb?' do
+  describe '#active_bomb?' do
     before do
       game1.active_bombs << active_bomb1
     end
@@ -161,15 +161,15 @@ RSpec.describe Worm, type: :model do
     context 'when the target square is not an active bomb' do
       it 'returns true' do
         allow(worm1).to receive(:game).and_return(game1)
-        not_an_active_bomb = worm1.send(:target_square_not_an_active_bomb?, [-2, -2])
-        expect(not_an_active_bomb).to eq(true)
+        an_active_bomb = worm1.send(:active_bomb?, [-2, -2])
+        expect(an_active_bomb).to eq(false)
       end
     end
     context 'when the target square is an active bomb' do
       it 'returns false' do
         allow(worm1).to receive(:game).and_return(game1)
-        not_an_active_bomb = worm1.send(:target_square_not_an_active_bomb?, [-2, 0])
-        expect(not_an_active_bomb).to eq(false)
+        an_active_bomb = worm1.send(:active_bomb?, [-2, 0])
+        expect(an_active_bomb).to eq(true)
       end
     end
   end

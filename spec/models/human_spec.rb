@@ -44,25 +44,25 @@ RSpec.describe Human, type: :model do
       end
     end
   end
-  describe '#target_square_not_a_human?' do
+  describe '#human?' do
     before do
       game1.humans << human1
       game1.humans << human2
       game1.humans << human3
     end
 
-    context 'when the target square is not a human' do
+    context 'when the target square is a human' do
       it 'returns true' do
         allow(human1).to receive(:game).and_return(game1)
-        not_a_human = human1.send(:target_square_not_a_human?, [1, 1])
-        expect(not_a_human).to eq(true)
+        a_human = human1.send(:human?, [0, 1])
+        expect(a_human).to eq(true)
       end
     end
-    context 'when the target square is a human' do
+    context 'when the target square is not a human' do
       it 'returns false' do
         allow(human1).to receive(:game).and_return(game1)
-        not_a_human = human1.send(:target_square_not_a_human?, [0, 1])
-        expect(not_a_human).to eq(false)
+        a_human = human1.send(:human?, [1, 1])
+        expect(a_human).to eq(false)
       end
     end
   end

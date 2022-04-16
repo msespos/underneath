@@ -22,7 +22,7 @@ class Human < Piece
 
   def valid_move?(v)
     valid_move_geometry?(v) &&
-    target_square_not_a_human?(v) &&
+    !human?(v) &&
     !active_bomb?(v) &&
     !moving_from_rock_to_rock?(v)
   end
@@ -39,13 +39,13 @@ class Human < Piece
     [-1, 1].include?(v[0]) && v[0].abs == v[1].abs
   end
 
-  def target_square_not_a_human?(v)
+  def human?(v)
     game.humans.each do |h|
       if x_position + v[0] == h.x_position && y_position + v[1] == h.y_position
-        return false
+        return true
       end
     end
-    true
+    false
   end
 
   def moving_from_rock_to_rock?(v)

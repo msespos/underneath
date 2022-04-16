@@ -42,25 +42,13 @@ class Game < ApplicationRecord
   end
 
   def set_up_cards
-    card_positions = []
-    # set y-coordinates of all squares on board
-    (0..63).each do |i|
-      card_positions[i] = [0, i % 8]
-    end
-    # set x-coordinates of all squares on board
-    card_positions.each_with_index do |_, i|
-      card_positions[i][0] = (i / 8).floor
-    end
-    # remove non-card squares
+    card_positions = (0..7).to_a.product((0..7).to_a)
     card_positions = card_positions -
                      [[0, 0], [0, 1], [0, 2], [0, 3], [0, 4],
                       [1, 0], [1, 1], [1, 3], [2, 0], [3, 0], [3, 1], [4, 0],
                       [6, 6], [6, 7], [7, 6], [7, 7]]
-    # create and shuffle list of card types
-    all_card_types = Array.new(12) { 'Blank' } + Array.new(12) { 'Bomb' } +
-                     Array.new(24) { 'Rock' }
+    all_card_types = ['Blank'] * 12 + ['Bomb'] * 12 + ['Rock'] * 12
     shuffled_card_types = all_card_types.shuffle
-    # create cards from card positions and shuffled card types
     (0..47).each do |i|
       cards.create({ x_position: card_positions[i][0],
                      y_position: card_positions[i][1],

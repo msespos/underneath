@@ -5,6 +5,7 @@ RSpec.describe Human, type: :model do
   subject(:human1) { described_class.new(x_position: 0, y_position: 0, game_id: 1) }
   subject(:human2) { described_class.new(x_position: 0, y_position: 1, game_id: 1) }
   subject(:human3) { described_class.new(x_position: 1, y_position: 0, game_id: 1) }
+  subject(:card1) { Card.new(x_position: 1, y_position: 1) }
 
   describe '#kings_move?' do
     context "when the vector is a king's move" do
@@ -63,6 +64,28 @@ RSpec.describe Human, type: :model do
         allow(human1).to receive(:game).and_return(game1)
         a_human = human1.send(:human?, [1, 1])
         expect(a_human).to eq(false)
+      end
+    end
+  end
+  describe '#card?' do
+    before do
+      game1.humans << human1
+      game1.humans << human2
+      game1.cards << card1
+    end
+
+    context 'when the target square is a card' do
+      it 'returns true' do
+        allow(human1).to receive(:game).and_return(game1)
+        a_card = human1.send(:card?, [1, 1])
+        expect(a_card).to eq(true)
+      end
+    end
+    context 'when the target square is not a card' do
+      it 'returns false' do
+        allow(human1).to receive(:game).and_return(game1)
+        a_card = human1.send(:card?, [0, 1])
+        expect(a_card).to eq(false)
       end
     end
   end

@@ -15,7 +15,7 @@ class Worm < Piece
 
   def valid_move?(v)
     valid_move_geometry?(v) &&
-    target_square_not_a_rock?(v) &&
+    !rock?(v) &&
     !active_bomb?(v)
   end
 
@@ -73,14 +73,14 @@ class Worm < Piece
     end
   end
 
-  def target_square_not_a_rock?(v)
+  def rock?(v)
     game.cards.each do |c|
       if x_position + v[0] == c.x_position && y_position + v[1] == c.y_position &&
         c.type == 'Rock'
-        return false
+        return true
       end
     end
-    true
+    false
   end
 
   def humans_in_view

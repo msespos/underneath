@@ -133,23 +133,23 @@ RSpec.describe Worm, type: :model do
       end
     end
   end
-  describe '#target_square_not_a_rock?' do
+  describe '#rock?' do
     before do
       game1.cards << [card1, card2]
     end
 
-    context 'when the target square is not a rock' do
+    context 'when the target square is a rock' do
       it 'returns true' do
         allow(worm1).to receive(:game).and_return(game1)
-        not_a_rock = worm1.send(:target_square_not_a_rock?, [0, -2])
-        expect(not_a_rock).to eq(true)
+        a_rock = worm1.send(:rock?, [-2, -2])
+        expect(a_rock).to eq(true)
       end
     end
-    context 'when the target square is a rock' do
+    context 'when the target square is not a rock' do
       it 'returns false' do
         allow(worm1).to receive(:game).and_return(game1)
-        not_a_rock = worm1.send(:target_square_not_a_rock?, [-2, -2])
-        expect(not_a_rock).to eq(false)
+        a_rock = worm1.send(:rock?, [0, -2])
+        expect(a_rock).to eq(false)
       end
     end
   end
@@ -158,18 +158,18 @@ RSpec.describe Worm, type: :model do
       game1.active_bombs << active_bomb1
     end
 
-    context 'when the target square is not an active bomb' do
-      it 'returns true' do
-        allow(worm1).to receive(:game).and_return(game1)
-        an_active_bomb = worm1.send(:active_bomb?, [-2, -2])
-        expect(an_active_bomb).to eq(false)
-      end
-    end
     context 'when the target square is an active bomb' do
-      it 'returns false' do
+      it 'returns true' do
         allow(worm1).to receive(:game).and_return(game1)
         an_active_bomb = worm1.send(:active_bomb?, [-2, 0])
         expect(an_active_bomb).to eq(true)
+      end
+    end
+    context 'when the target square is not an active bomb' do
+      it 'returns false' do
+        allow(worm1).to receive(:game).and_return(game1)
+        an_active_bomb = worm1.send(:active_bomb?, [-2, -2])
+        expect(an_active_bomb).to eq(false)
       end
     end
   end

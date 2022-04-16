@@ -48,6 +48,12 @@ class Human < Piece
     true
   end
 
+  def moving_from_rock_to_rock?(v)
+    rocks = game.cards.where(type: 'Rock', face_up: true)
+    game.item_on_square(rocks, position) &&
+    game.item_on_square(rocks, position + Vector.elements(v))
+  end
+
   def target_square_not_a_card?(v)
     game.cards.each do |c|
       if x_position + v[0] == c.x_position && y_position + v[1] == c.y_position
@@ -55,12 +61,6 @@ class Human < Piece
       end
     end
     true
-  end
-
-  def moving_from_rock_to_rock?(v)
-    rocks = game.cards.where(type: 'Rock', face_up: true)
-    game.item_on_square(rocks, position) &&
-    game.item_on_square(rocks, position + Vector.elements(v))
   end
 
   def die!

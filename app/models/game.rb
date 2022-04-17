@@ -79,6 +79,7 @@ class Game < ApplicationRecord
   end
 
   def play_turn(type, v)
+    reset_worm_message
     if type == 'place bomb' && phase == 'worm'
       raise StandardError, 'Worm cannot place bomb'
     end
@@ -96,6 +97,11 @@ class Game < ApplicationRecord
 
     # still need to check win conditions here
     advance_phase
+  end
+
+  def reset_worm_message
+    self.worm_message = nil
+    self.save
   end
 
   def move(v)
@@ -151,7 +157,8 @@ class Game < ApplicationRecord
       active_bombs: active_bombs,
       rocks: rocks_locations,
       active_piece: active_piece,
-      valid_moves: valid_moves }
+      valid_moves: valid_moves,
+      worm_message: worm_message }
   end
 
   def rocks_locations

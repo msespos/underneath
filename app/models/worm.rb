@@ -102,4 +102,8 @@ class Worm < Piece
     end
     squares_in_view
   end
+
+  def alive_humans_count
+    game.humans.count { |h| h.alive }
+  end
 end

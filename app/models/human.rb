@@ -68,5 +68,7 @@ class Human < Piece
     self.x_position = nil
     self.y_position = nil
     self.save
+    game.worm_message = 'You just ate a human'
+    game.save
   end
 end

@@ -79,7 +79,7 @@ class Game < ApplicationRecord
   end
 
   def play_turn(type, v)
-    reset_worm_message
+    reset_messages
     if type == 'place bomb' && phase == 'worm'
       raise StandardError, 'Worm cannot place bomb'
     end
@@ -99,8 +99,9 @@ class Game < ApplicationRecord
     advance_phase
   end
 
-  def reset_worm_message
+  def reset_messages
     self.worm_message = nil
+    self.humans_message = nil
     self.save
   end
 
@@ -133,7 +134,8 @@ class Game < ApplicationRecord
       face_up_cards: face_up_cards_locations,
       face_down_cards: face_down_cards_locations,
       active_piece: active_piece,
-      valid_moves: valid_moves }
+      valid_moves: valid_moves,
+      humans_message: humans_message }
   end
 
   def face_up_cards_locations

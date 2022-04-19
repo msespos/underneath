@@ -45,7 +45,7 @@ RSpec.describe Human, type: :model do
       end
     end
   end
-  describe '#human?' do
+  describe '#human_on?' do
     before do
       game1.humans << human1
       game1.humans << human2
@@ -55,19 +55,19 @@ RSpec.describe Human, type: :model do
     context 'when the target square is a human' do
       it 'returns true' do
         allow(human1).to receive(:game).and_return(game1)
-        a_human = human1.send(:human?, [0, 1])
+        a_human = human1.send(:human_on?, [0, 1])
         expect(a_human).to eq(true)
       end
     end
     context 'when the target square is not a human' do
       it 'returns false' do
         allow(human1).to receive(:game).and_return(game1)
-        a_human = human1.send(:human?, [1, 1])
+        a_human = human1.send(:human_on?, [1, 1])
         expect(a_human).to eq(false)
       end
     end
   end
-  describe '#card?' do
+  describe '#card_on?' do
     before do
       game1.humans << human1
       game1.humans << human2

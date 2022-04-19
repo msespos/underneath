@@ -22,7 +22,7 @@ class Human < Piece
 
   def valid_move?(v)
     valid_move_geometry?(v) &&
-    !human?(v) &&
+    !human_on?(self.position + Vector.elements(v)) &&
     !active_bomb_on?(self.position + Vector.elements(v)) &&
     !moving_from_rock_to_rock?(v)
   end
@@ -39,9 +39,9 @@ class Human < Piece
     [-1, 1].include?(v[0]) && v[0].abs == v[1].abs
   end
 
-  def human?(v)
+  def human_on?(square)
     game.humans.each do |h|
-      if x_position + v[0] == h.x_position && y_position + v[1] == h.y_position
+      if square[0] == h.x_position && square[1] == h.y_position
         return true
       end
     end

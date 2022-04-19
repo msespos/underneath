@@ -23,7 +23,7 @@ class Human < Piece
   def valid_move?(v)
     valid_move_geometry?(v) &&
     !human?(v) &&
-    !active_bomb?(v) &&
+    !active_bomb_on?(self.position + Vector.elements(v)) &&
     !moving_from_rock_to_rock?(v)
   end
 

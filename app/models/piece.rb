@@ -41,9 +41,9 @@ class Piece < ApplicationRecord
     valid_moves
   end
 
-  def active_bomb?(v)
+  def active_bomb_on?(square)
     game.active_bombs.each do |b|
-      if x_position + v[0] == b.x_position && y_position + v[1] == b.y_position
+      if square[0] == b.x_position && square[1] == b.y_position
         return true
       end
     end

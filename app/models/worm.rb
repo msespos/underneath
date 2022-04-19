@@ -16,7 +16,7 @@ class Worm < Piece
   def valid_move?(v)
     valid_move_geometry?(v) &&
     !rock?(v) &&
-    !active_bomb?(v)
+    !active_bomb_on?(self.position + Vector.elements(v))
   end
 
   def valid_move_geometry?(v)

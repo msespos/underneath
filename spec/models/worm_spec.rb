@@ -9,7 +9,6 @@ RSpec.describe Worm, type: :model do
                                         last_move_y_direction: 2) }
   subject(:card1) { Card.new(x_position: 5, y_position: 5, type: 'Rock') }
   subject(:card2) { Card.new(x_position: 7, y_position: 5, type: 'Blank') }
-  subject(:active_bomb1) { ActiveBomb.new(x_position: 5, y_position: 7) }
 
   describe '#queens_move?' do
     context "when the vector is a queen's move" do
@@ -150,26 +149,6 @@ RSpec.describe Worm, type: :model do
         allow(worm1).to receive(:game).and_return(game1)
         a_rock = worm1.send(:rock?, [0, -2])
         expect(a_rock).to eq(false)
-      end
-    end
-  end
-  describe '#active_bomb?' do
-    before do
-      game1.active_bombs << active_bomb1
-    end
-
-    context 'when the target square is an active bomb' do
-      it 'returns true' do
-        allow(worm1).to receive(:game).and_return(game1)
-        an_active_bomb = worm1.send(:active_bomb?, [-2, 0])
-        expect(an_active_bomb).to eq(true)
-      end
-    end
-    context 'when the target square is not an active bomb' do
-      it 'returns false' do
-        allow(worm1).to receive(:game).and_return(game1)
-        an_active_bomb = worm1.send(:active_bomb?, [-2, -2])
-        expect(an_active_bomb).to eq(false)
       end
     end
   end

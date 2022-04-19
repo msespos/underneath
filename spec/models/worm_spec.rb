@@ -132,7 +132,7 @@ RSpec.describe Worm, type: :model do
       end
     end
   end
-  describe '#rock?' do
+  describe '#rock_on?' do
     before do
       game1.cards << [card1, card2]
     end
@@ -140,14 +140,14 @@ RSpec.describe Worm, type: :model do
     context 'when the target square is a rock' do
       it 'returns true' do
         allow(worm1).to receive(:game).and_return(game1)
-        a_rock = worm1.send(:rock?, [-2, -2])
+        a_rock = worm1.send(:rock_on?, [5, 5])
         expect(a_rock).to eq(true)
       end
     end
     context 'when the target square is not a rock' do
       it 'returns false' do
         allow(worm1).to receive(:game).and_return(game1)
-        a_rock = worm1.send(:rock?, [0, -2])
+        a_rock = worm1.send(:rock_on?, [7, 5])
         expect(a_rock).to eq(false)
       end
     end

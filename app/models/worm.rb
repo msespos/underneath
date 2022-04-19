@@ -15,7 +15,7 @@ class Worm < Piece
 
   def valid_move?(v)
     valid_move_geometry?(v) &&
-    !rock?(v) &&
+    !rock_on?(self.position + Vector.elements(v)) &&
     !active_bomb_on?(self.position + Vector.elements(v))
   end
 
@@ -73,10 +73,9 @@ class Worm < Piece
     end
   end
 
-  def rock?(v)
+  def rock_on?(square)
     game.cards.each do |c|
-      if x_position + v[0] == c.x_position && y_position + v[1] == c.y_position &&
-        c.type == 'Rock'
+      if square[0] == c.x_position && square[1] == c.y_position && c.type == 'Rock'
         return true
       end
     end

@@ -17,7 +17,7 @@ class Human < Piece
   def valid_bomb_placement?(v)
     game.humans_bombs > 0 &&
     valid_move?(v) &&
-    !card?(v)
+    !card_on?(self.position + Vector.elements(v))
   end
 
   def valid_move?(v)
@@ -54,9 +54,9 @@ class Human < Piece
     game.item_on_square(rocks, position + Vector.elements(v))
   end
 
-  def card?(v)
+  def card_on?(square)
     game.cards.each do |c|
-      if x_position + v[0] == c.x_position && y_position + v[1] == c.y_position
+      if square[0] == c.x_position && square[1] == c.y_position
         return true
       end
     end

@@ -77,14 +77,14 @@ RSpec.describe Human, type: :model do
     context 'when the target square is a card' do
       it 'returns true' do
         allow(human1).to receive(:game).and_return(game1)
-        a_card = human1.send(:card?, [1, 1])
+        a_card = human1.send(:card_on?, [1, 1])
         expect(a_card).to eq(true)
       end
     end
     context 'when the target square is not a card' do
       it 'returns false' do
         allow(human1).to receive(:game).and_return(game1)
-        a_card = human1.send(:card?, [0, 1])
+        a_card = human1.send(:card_on?, [0, 1])
         expect(a_card).to eq(false)
       end
     end

@@ -129,7 +129,8 @@ class Game < ApplicationRecord
 
   def humans_view_state
     valid_moves = active_piece.valid_moves if active_piece_side == 'humans'
-    { humans: humans,
+    { game: self.as_json.except('worm_message'),
+      humans: humans,
       active_bombs: active_bombs,
       face_up_cards: face_up_cards_locations,
       face_down_cards: face_down_cards_locations,
@@ -155,7 +156,10 @@ class Game < ApplicationRecord
 
   def worms_view_state
     valid_moves = active_piece.valid_moves if active_piece_side == 'worm'
-    { worm: worm,
+    { game: self.as_json.except(*['humans_bombs',
+                                  'last_revealed_card_message',
+                                  'humans_message']),
+      worm: worm,
       active_bombs: active_bombs,
       rocks: rocks_locations,
       active_piece: active_piece,

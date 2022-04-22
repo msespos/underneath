@@ -105,4 +105,14 @@ class Worm < Piece
   def alive_humans_count
     game.humans.count { |h| h.alive }
   end
+
+  def die!
+    self.alive = false
+    self.x_position = nil
+    self.y_position = nil
+    self.save
+    game.worm_message = 'Your worm is dead'
+    game.humans_message = 'You just killed the worm'
+    game.save
+  end
 end

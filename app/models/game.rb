@@ -136,7 +136,8 @@ class Game < ApplicationRecord
       face_down_cards: face_down_cards_locations,
       active_piece: active_piece,
       valid_moves: valid_moves,
-      humans_message: humans_message }
+      humans_message: humans_message,
+      next_worm_emergence_turn: next_worm_emergence_turn }
   end
 
   def face_up_cards_locations
@@ -164,7 +165,8 @@ class Game < ApplicationRecord
       rocks: rocks_locations,
       active_piece: active_piece,
       valid_moves: valid_moves,
-      worm_message: worm_message }
+      worm_message: worm_message,
+      next_worm_emergence_turn: next_worm_emergence_turn }
   end
 
   def rocks_locations

@@ -174,6 +174,10 @@ class Game < ApplicationRecord
     end
   end
 
+  def next_worm_emergence_turn
+    turn - turn % 4 + 4
+  end
+
   def advance_phase
     phases = ['human 1', 'human 2', 'human 3', 'human 4', 'worm']
     simple_advance_phase(phases)

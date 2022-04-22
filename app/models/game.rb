@@ -83,20 +83,21 @@ class Game < ApplicationRecord
     if type == 'place bomb' && phase == 'worm'
       raise StandardError, 'Worm cannot place bomb'
     end
-    if active_piece.valid_moves.empty?
-      active_piece.die!
-      advance_phase
-      return
-    end
     if type == 'move'
       move(v)
+      item_on_square(cards, active_piece.position)&.reveal unless phase == 'worm'
+      item_on_square(humans, worm.position)&.die!
     elsif type == 'place bomb'
       place_bomb(v)
+    elsif type == 'forfeit piece'
+      if active_piece.valid_moves.empty?
+        active_piece.die!
+      else
+        raise StandardError, 'Piece still has moves available'
+      end
     else
       raise StandardError, 'Incorrect type'
     end
-    item_on_square(cards, active_piece.position)&.reveal unless phase == 'worm'
-    item_on_square(humans, worm.position)&.die!
     advance_phase
   end
 

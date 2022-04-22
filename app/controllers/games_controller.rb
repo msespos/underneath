@@ -69,11 +69,11 @@ class GamesController < ApplicationController
   def broadcast!
     ActionCable.server.broadcast(
       "game:#{@game.to_gid_param}:human",
-      {game: @game}.merge(@game.humans_view_state))
+      @game.humans_view_state)
 
     ActionCable.server.broadcast(
       "game:#{@game.to_gid_param}:worm",
-      {game: @game}.merge(@game.worms_view_state))
+      @game.worms_view_state)
   end
 
   def require_cookie

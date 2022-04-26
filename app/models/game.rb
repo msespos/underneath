@@ -90,6 +90,7 @@ class Game < ApplicationRecord
       item_on_square(humans, worm.position)&.die!
     elsif type == 'place bomb'
       place_bomb(v)
+      bomb_emergent_worm(v)
     elsif type == 'forfeit piece'
       if active_piece.valid_moves.empty?
         active_piece.die!
@@ -128,6 +129,14 @@ class Game < ApplicationRecord
       active_piece.place_bomb(v)
     else
       raise StandardError, 'Invalid bomb placement'
+    end
+  end
+
+  def bomb_emergent_worm(v)
+    if worm.emergent == true &&
+      active_piece.x_position + v[0] == worm.x_position &&
+      active_piece.y_position + v[1] == worm.y_position
+      worm.die!
     end
   end
 

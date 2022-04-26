@@ -115,6 +115,12 @@ class Game < ApplicationRecord
     end
   end
 
+  def item_on_square(items, position)
+    items.detect do |i|
+      i.x_position == position[0] && i.y_position == position[1]
+    end
+  end
+
   def place_bomb(v)
     if active_piece.valid_bomb_placement?(v)
       active_piece.place_bomb(v)
@@ -123,9 +129,22 @@ class Game < ApplicationRecord
     end
   end
 
-  def item_on_square(items, position)
-    items.detect do |i|
-      i.x_position == position[0] && i.y_position == position[1]
+  def advance_phase
+    phases = ['human 1', 'human 2', 'human 3', 'human 4', 'worm']
+    simple_advance_phase(phases)
+    while human_by_phase && !human_by_phase.alive
+      simple_advance_phase(phases)
+    end
+    self.save
+  end
+
+  def simple_advance_phase(phases)
+    idx = phases.index(phase)
+    if idx == phases.length - 1
+      self.phase = phases[0]
+      self.turn += 1
+    else
+      self.phase = phases[idx + 1]
     end
   end
 
@@ -180,24 +199,5 @@ class Game < ApplicationRecord
 
   def next_worm_emergence_turn
     turn - turn % 4 + 4
-  end
-
-  def advance_phase
-    phases = ['human 1', 'human 2', 'human 3', 'human 4', 'worm']
-    simple_advance_phase(phases)
-    while human_by_phase && !human_by_phase.alive
-      simple_advance_phase(phases)
-    end
-    self.save
-  end
-
-  def simple_advance_phase(phases)
-    idx = phases.index(phase)
-    if idx == phases.length - 1
-      self.phase = phases[0]
-      self.turn += 1
-    else
-      self.phase = phases[idx + 1]
-    end
   end
 end

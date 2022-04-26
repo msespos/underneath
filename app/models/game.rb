@@ -25,6 +25,7 @@ class Game < ApplicationRecord
     self.phase = "human 1"
     self.humans_bombs = 0
     self.last_revealed_card_message = nil
+    self.status = 'Game in play'
     self.save
     all_pieces.map { |i| i.destroy }
   end
@@ -98,6 +99,7 @@ class Game < ApplicationRecord
     else
       raise StandardError, 'Incorrect type'
     end
+    set_status
     advance_phase
   end
 
@@ -127,6 +129,21 @@ class Game < ApplicationRecord
     else
       raise StandardError, 'Invalid bomb placement'
     end
+  end
+
+  def set_status
+    if worm.alive == false
+      self.status = 'Humans win'
+    elsif all_humans_dead?
+      self.status = 'Worm wins'
+    else
+      self.status = 'Game in play'
+    end
+    self.save
+  end
+
+  def all_humans_dead?
+    humans.all? { |h| h.alive == false }
   end
 
   def advance_phase

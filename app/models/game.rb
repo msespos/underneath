@@ -13,6 +13,7 @@ class Game < ApplicationRecord
     humans + cards + (worm ? [worm] : []) + active_bombs
   end
 
+  # need to test that running set_up multiple times produces exactly 4 humans
   def set_up
     reset
     set_up_humans
@@ -30,6 +31,7 @@ class Game < ApplicationRecord
     all_pieces.map { |i| i.destroy }
   end
 
+  # does this need to be tested?
   def set_up_humans
     [[1, 0, 1], [2, 0, 3], [3, 1, 0], [4, 3, 0]].each do |p|
       humans.create({ alive: true,
@@ -47,6 +49,7 @@ class Game < ApplicationRecord
                   game_id: self.id })
   end
 
+  # need to test that cards are created correctly
   def set_up_cards
     card_positions = (0..7).to_a.product((0..7).to_a)
     card_positions = card_positions -
@@ -71,6 +74,7 @@ class Game < ApplicationRecord
     end
   end
 
+  # need to test
   def human_by_phase
     humans.where(play_order: phase.split(' ')[-1].to_i).first
   end
@@ -79,6 +83,7 @@ class Game < ApplicationRecord
     phase == 'worm' ? 'worm' : 'humans'
   end
 
+  # need to test
   def play_turn(type, v)
     reset_messages
     if type == 'place bomb' && phase == 'worm'
@@ -118,6 +123,7 @@ class Game < ApplicationRecord
     end
   end
 
+  # need to test
   def item_on_square(items, position)
     items.detect do |i|
       i.x_position == position[0] && i.y_position == position[1]
@@ -132,6 +138,7 @@ class Game < ApplicationRecord
     end
   end
 
+  # need to test
   def bomb_emergent_worm(v)
     if worm.emergent == true &&
       active_piece.x_position + v[0] == worm.x_position &&
@@ -151,6 +158,7 @@ class Game < ApplicationRecord
     self.save
   end
 
+  # need to test
   def all_humans_dead?
     humans.all? { |h| h.alive == false }
   end
@@ -164,6 +172,7 @@ class Game < ApplicationRecord
     self.save
   end
 
+  # need to test
   def simple_advance_phase(phases)
     idx = phases.index(phase)
     if idx == phases.length - 1
@@ -223,6 +232,7 @@ class Game < ApplicationRecord
     end
   end
 
+  # need to test
   def next_worm_emergence_turn
     turn - turn % 4 + 4
   end

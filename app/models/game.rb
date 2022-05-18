@@ -13,6 +13,10 @@ class Game < ApplicationRecord
     humans + cards + (worm ? [worm] : []) + active_bombs
   end
 
+  def rocks
+    cards.where(type: "Rock")
+  end
+
   # need to test that running set_up multiple times produces exactly 4 humans
   def set_up
     reset

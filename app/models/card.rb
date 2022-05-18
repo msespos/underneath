@@ -3,10 +3,10 @@ require 'matrix'
 class Card < ApplicationRecord
   belongs_to :game
 
-  def print_label
+  def print_label(worm_view = false)
     if type == 'Rock' && self.face_up == true && human_on_card?
       '®'
-    elsif type == 'Rock' && self.face_up == true
+    elsif type == 'Rock' && (self.face_up == true || worm_view = true)
       'R'
     else
       'C'

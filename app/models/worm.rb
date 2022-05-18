@@ -106,6 +106,27 @@ class Worm < Piece
     game.humans.count { |h| h.alive }
   end
 
+  def accessible_squares
+    # find all valid moves [target squares + last_move_directions] for the worm
+    # add valid moves to a list
+    accessible_squares = valid_moves
+    # find all valid moves [target squares + last_move_directions] from those locations
+    # if the list has grown, repeat, until it stops growing.
+    valid_moves.each do |s|
+      valid_moves_from_square(s).each do |m|
+        accessible_squares << m
+      end
+    end
+    accessible_squares
+  end
+
+  def valid_moves_from_square(s)
+    self.x_position = s[0]
+    self.y_position = s[1]
+    p self
+    valid_moves
+  end
+
   def die!
     self.alive = false
     self.x_position = nil

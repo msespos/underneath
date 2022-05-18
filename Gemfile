@@ -4,7 +4,7 @@ git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 ruby '3.0.3'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails', branch: 'main'
-gem 'rails', '~> 6.1.4', '>= 6.1.4.1'
+gem 'rails', '~> 7.0'
 # Use Postgres as the database for Active Record
 gem 'pg', '~> 1.3', '>= 1.3.5'
 # Use Puma as the app server
@@ -21,6 +21,16 @@ gem 'jbuilder', '~> 2.7'
 gem 'redis', '~> 4.0'
 # Use Active Model has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
+
+gem 'activemodel', '~> 7.0', '>= 7.0.3'
+
+gem 'activesupport', '~> 7.0', '>= 7.0.3'
+
+gem 'railties', '~> 7.0', '>= 7.0.3'
+
+gem 'actionview', '~> 7.0', '>= 7.0.3'
+
+gem 'actionpack', '~> 7.0', '>= 7.0.3'
 
 # support react-based front-end
 gem 'react-rails'

@@ -10,8 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_04_26_134927) do
-
+ActiveRecord::Schema[7.0].define(version: 2022_05_18_221312) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
   enable_extension "plpgsql"
@@ -19,24 +18,24 @@ ActiveRecord::Schema.define(version: 2022_04_26_134927) do
   create_table "active_bombs", force: :cascade do |t|
     t.integer "x_position"
     t.integer "y_position"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.bigint "game_id"
   end
 
   create_table "cards", force: :cascade do |t|
     t.integer "x_position"
     t.integer "y_position"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.bigint "game_id"
     t.boolean "face_up"
     t.string "type"
   end
 
   create_table "games", force: :cascade do |t|
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.integer "turn"
     t.uuid "human_player_id"
     t.uuid "worm_player_id"
@@ -52,8 +51,8 @@ ActiveRecord::Schema.define(version: 2022_04_26_134927) do
     t.boolean "alive"
     t.integer "x_position"
     t.integer "y_position"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.bigint "game_id"
     t.integer "play_order"
   end
@@ -62,8 +61,8 @@ ActiveRecord::Schema.define(version: 2022_04_26_134927) do
     t.boolean "alive"
     t.integer "x_position"
     t.integer "y_position"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.bigint "game_id"
     t.integer "last_move_x_direction"
     t.integer "last_move_y_direction"

@@ -46,10 +46,14 @@ a {
     transition-duration: 0.35s;
 }
 
+.active_halo {
+    background: radial-gradient(rgba(244,244,244,0.4),rgba(0,0,0,0));
+    border-radius: 50%;
+}
+
 .valid_move_square {
     background-color: rgba(78,177,254,0.4);
 }
-
 
 .turn-strip {
     color:  #72605e;

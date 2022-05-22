@@ -32,6 +32,19 @@ const sendMove = (gameId, deltaX, deltaY) => {
 };
 
 
+function renderActiveHalo(x, y, perRow) {
+  const size = 100/perRow + '%';
+  const top = (100 * (x/perRow)) + '%';
+  const left = (100 * (y/perRow)) + '%';
+  return (
+    <div className="active_halo"
+         style={{position: 'absolute',
+                 top: top,
+                 left: left,
+                 width: size,
+                 height: size}} />)
+}
+
 function renderTarget(type, index, x, y, perRow, gameId, activeX, activeY) {
   const size = 100/perRow + '%'  
   const top = (100 * (x/perRow)) + '%';
@@ -54,6 +67,15 @@ class Controls extends React.Component {
   render () {
     const output = [];
 
+    if (this.props.active_piece) {
+      output.push(
+        renderActiveHalo(
+          this.props.active_piece.x_position,
+          this.props.active_piece.y_position,
+          8
+        )
+      );
+    }
     if (this.props.valid_moves) {
       var i = 0;
       var sx = this.props.active_piece.x_position;

@@ -15,12 +15,15 @@ class GamesController < ApplicationController
   end
 
   def show
-    # TODO: assign me a game, and show that one only
+    # TODO: assign me a game
     @game = Game.find(params[:id])
-    if player_side == "human"
+    join_as_unassigned_player
+    if player_side == :human
       @state = @game.humans_view_state
-    elsif player_side == "worm"
+    elsif player_side == :worm
       @state = @game.worms_view_state
+    else
+      render "games/locked"
     end
   end
 
@@ -39,14 +42,7 @@ class GamesController < ApplicationController
 
   def join
     @game = Game.find(params[:game_id])
-    if @game.human_player_id.nil?
-      @game.human_player_id = @player_id
-    elsif @game.worm_player_id.nil?
-      @game.worm_player_id = @player_id
-    else
-      raise Exception.new "Can't join game #{params[:id]}"
-    end
-    @game.save!
+    join_as_unassigned_player
     redirect_to @game
   end
 
@@ -86,10 +82,24 @@ class GamesController < ApplicationController
 
   def player_side
     if @game.human_player_id == @player_id
-      'human'
+      :human
     elsif @game.worm_player_id == @player_id
-      'worm'
+      :worm
     end
+  end
+
+  def join_as_unassigned_player
+    players = [@game.human_player_id, @game.worm_player_id]
+    return if players.include?(@player_id) # already joined
+
+    if @game.human_player_id.nil?
+      @game.human_player_id = @player_id
+    elsif @game.worm_player_id.nil?
+      @game.worm_player_id = @player_id
+    else
+      raise Exception.new "Can't join game #{params[:id]}"
+    end
+    @game.save!
   end
 
 end

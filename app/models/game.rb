@@ -189,12 +189,13 @@ class Game < ApplicationRecord
 
   def humans_view_state
     valid_moves = active_piece.valid_moves if active_piece_side == 'humans'
+    local_active_piece = active_piece if active_piece_side == 'humans'
     { game: self.as_json.except('worm_message'),
       humans: humans,
       active_bombs: active_bombs,
       face_up_cards: face_up_cards_locations,
       face_down_cards: face_down_cards_locations,
-      active_piece: active_piece,
+      active_piece: local_active_piece,
       valid_moves: valid_moves,
       humans_message: humans_message,
       next_worm_emergence_turn: next_worm_emergence_turn }
@@ -217,13 +218,14 @@ class Game < ApplicationRecord
 
   def worms_view_state
     valid_moves = active_piece.valid_moves if active_piece_side == 'worm'
+    local_active_piece = active_piece if active_piece_side == 'worm'
     { game: self.as_json.except(*['humans_bombs',
                                   'last_revealed_card_message',
                                   'humans_message']),
       worm: worm,
       active_bombs: active_bombs,
       rocks: rocks_locations,
-      active_piece: active_piece,
+      active_piece: local_active_piece,
       valid_moves: valid_moves,
       worm_message: worm_message,
       next_worm_emergence_turn: next_worm_emergence_turn }

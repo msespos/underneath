@@ -52,7 +52,83 @@ a {
 }
 
 .valid_move_square {
-    background-color: rgba(78,177,254,0.4);
+    background-color: rgba(78,177,254,0.25);
+}
+
+.valid_move_square .text {
+    color: rgba(78,177,254,0.2);
+    display: inline-block;
+    -webkit-user-select: none; /* Safari */
+    -moz-user-select: none; /* Firefox */
+    -ms-user-select: none; /* IE10+/Edge */
+    user-select: none; /* Standard */
+}
+
+.valid_move_square.e  { clip-path: path('M 50,50 L 26,50 A 76,76 0,0,0 26,0 L 50,0 z'); }
+.valid_move_square.se { clip-path: path('M 50,50 L 0,50 L 0,26 A 76,76 0,0,0 26,0 L 50,0 z'); }
+.valid_move_square.s  { clip-path: path('M 50,50 L 0,50 L 0,26 A 76,76 0,0,0 50,26 z'); }
+.valid_move_square.sw { clip-path: path('M 0,50 L 0,0 L 24,0 A 76,76 0,0,0 50,26 L 50,50 z'); }
+.valid_move_square.w  { clip-path: path('M 0,0 L 24,0 A 76,76 0,0,0 24,50 L 0,50 z'); }
+.valid_move_square.nw { clip-path: path('M 0,0 L 50,0 L 50,24 A 76,76 0,0,0 24,50 L 0,50 z'); }
+.valid_move_square.n  { clip-path: path('M 0,0 L 50,0 L 50,24 A 76,76 0,0,0 0,24 z'); }
+.valid_move_square.ne { clip-path: path('M 50,0 L 50,50 L 26,50 A 76,76 0,0,0 0,24 L 0,0 z'); }
+
+
+.valid_move_square.e .text {
+    text-align: right;
+    width: 89%;
+    line-height: 3.4rem;
+    margin-right: 0.2rem;
+}
+
+.valid_move_square.se .text {
+    text-align: right;
+    position: absolute;
+    bottom: 0;
+    width: 89%;
+}
+
+.valid_move_square.s .text {
+    text-align: center;
+    position: absolute;
+    bottom: 0;
+    line-height: 1.2rem;
+    width: 100%;
+}
+
+.valid_move_square.sw .text {
+    text-align: left;
+    position: absolute;
+    bottom: 0.2rem;
+    line-height: 1.2rem;
+    margin-left: 0.3rem;
+    width: 100%;
+}
+
+.valid_move_square.w .text {
+    text-align: left;
+    width: 89%;
+    line-height: 3.4rem;
+    margin-left: 0.2rem;
+}
+
+.valid_move_square.nw .text {
+    text-align: left;
+    float: right;
+    width: 89%;
+}
+
+.valid_move_square.n .text {
+    text-align: center;
+    vertical-align: top;
+    width: 100%;
+    font-size: 90%;
+}
+
+.valid_move_square.ne .text {
+    text-align: right;
+    vertical-align: top;
+    width: 89%;
 }
 
 .turn-strip {

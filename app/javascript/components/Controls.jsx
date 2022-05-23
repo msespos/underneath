@@ -15,6 +15,19 @@ arrows[-1][+1] = '↗';
 arrows[+1][+1] = '↘';
 arrows[+1][-1] = '↙';
 
+var directionNames = {};
+directionNames[0] = {};
+directionNames[-1] = {};
+directionNames[1] = {};
+directionNames[0][-1]  = 'w';
+directionNames[0][+1]  = 'e';
+directionNames[-1][0]  = 'n';
+directionNames[+1][0]  = 's';
+directionNames[-1][-1] = 'nw';
+directionNames[-1][+1] = 'ne';
+directionNames[+1][+1] = 'se';
+directionNames[+1][-1] = 'sw';
+
 // submit move to server
 const sendMove = (gameId, deltaX, deltaY) => {
   const csrf = document.querySelector("meta[name='csrf-token']").getAttribute("content");
@@ -31,13 +44,13 @@ const sendMove = (gameId, deltaX, deltaY) => {
   });
 };
 
-
 function renderActiveHalo(x, y, perRow) {
   const size = 100/perRow + '%';
   const top = (100 * (x/perRow)) + '%';
   const left = (100 * (y/perRow)) + '%';
   return (
-    <div className="active_halo"
+    <div key="active_halo"
+         className="active_halo"
          style={{position: 'absolute',
                  top: top,
                  left: left,
@@ -50,15 +63,22 @@ function renderTarget(type, index, x, y, perRow, gameId, activeX, activeY) {
   const top = (100 * (x/perRow)) + '%';
   const left = (100 * (y/perRow)) + '%';
 
+  const dx = x-activeX;
+  const dy = y-activeY;
+
+  const arrow = arrows[Math.sign(dx)][Math.sign(dy)];
+  const direction = directionNames[Math.sign(dx)][Math.sign(dy)];
   return (
     <div key={type + '_' + index}
-         className={type + '_square '}
+         className={type + '_square ' + direction}
+         viewBox="0 0 10 10"
          style={{position: 'absolute',
                  top: top,
                  left: left,
                  width: size,
                  height: size}}
-         onClick={(e) => sendMove(gameId, x-activeX, y-activeY, e)}>
+         onClick={(e) => sendMove(gameId, dx, dy, e)}>
+      <div className="text">{arrow}</div>
     </div>
     )
 }

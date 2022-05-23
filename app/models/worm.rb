@@ -13,18 +13,23 @@ class Worm < Piece
     super(v)
   end
 
-  def valid_move?(v)
-    valid_move_geometry?(v) &&
-    !rock_on?(self.position + Vector.elements(v)) &&
-    !active_bomb_on?(self.position + Vector.elements(v))
+  def valid_move?(v, starting_square, last_move)
+    return valid_move_geometry?(v, starting_square, last_move) &&
+      !rock_on?(Vector[*starting_square] + Vector[*v]) &&
+      !active_bomb_on?(Vector[*starting_square] + Vector[*v])
   end
 
-  def valid_move_geometry?(v)
-    start_and_finish_on_board?(v) &&
+  def valid_move_geometry?(v, starting_square, last_move)
+    on_board?(starting_square) &&
+    on_board?(Vector[*starting_square] + Vector[*v]) &&
     queens_move?(v) &&
     number_of_king_moves_away(v).in?([1, 2]) &&
-    (last_move.nil? ||
-     !same_direction?(v, last_move) && !opposite_direction?(v, last_move))
+    last_move_check_passes(v, last_move)
+  end
+
+  def last_move_check_passes(v, last_move)
+    return (last_move.nil? ||
+      !same_direction?(v, last_move) && !opposite_direction?(v, last_move))
   end
 
   def queens_move?(v)
@@ -104,6 +109,40 @@ class Worm < Piece
 
   def alive_humans_count
     game.humans.count { |h| h.alive }
+  end
+
+  def accessible_squares
+    # currently can generate a list of first and second level moves
+    # from current worm position
+    # need to continue creating lists of third level and beyond
+    # keep building list until it stops growing
+    accessible_squares = valid_moves_plus_directions
+    valid_moves_plus_directions.each do |move_plus_direction|
+      simulated_valid_moves_plus_directions(move_plus_direction).each do |s|
+        accessible_squares << s
+      end
+    end
+    accessible_squares
+  end
+
+  def valid_moves_plus_directions
+    valid_moves.map do |move|
+      move = [move, [move[0] - x_position, move[1] - y_position]]
+    end
+  end
+
+  # overlaps logic with Piece#valid_moves; consider combining
+  def simulated_valid_moves_plus_directions(move_plus_direction)
+    valid_moves_plus_directions = []
+    (0..Game::BOARD_SIZE - 1).each do |x|
+      (0..Game::BOARD_SIZE - 1).each do |y|
+        v = [x - move_plus_direction[0][0], y - move_plus_direction[0][1]]
+        start = move_plus_direction[0]
+        last_move = move_plus_direction[1]
+        valid_moves_plus_directions << [[x, y], v] if valid_move?(v, start, last_move)
+      end
+    end
+    valid_moves_plus_directions
   end
 
   def die!

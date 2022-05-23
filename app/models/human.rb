@@ -16,19 +16,21 @@ class Human < Piece
 
   def valid_bomb_placement?(v)
     game.humans_bombs > 0 &&
-    valid_move?(v) &&
+    valid_move?(v, position, last_move) &&
     !card_on?(self.position + Vector.elements(v))
   end
 
-  def valid_move?(v)
-    valid_move_geometry?(v) &&
+  # third parameter is included because worm version of valid_move needs it
+  def valid_move?(v, starting_square, _)
+    valid_move_geometry?(v, starting_square) &&
     !human_on?(self.position + Vector.elements(v)) &&
     !active_bomb_on?(self.position + Vector.elements(v)) &&
     !moving_from_rock_to_rock?(v)
   end
 
-  def valid_move_geometry?(v)
-    start_and_finish_on_board?(v) &&
+  def valid_move_geometry?(v, starting_square)
+    on_board?(starting_square) &&
+    on_board?(Vector[*starting_square] + Vector[*v]) &&
     kings_move?(v) &&
     number_of_king_moves_away(v) == 1
   end
@@ -71,5 +73,10 @@ class Human < Piece
     game.worm_message = 'You just ate a human'
     game.humans_message = 'One of your humans was just eaten'
     game.save
+  end
+
+  # for passing into valid_move since human's last move is unimportant
+  def last_move
+    nil
   end
 end

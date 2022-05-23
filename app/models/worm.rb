@@ -3,7 +3,7 @@ require 'matrix'
 class Worm < Piece
   belongs_to :game
 
-  def print_label
+  def print_label(view = :humans)
     'W'
   end
 

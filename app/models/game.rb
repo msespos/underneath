@@ -120,7 +120,7 @@ class Game < ApplicationRecord
   end
 
   def move(v)
-    if active_piece.valid_move?(v)
+    if active_piece.valid_move?(v, active_piece.position, active_piece.last_move)
       active_piece.move(v)
     else
       raise StandardError, 'Invalid move'

@@ -65,6 +65,19 @@ class Human < Piece
     false
   end
 
+  # very similar to Piece#valid_moves; consider combining
+  def valid_bomb_placements
+    valid_bomb_placements = []
+    (0..Game::BOARD_SIZE - 1).each do |x|
+      (0..Game::BOARD_SIZE - 1).each do |y|
+        if valid_bomb_placement?([x - x_position, y - y_position])
+          valid_bomb_placements << [x, y]
+        end
+      end
+    end
+    valid_bomb_placements
+  end
+
   def die!
     self.alive = false
     self.x_position = nil

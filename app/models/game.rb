@@ -197,6 +197,7 @@ class Game < ApplicationRecord
       face_down_cards: face_down_cards_locations,
       active_piece: local_active_piece,
       valid_moves: valid_moves,
+      valid_bomb_placements: valid_bomb_placements,
       humans_message: humans_message,
       next_worm_emergence_turn: next_worm_emergence_turn }
   end

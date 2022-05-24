@@ -111,16 +111,27 @@ class Worm < Piece
     game.humans.count { |h| h.alive }
   end
 
+  # build a list of all accessible squares from the current position
+  # over any number of moves
+  # list is built by adding to it until it stops growing
   def accessible_squares
-    # currently can generate a list of first and second level moves
-    # from current worm position
-    # need to continue creating lists of third level and beyond
-    # keep building list until it stops growing
+    last_accessible_squares = []
     accessible_squares = valid_moves_plus_directions
-    valid_moves_plus_directions.each do |move_plus_direction|
-      simulated_valid_moves_plus_directions(move_plus_direction).each do |s|
-        accessible_squares << s
+    top_level = valid_moves_plus_directions
+    until accessible_squares - last_accessible_squares == []
+      last_accessible_squares = accessible_squares.dup
+      next_level_down = top_level.dup
+      top_level.clear
+      next_level_down.each do |move_plus_direction|
+        simulated_valid_moves_plus_directions(move_plus_direction).each do |s|
+          top_level << s
+        end
       end
+      top_level.uniq!
+      top_level.each do |move_plus_direction|
+        accessible_squares << move_plus_direction
+      end
+      accessible_squares.uniq!
     end
     accessible_squares
   end

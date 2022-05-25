@@ -25,29 +25,6 @@ RSpec.describe Piece, type: :model do
   subject(:worm6) { Worm.new(x_position: 7, y_position: 7,
                              last_move_x_direction: -1,
                              last_move_y_direction: -1) }
-
-  describe '#start_and_finish_on_board?' do
-    context 'when the piece starts and finishes on the board' do
-      it 'returns true' do
-        start_and_finish = human1.send(:start_and_finish_on_board?, [0, 2])
-        expect(start_and_finish).to eq(true)
-      end
-      it 'returns true' do
-        start_and_finish = human1.send(:start_and_finish_on_board?, [1, 1])
-        expect(start_and_finish).to eq(true)
-      end
-    end
-    context 'when the piece starts on the board and does not finish on the board' do
-      it 'returns false' do
-        start_and_finish = human1.send(:start_and_finish_on_board?, [-1, 2])
-        expect(start_and_finish).to eq(false)
-      end
-      it 'returns false' do
-        start_and_finish = human1.send(:start_and_finish_on_board?, [1, -1])
-        expect(start_and_finish).to eq(false)
-      end
-    end
-  end
   describe '#on_board?' do
     context 'when the square is on the board' do
       it 'returns true' do

@@ -25,6 +25,12 @@ class Game < ApplicationRecord
     set_up_cards
   end
 
+  def set_up_no_cards
+    reset
+    set_up_humans
+    set_up_worm
+  end
+
   def reset
     self.turn = 1
     self.phase = "human 1"
@@ -154,12 +160,18 @@ class Game < ApplicationRecord
   def set_status
     if worm.alive == false
       self.status = 'Humans win'
+    elsif any_human_inaccessible?
+      self.status = 'Humans win'
     elsif all_humans_dead?
       self.status = 'Worm wins'
     else
       self.status = 'Game in play'
     end
     self.save
+  end
+
+  def any_human_inaccessible_and_not_on_a_rock?
+    humans.any? { |h| h.inaccessible && !h.on_a_rock? }
   end
 
   # need to test

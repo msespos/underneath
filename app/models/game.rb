@@ -9,15 +9,17 @@ class Game < ApplicationRecord
 
   BOARD_SIZE = 8.freeze
 
+  # not tested
   def all_pieces
     humans + cards + (worm ? [worm] : []) + active_bombs
   end
 
+  # not tested
   def rocks
     cards.where(type: "Rock")
   end
 
-  # need to test that running set_up multiple times produces exactly 4 humans
+  # tested
   def set_up
     reset
     set_up_humans

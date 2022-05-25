@@ -78,6 +78,21 @@ class Human < Piece
     valid_bomb_placements
   end
 
+  # check if a human is inaccessible to the worm
+  def inaccessible?
+    game.worm.accessible_squares_no_last_moves.each do |square|
+      return false if position == square
+    end
+    true
+  end
+
+  def on_a_rock?
+    game.rocks.each.do |rock|
+      return true if position == [rock.x_position, rock.y_position]
+    end
+    false
+  end
+
   def die!
     self.alive = false
     self.x_position = nil

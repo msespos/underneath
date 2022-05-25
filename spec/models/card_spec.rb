@@ -1,8 +1,8 @@
 require 'rails_helper'
 
 RSpec.describe Card, type: :model do
-  subject(:game) { Game.new(id: 1) }
-  subject(:human) { Human.new(x_position: 0, y_position: 0, game_id: 1) }
+  subject(:game) { Game.new }
+  subject(:human) { Human.new(x_position: 0, y_position: 0) }
   subject(:card1) { described_class.new(x_position: 0, y_position: 0) }
   subject(:card2) { described_class.new(x_position: 1, y_position: 1) }
   describe '#human_on_card?' do

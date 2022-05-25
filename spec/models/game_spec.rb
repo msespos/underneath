@@ -2,9 +2,6 @@ require 'rails_helper'
 
 RSpec.describe Game, type: :model do
   subject(:game) { Game.new(id: 1) }
-  #subject(:human) { Human.new(x_position: 0, y_position: 0, game_id: 1) }
-  #subject(:card1) { described_class.new(x_position: 0, y_position: 0) }
-  #subject(:card2) { described_class.new(x_position: 1, y_position: 1) }
   describe '#set_up' do
     context "when set_up is run three times" do
       it 'creates exactly four humans' do

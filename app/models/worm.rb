@@ -114,6 +114,7 @@ class Worm < Piece
   # build a list of all accessible squares from the current position
   # over any number of moves
   # list is built by adding to it until it stops growing
+  # need to fix the verbose naming
   def accessible_squares
     last_accessible_squares = []
     accessible_squares = valid_moves_plus_directions
@@ -134,6 +135,11 @@ class Worm < Piece
       accessible_squares.uniq!
     end
     accessible_squares
+  end
+
+  # need to fix the verbose naming
+  def accessible_squares_no_last_moves
+    accessible_squares.map { |e| e[0] }.uniq
   end
 
   def valid_moves_plus_directions

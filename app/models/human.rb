@@ -87,7 +87,7 @@ class Human < Piece
   end
 
   def on_a_rock?
-    game.rocks.each.do |rock|
+    game.rocks.each do |rock|
       return true if position == [rock.x_position, rock.y_position]
     end
     false

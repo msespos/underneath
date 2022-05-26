@@ -51,4 +51,24 @@ RSpec.describe Game, type: :model do
       end
     end
   end
+  describe '#set_up_worm' do
+    context 'when set_up_worm is run' do
+      it 'creates a worm with x position 7' do
+        game.save
+        game.set_up_worm
+        worm = game.worm
+        worms_x_position = worm.x_position
+        expect(worms_x_position).to eq(7)
+      end
+    end
+    context 'when set_up_worm is run' do
+      it 'creates a worm that is alive' do
+        game.save
+        game.set_up_worm
+        worm = game.worm
+        worms_aliveness = worm.alive
+        expect(worms_aliveness).to eq(true)
+      end
+    end
+  end
 end

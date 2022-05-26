@@ -3,7 +3,7 @@ require 'rails_helper'
 RSpec.describe Game, type: :model do
   subject(:game) { Game.new(id: 1) }
   describe '#set_up' do
-    context "when set_up is run three times" do
+    context 'when set_up is run three times' do
       it 'creates exactly four humans' do
         game.set_up
         game.set_up
@@ -12,13 +12,42 @@ RSpec.describe Game, type: :model do
         expect(number_of_humans).to eq(4)
       end
     end
-    context "when set_up is run three times" do
+    context 'when set_up is run three times' do
       it 'creates exactly 45 cards' do
         game.set_up
         game.set_up
         game.set_up
         number_of_cards = game.cards.count
         expect(number_of_cards).to eq(45)
+      end
+    end
+  end
+  describe '#set_up_humans' do
+    context 'when set_up_humans is run' do
+      it 'creates a human with play order 1 and x position 0' do
+        game.save
+        game.set_up_humans
+        first_human = game.humans.first
+        first_humans_x_position = first_human.x_position
+        expect(first_humans_x_position).to eq(0)
+      end
+    end
+    context 'when set_up_humans is run' do
+      it 'creates a human with play order 2 and y position 3' do
+        game.save
+        game.set_up_humans
+        second_human = game.humans.second
+        second_humans_y_position = second_human.y_position
+        expect(second_humans_y_position).to eq(3)
+      end
+    end
+    context 'when set_up_humans is run' do
+      it 'creates a human with play order 3 who is alive' do
+        game.save
+        game.set_up_humans
+        third_human = game.humans.third
+        third_humans_aliveness = third_human.alive
+        expect(third_humans_aliveness).to eq(true)
       end
     end
   end

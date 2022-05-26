@@ -27,12 +27,14 @@ class Game < ApplicationRecord
     set_up_cards
   end
 
+  # not tested - almost identical to set_up
   def set_up_no_cards
     reset
     set_up_humans
     set_up_worm
   end
 
+  # not tested - just writing data
   def reset
     self.turn = 1
     self.phase = "human 1"
@@ -43,7 +45,7 @@ class Game < ApplicationRecord
     all_pieces.map { |i| i.destroy }
   end
 
-  # does this need to be tested?
+  # tested
   def set_up_humans
     [[1, 0, 1], [2, 0, 3], [3, 1, 0], [4, 3, 0]].each do |p|
       humans.create({ alive: true,
@@ -54,6 +56,7 @@ class Game < ApplicationRecord
     end
   end
 
+  # tested
   def set_up_worm
     create_worm({ alive: true,
                   x_position: 7,
@@ -61,7 +64,7 @@ class Game < ApplicationRecord
                   game_id: self.id })
   end
 
-  # need to test that cards are created correctly
+  # still need to test that card types are created correctly (how to do this?)
   def set_up_cards
     card_positions = (0..7).to_a.product((0..7).to_a)
     card_positions = card_positions -

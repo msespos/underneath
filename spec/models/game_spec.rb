@@ -71,4 +71,24 @@ RSpec.describe Game, type: :model do
       end
     end
   end
+  describe '#set_up_cards' do
+    context 'when set_up_cards is run' do
+      it 'creates a first card with x position 0' do
+        game.save
+        game.set_up_cards
+        first_card = game.cards.first
+        first_cards_x_position = first_card.x_position
+        expect(first_cards_x_position).to eq(0)
+      end
+    end
+    context 'when set_up_cards is run' do
+      it 'creates a second card that is face down' do
+        game.save
+        game.set_up_cards
+        second_card = game.cards.second
+        second_cards_face_status = second_card.face_up
+        expect(second_cards_face_status).to eq(false)
+      end
+    end
+  end
 end

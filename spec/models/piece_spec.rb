@@ -25,6 +25,7 @@ RSpec.describe Piece, type: :model do
   subject(:worm6) { Worm.new(x_position: 7, y_position: 7,
                              last_move_x_direction: -1,
                              last_move_y_direction: -1) }
+  subject(:card) { Card.new }
   describe '#on_board?' do
     context 'when the square is on the board' do
       it 'returns true' do
@@ -70,41 +71,52 @@ RSpec.describe Piece, type: :model do
     end
   end
   describe '#valid moves' do
+    before do
+      game1.humans << human1
+      game1.humans << human2
+      game1.humans << human3
+      game1.humans << human4
+      game1.worm = worm2
+      game1.worm = worm3
+      game1.worm = worm4
+      game1.worm = worm5
+      game1.worm = worm6
+    end
     context 'when it is a human at [0, 0] with no other piece on the board' do
-      xit 'returns the valid moves' do
+      it 'returns the valid moves' do
         valid_move_list = human1.send(:valid_moves)
         expect(valid_move_list).to eq([[0, 1], [1, 0], [1, 1]])
       end
     end
     context 'when it is a human at [1, 2] with no other piece on the board' do
-      xit 'returns the valid moves' do
+      it 'returns the valid moves' do
         valid_move_list = human2.send(:valid_moves)
         expect(valid_move_list).to eq([[0, 1], [0, 2], [0, 3], [1, 1], [1, 3],
                                        [2, 1], [2, 2], [2, 3]])
       end
     end
     context 'when it is a human at [7, 5] with no other piece on the board' do
-      xit 'returns the valid moves' do
+      it 'returns the valid moves' do
         valid_move_list = human3.send(:valid_moves)
         expect(valid_move_list).to eq([[6, 4], [6, 5], [6, 6], [7, 4], [7, 6]])
       end
     end
     context 'when it is a human at [7, 7] with no other piece on the board' do
-      xit 'returns the valid moves' do
+      it 'returns the valid moves' do
         valid_move_list = human4.send(:valid_moves)
         expect(valid_move_list).to eq([[6, 6], [6, 7], [7, 6]])
       end
     end
     context 'when it is a worm at [0, 0] with no other piece on the board
              and last move [-1, 0]' do
-      xit 'returns the valid moves' do
+      it 'returns the valid moves' do
         valid_move_list = worm2.send(:valid_moves)
         expect(valid_move_list).to eq([[0, 1], [0, 2], [1, 1], [2, 2]])
       end
     end
     context 'when it is a worm at [1, 2] with no other piece on the board
              and last move [-1, -1]' do
-      xit 'returns the valid moves' do
+      it 'returns the valid moves' do
         valid_move_list = worm3.send(:valid_moves)
         expect(valid_move_list).to eq([[0, 2], [0, 3], [1, 0], [1, 1], [1, 3], [1, 4],
                                        [2, 1], [2, 2], [3, 0], [3, 2]])
@@ -112,7 +124,7 @@ RSpec.describe Piece, type: :model do
     end
     context 'when it is a worm at [4, 4] with no other piece on the board
              and last move [-2, 2]' do
-      xit 'returns the valid moves' do
+      it 'returns the valid moves' do
         valid_move_list = worm4.send(:valid_moves)
         expect(valid_move_list).to eq([[2, 2], [2, 4], [3, 3], [3, 4], [4, 2], [4, 3],
                                        [4, 5], [4, 6], [5, 4], [5, 5], [6, 4], [6, 6]])
@@ -120,7 +132,7 @@ RSpec.describe Piece, type: :model do
     end
     context 'when it is a worm at [7, 5] with no other piece on the board
              and last move [1, 0]' do
-      xit 'returns the valid moves' do
+      it 'returns the valid moves' do
         valid_move_list = worm5.send(:valid_moves)
         expect(valid_move_list).to eq([[5, 3], [5, 7], [6, 4], [6, 6], [7, 3],
                                        [7, 4], [7, 6], [7, 7]])
@@ -128,7 +140,7 @@ RSpec.describe Piece, type: :model do
     end
     context 'when it is a worm at [7, 7] with no other piece on the board
              and last move [-1, -1]' do
-      xit 'returns the valid moves' do
+      it 'returns the valid moves' do
         valid_move_list = worm6.send(:valid_moves)
         expect(valid_move_list).to eq([[5, 7], [6, 7], [7, 5], [7, 6]])
       end

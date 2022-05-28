@@ -89,6 +89,10 @@ class Game < ApplicationRecord
     end
   end
 
+  def humans_left
+    humans.where.not(x_position: nil).count
+  end
+
   # need to test
   def human_by_phase
     humans.where(play_order: phase.split(' ')[-1].to_i).first
@@ -219,6 +223,7 @@ class Game < ApplicationRecord
       valid_moves: valid_moves,
       valid_bomb_placements: valid_bomb_placements,
       humans_message: humans_message,
+      humans_left: humans_left,
       next_worm_emergence_turn: next_worm_emergence_turn }
   end
 

@@ -30,10 +30,6 @@ class Hud extends React.Component {
       </div>)
     }
 
-    console.log("Messages:");
-
-    console.log(this.props.humans_message);
-    console.log(this.props.last_revealed_card_message);
     var message = this.props.humans_message || this.props.last_revealed_card_message;
     if (message) {
       hud_items.push(<div key="hud4" className="float-left w-40 game-message">

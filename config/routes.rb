@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
   resources :games do
-    post :move
+    post :play
     post :join
   end
 

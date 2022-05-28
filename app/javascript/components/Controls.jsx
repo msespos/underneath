@@ -29,11 +29,12 @@ directionNames[+1][+1] = 'se';
 directionNames[+1][-1] = 'sw';
 
 // submit move to server
-const sendMove = (gameId, deltaX, deltaY) => {
+const sendPlay = (gameId, type, deltaX, deltaY) => {
   const csrf = document.querySelector("meta[name='csrf-token']").getAttribute("content");
-  const body = JSON.stringify({'delta_x': deltaX,
+  const body = JSON.stringify({'type': type,
+                               'delta_x': deltaX,
                                'delta_y': deltaY});
-  fetch('/games/' + gameId + '/move', {
+  fetch('/games/' + gameId + '/play', {
     method: 'POST',
     credentials: 'same-origin',
     headers: {
@@ -58,7 +59,7 @@ function renderActiveHalo(x, y, perRow) {
                  height: size}} />)
 }
 
-function renderTarget(type, index, x, y, perRow, gameId, activeX, activeY) {
+function renderMoveTarget(type, index, x, y, perRow, gameId, activeX, activeY) {
   const size = 100/perRow + '%'  
   const top = (100 * (x/perRow)) + '%';
   const left = (100 * (y/perRow)) + '%';
@@ -77,8 +78,35 @@ function renderTarget(type, index, x, y, perRow, gameId, activeX, activeY) {
                  left: left,
                  width: size,
                  height: size}}
-         onClick={(e) => sendMove(gameId, dx, dy, e)}>
+         onClick={(e) => sendPlay(gameId, 'move', dx, dy, e)}>
       <div className="text">{arrow}</div>
+    </div>
+    )
+}
+
+function renderBombTarget(type, index, x, y, perRow, gameId, activeX, activeY) {
+  const size = 100/perRow + '%'  
+  const top = (100 * (x/perRow)) + '%';
+  const left = (100 * (y/perRow)) + '%';
+
+  const dx = x-activeX;
+  const dy = y-activeY;
+
+  const direction = directionNames[Math.sign(dx)][Math.sign(dy)];
+  return (
+    <div key={type + '_' + index}
+         className={type + '_square ' + direction}
+         viewBox="0 0 10 10"
+         style={{position: 'absolute',
+                 top: top,
+                 left: left,
+                 width: size,
+                 height: size}}
+         onClick={(e) => sendPlay(gameId, 'place bomb', dx, dy, e)}>
+         <img className="potential_bomb" 
+              src="/img/active_bomb.png"
+              height="16"
+              width="16" />
     </div>
     )
 }
@@ -102,7 +130,7 @@ class Controls extends React.Component {
       var sy = this.props.active_piece.y_position;
       this.props.valid_moves.forEach(target => {
         output.push(
-          renderTarget('valid_move',
+          renderMoveTarget('valid_move',
             i,
             target[0],
             target[1],
@@ -113,6 +141,28 @@ class Controls extends React.Component {
         );
         i = i + 1;
       });
+    }
+
+    if (this.props.valid_bomb_placements) {
+      var i = 0;
+      var sx = this.props.active_piece.x_position;
+      var sy = this.props.active_piece.y_position;
+      this.props.valid_bomb_placements.forEach(target => {
+        output.push(
+          renderBombTarget('valid_bomb_placement',
+            i,
+            target[0],
+            target[1],
+            8,
+            this.props.gameId,
+            this.props.active_piece.x_position,
+            this.props.active_piece.y_position)
+        );
+        i = i + 1;
+      });
+    } else {
+      console.log("Can't find bomb_placements here:");
+      console.log(this.props);
     }
 
     return (

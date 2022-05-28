@@ -46,6 +46,8 @@ a {
     transition-duration: 0.35s;
 }
 
+/* --- Move-related ---- */
+
 .active_halo {
     background: radial-gradient(rgba(244,244,244,0.4),rgba(0,0,0,0));
     border-radius: 50%;
@@ -81,7 +83,6 @@ a {
 .valid_move_square.nw { clip-path: path('M 0,0 L 50,0 L 50,24 A 76,76 0,0,0 24,50 L 0,50 z'); }
 .valid_move_square.n  { clip-path: path('M 0,0 L 50,0 L 50,24 A 76,76 0,0,0 0,24 z'); }
 .valid_move_square.ne { clip-path: path('M 50,0 L 50,50 L 26,50 A 76,76 0,0,0 0,24 L 0,0 z'); }
-
 
 .valid_move_square.e .text {
     text-align: right;
@@ -139,6 +140,40 @@ a {
     vertical-align: top;
     width: 89%;
 }
+
+.valid_bomb_placement_square {
+    background-color: rgba(254,112,78,0.25);
+    transition: 0.18s;
+}
+
+.valid_bomb_placement_square:hover {
+    background-color: rgba(254,112,78,0.55);
+}
+
+.valid_bomb_placement_square.e  { clip-path: path('M 0,50 L 24,50 A 74,74 0,0,0 24,0 L 0,0 z'); }
+.valid_bomb_placement_square.se { clip-path: path('M 0,0 L 0,24 A 74,74 0,0,0 24,0 z'); }
+.valid_bomb_placement_square.s  { clip-path: path('M 0,0 L 50,0 L 50,24 A 74,74 0,0,1 0,24 z'); }
+.valid_bomb_placement_square.sw { clip-path: path('M 50,0 L 50,24 A 74,74 0,0,1 26,0 z'); }
+.valid_bomb_placement_square.w  { clip-path: path('M 50,0 L 26,0 A 74,74 0,0,0 26,50 L 50,50 z'); }
+.valid_bomb_placement_square.nw { clip-path: path('M 50,50 L 50,26 A 74,74 0,0,0 26,50 z'); }
+.valid_bomb_placement_square.n  { clip-path: path('M 0,50 L 50,50 L 50,26 A 74,74 0,0,0 0,26 z'); }
+.valid_bomb_placement_square.ne { clip-path: path('M 0,50 L 0,26 A 74,74 0,0,1 24,50 z'); }
+
+.valid_bomb_placement_square .potential_bomb {
+    opacity: 0.5;
+}
+
+.e  .potential_bomb { margin-top: 1rem; margin-left: 0.25rem; }
+.se .potential_bomb { margin-top: 0.1rem; margin-left: 0.1rem; }
+.s  .potential_bomb { margin-top: 0.25rem; margin-left: 1rem; }
+.sw .potential_bomb { margin-top: 0.1rem; margin-left: 2rem; }
+.w  .potential_bomb { margin-top: 1rem; margin-left: 2rem; }
+.nw .potential_bomb { margin-top: 1.9rem; margin-left: 2rem; }
+.n  .potential_bomb { margin-top: 1.9rem; margin-left: 1rem; }
+.ne .potential_bomb { margin-top: 1.9rem; margin-left: 0.1rem; }
+.
+
+/* --- Turn-strip + HUD ---- */
 
 .turn-strip {
     color:  #72605e;

@@ -47,12 +47,12 @@ class GamesController < ApplicationController
   end
 
   # should maybe generalize to taking a turn
-  def move
+  def play
     @game = Game.find(params[:game_id])
 
     # TODO: confirm can play this game & this side
 
-    @game.play_turn('move',[params[:delta_x],params[:delta_y]])
+    @game.play_turn(params[:type],[params[:delta_x],params[:delta_y]])
     @game.reload
     
     broadcast!

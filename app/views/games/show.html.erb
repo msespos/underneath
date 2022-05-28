@@ -1,5 +1,5 @@
 <div class="flex flex-col items-center justify-center m-4">
-
+	
 	<div class="info-line flex flow-root max-w-md w-96 mb-4">
 		<div class="float-left">
 			Game <%= @game.id %>
@@ -10,7 +10,7 @@
 	</div>
 
 	<div class="max-w-md w-96 h-96">
-	<%= react_component("Field", { game: @game }.merge(@state)) %>
+	<%= react_component("Field", @state) %>
 	</div>
 </div>
 

@@ -6,6 +6,7 @@ import Board from "./Board"
 import Entities from "./Entities"
 import Controls from "./Controls"
 import TurnStrip from "./TurnStrip"
+import Hud from "./Hud"
 
 class Field extends React.Component {
   constructor(props) {
@@ -56,6 +57,9 @@ class Field extends React.Component {
   			<Board />
         <TurnStrip turn={this.state.game.turn} 
                    phase={this.state.game.phase} />
+        <Hud active_piece={this.state.active_piece} 
+             humans_bombs={this.state.game.humans_bombs} 
+             humans_message={this.state.humans_message} />
   		</div>
   	);
   }

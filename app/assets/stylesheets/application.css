@@ -147,3 +147,10 @@ a {
     border: 1.5px solid #72605e;
     border-radius: 50%;
 }
+
+.please-move {
+    font-size: 140%;
+}
+.please-wait {
+    font-size: 80%;
+}

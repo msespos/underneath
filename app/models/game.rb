@@ -214,15 +214,10 @@ class Game < ApplicationRecord
     valid_moves = active_piece.valid_moves if active_piece_side == 'humans'
     local_active_piece = active_piece if active_piece_side == 'humans'
     valid_bomb_placements = active_piece.valid_bomb_placements if active_piece_side == 'humans'
-    if on_worm_emergence_turn?
-      worms_x_position = worm.x_position
-      worms_y_position = worm.y_position
-    else
-      worms_x_position = 'hidden'
-      worms_y_position = 'hidden'
-    end
+    worm_if_emergent = on_worm_emergence_turn? ? worm : nil
     { game: self.as_json.except('worm_message'),
       humans: humans,
+      worm: worm_if_emergent,
       active_bombs: active_bombs,
       face_up_cards: face_up_cards_locations,
       face_down_cards: face_down_cards_locations,
@@ -230,8 +225,6 @@ class Game < ApplicationRecord
       valid_moves: valid_moves,
       valid_bomb_placements: valid_bomb_placements,
       humans_message: humans_message,
-      worms_x_position: worms_x_position,
-      worms_y_position: worms_y_position,
       next_worm_emergence_turn: next_worm_emergence_turn }
   end
 

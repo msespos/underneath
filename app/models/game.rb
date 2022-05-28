@@ -223,7 +223,6 @@ class Game < ApplicationRecord
       valid_moves: valid_moves,
       valid_bomb_placements: valid_bomb_placements,
       humans_message: humans_message,
-      humans_left: humans_left,
       next_worm_emergence_turn: next_worm_emergence_turn }
   end
 
@@ -254,6 +253,7 @@ class Game < ApplicationRecord
       active_piece: local_active_piece,
       valid_moves: valid_moves,
       worm_message: worm_message,
+      humans_left: humans_left,
       next_worm_emergence_turn: next_worm_emergence_turn }
   end
 

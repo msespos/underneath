@@ -21,7 +21,7 @@ class Hud extends React.Component {
     }
 
     if (this.props.humans_left) {
-      hud_items.push(<div key="hud2" className="float-left w-16">
+      hud_items.push(<div key="hud3" className="float-left w-16">
           <img className="float-left"
                src="/img/human.png" height="32" width="32" />
           <div className="float-left human-count mt-1.5">
@@ -30,20 +30,25 @@ class Hud extends React.Component {
       </div>)
     }
 
-    if (this.props.humans_message) {
-      hud_items.push(<div key="hud3" className="float-left w-40 game-message">
-        {this.props.humans_message}
+    console.log("Messages:");
+
+    console.log(this.props.humans_message);
+    console.log(this.props.last_revealed_card_message);
+    var message = this.props.humans_message || this.props.last_revealed_card_message;
+    if (message) {
+      hud_items.push(<div key="hud4" className="float-left w-40 game-message">
+        {message}
       </div>)
     }
 
     if (this.props.worm_message) {
-      hud_items.push(<div key="hud4" className="float-left w-40 game-message">
+      hud_items.push(<div key="hud5" className="float-left w-40 game-message">
         {this.props.worm_message}
       </div>)
     }
 
     return (
-      <div className="hud w-96 h-96 mt-4 flow-root">
+      <div className="hud w-96 mt-4 flow-root">
       {hud_items}
       </div>
     );

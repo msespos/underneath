@@ -65,7 +65,8 @@ class Field extends React.Component {
         <Hud active_piece={this.state.active_piece} 
              humans_bombs={this.state.game.humans_bombs} 
              humans_left={this.state.humans_left} 
-             humans_message={this.state.humans_message} />
+             humans_message={this.state.humans_message}
+             last_revealed_card_message={this.state.game.last_revealed_card_message} />
   		</div>
   	);
   }

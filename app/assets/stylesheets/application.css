@@ -195,6 +195,9 @@ a {
 .please-move {
     font-size: 140%;
 }
-.please-wait {
-    font-size: 80%;
+.please-wait, .game-message {
+    opacity: 0.7;
+    font-size: 70%;
+    line-height: 105%;
+    margin-top: 0.25rem;
 }

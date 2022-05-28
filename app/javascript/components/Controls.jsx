@@ -50,8 +50,8 @@ function renderActiveHalo(x, y, perRow) {
   const top = (100 * (x/perRow)) + '%';
   const left = (100 * (y/perRow)) + '%';
   return (
-    <div key="active_halo"
-         className="active_halo"
+    <div key="active-halo"
+         className="active-halo"
          style={{position: 'absolute',
                  top: top,
                  left: left,
@@ -71,7 +71,7 @@ function renderMoveTarget(type, index, x, y, perRow, gameId, activeX, activeY) {
   const direction = directionNames[Math.sign(dx)][Math.sign(dy)];
   return (
     <div key={type + '_' + index}
-         className={type + '_square ' + direction}
+         className={type + '-square ' + direction}
          viewBox="0 0 10 10"
          style={{position: 'absolute',
                  top: top,
@@ -95,7 +95,7 @@ function renderBombTarget(type, index, x, y, perRow, gameId, activeX, activeY) {
   const direction = directionNames[Math.sign(dx)][Math.sign(dy)];
   return (
     <div key={type + '_' + index}
-         className={type + '_square ' + direction}
+         className={type + '-square ' + direction}
          viewBox="0 0 10 10"
          style={{position: 'absolute',
                  top: top,
@@ -103,7 +103,7 @@ function renderBombTarget(type, index, x, y, perRow, gameId, activeX, activeY) {
                  width: size,
                  height: size}}
          onClick={(e) => sendPlay(gameId, 'place bomb', dx, dy, e)}>
-         <img className="potential_bomb" 
+         <img className="potential-bomb" 
               src="/img/active_bomb.png"
               height="16"
               width="16" />
@@ -130,7 +130,7 @@ class Controls extends React.Component {
       var sy = this.props.active_piece.y_position;
       this.props.valid_moves.forEach(target => {
         output.push(
-          renderMoveTarget('valid_move',
+          renderMoveTarget('valid-move',
             i,
             target[0],
             target[1],
@@ -149,7 +149,7 @@ class Controls extends React.Component {
       var sy = this.props.active_piece.y_position;
       this.props.valid_bomb_placements.forEach(target => {
         output.push(
-          renderBombTarget('valid_bomb_placement',
+          renderBombTarget('valid-bomb-placement',
             i,
             target[0],
             target[1],

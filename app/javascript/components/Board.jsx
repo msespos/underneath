@@ -5,7 +5,7 @@ function renderSquare(i, j, per_row, side, parity) {
   const width_percent = 100/per_row + '%'
   return (
     <div key={'square_' + i + '_' + j}
-         className={'board_square float-left text-center align-middle ' + side + '_' + parity}
+         className={'board-square float-left text-center align-middle ' + side + '-' + parity}
          style={{width: width_percent,
                  height: width_percent}}>
     

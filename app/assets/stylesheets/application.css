@@ -29,15 +29,15 @@ a {
     color: #cf4221;
 }
 
-.board_square {
+.board-square {
     font-size: 125%;
     padding-top: 8px;
 }
-.board_square.human_0 {
+.board-square.human-0 {
     background-color: #291d10;
 }
 
-.board_square.human_1 {
+.board-square.human-1 {
     background-color: #1F1100;
 }
 
@@ -48,25 +48,25 @@ a {
 
 /* --- Move-related ---- */
 
-.active_halo {
+.active-halo {
     background: radial-gradient(rgba(244,244,244,0.4),rgba(0,0,0,0));
     border-radius: 50%;
 }
 
-.valid_move_square {
+.valid-move-square {
     background-color: rgba(78,177,254,0.25);
     transition: 0.18s;
 }
 
-.valid_move_square:hover {
+.valid-move-square:hover {
     background-color: rgba(78,177,254,0.55);
 }
 
-.valid_move_square:hover .text {
+.valid-move-square:hover .text {
     color: rgba(78,177,254,0.8);
 }
 
-.valid_move_square .text {
+.valid-move-square .text {
     color: rgba(78,177,254,0.2);
     display: inline-block;
     -webkit-user-select: none; /* Safari */
@@ -75,30 +75,30 @@ a {
     user-select: none; /* Standard */
 }
 
-.valid_move_square.e  { clip-path: path('M 50,50 L 26,50 A 76,76 0,0,0 26,0 L 50,0 z'); }
-.valid_move_square.se { clip-path: path('M 50,50 L 0,50 L 0,26 A 76,76 0,0,0 26,0 L 50,0 z'); }
-.valid_move_square.s  { clip-path: path('M 50,50 L 0,50 L 0,26 A 76,76 0,0,0 50,26 z'); }
-.valid_move_square.sw { clip-path: path('M 0,50 L 0,0 L 24,0 A 76,76 0,0,0 50,26 L 50,50 z'); }
-.valid_move_square.w  { clip-path: path('M 0,0 L 24,0 A 76,76 0,0,0 24,50 L 0,50 z'); }
-.valid_move_square.nw { clip-path: path('M 0,0 L 50,0 L 50,24 A 76,76 0,0,0 24,50 L 0,50 z'); }
-.valid_move_square.n  { clip-path: path('M 0,0 L 50,0 L 50,24 A 76,76 0,0,0 0,24 z'); }
-.valid_move_square.ne { clip-path: path('M 50,0 L 50,50 L 26,50 A 76,76 0,0,0 0,24 L 0,0 z'); }
+.valid-move-square.e  { clip-path: path('M 50,50 L 26,50 A 76,76 0,0,0 26,0 L 50,0 z'); }
+.valid-move-square.se { clip-path: path('M 50,50 L 0,50 L 0,26 A 76,76 0,0,0 26,0 L 50,0 z'); }
+.valid-move-square.s  { clip-path: path('M 50,50 L 0,50 L 0,26 A 76,76 0,0,0 50,26 z'); }
+.valid-move-square.sw { clip-path: path('M 0,50 L 0,0 L 24,0 A 76,76 0,0,0 50,26 L 50,50 z'); }
+.valid-move-square.w  { clip-path: path('M 0,0 L 24,0 A 76,76 0,0,0 24,50 L 0,50 z'); }
+.valid-move-square.nw { clip-path: path('M 0,0 L 50,0 L 50,24 A 76,76 0,0,0 24,50 L 0,50 z'); }
+.valid-move-square.n  { clip-path: path('M 0,0 L 50,0 L 50,24 A 76,76 0,0,0 0,24 z'); }
+.valid-move-square.ne { clip-path: path('M 50,0 L 50,50 L 26,50 A 76,76 0,0,0 0,24 L 0,0 z'); }
 
-.valid_move_square.e .text {
+.valid-move-square.e .text {
     text-align: right;
     width: 89%;
     line-height: 3.4rem;
     margin-right: 0.2rem;
 }
 
-.valid_move_square.se .text {
+.valid-move-square.se .text {
     text-align: right;
     position: absolute;
     bottom: 0;
     width: 89%;
 }
 
-.valid_move_square.s .text {
+.valid-move-square.s .text {
     text-align: center;
     position: absolute;
     bottom: 0;
@@ -106,7 +106,7 @@ a {
     width: 100%;
 }
 
-.valid_move_square.sw .text {
+.valid-move-square.sw .text {
     text-align: left;
     position: absolute;
     bottom: 0.2rem;
@@ -115,63 +115,62 @@ a {
     width: 100%;
 }
 
-.valid_move_square.w .text {
+.valid-move-square.w .text {
     text-align: left;
     width: 89%;
     line-height: 3.4rem;
     margin-left: 0.2rem;
 }
 
-.valid_move_square.nw .text {
+.valid-move-square.nw .text {
     text-align: left;
     float: right;
     width: 89%;
 }
 
-.valid_move_square.n .text {
+.valid-move-square.n .text {
     text-align: center;
     vertical-align: top;
     width: 100%;
     font-size: 90%;
 }
 
-.valid_move_square.ne .text {
+.valid-move-square.ne .text {
     text-align: right;
     vertical-align: top;
     width: 89%;
 }
 
-.valid_bomb_placement_square {
+.valid-bomb-placement-square {
     background-color: rgba(254,112,78,0.25);
     transition: 0.18s;
 }
 
-.valid_bomb_placement_square:hover {
+.valid-bomb-placement-square:hover {
     background-color: rgba(254,112,78,0.55);
 }
 
-.valid_bomb_placement_square.e  { clip-path: path('M 0,50 L 24,50 A 74,74 0,0,0 24,0 L 0,0 z'); }
-.valid_bomb_placement_square.se { clip-path: path('M 0,0 L 0,24 A 74,74 0,0,0 24,0 z'); }
-.valid_bomb_placement_square.s  { clip-path: path('M 0,0 L 50,0 L 50,24 A 74,74 0,0,1 0,24 z'); }
-.valid_bomb_placement_square.sw { clip-path: path('M 50,0 L 50,24 A 74,74 0,0,1 26,0 z'); }
-.valid_bomb_placement_square.w  { clip-path: path('M 50,0 L 26,0 A 74,74 0,0,0 26,50 L 50,50 z'); }
-.valid_bomb_placement_square.nw { clip-path: path('M 50,50 L 50,26 A 74,74 0,0,0 26,50 z'); }
-.valid_bomb_placement_square.n  { clip-path: path('M 0,50 L 50,50 L 50,26 A 74,74 0,0,0 0,26 z'); }
-.valid_bomb_placement_square.ne { clip-path: path('M 0,50 L 0,26 A 74,74 0,0,1 24,50 z'); }
+.valid-bomb-placement-square.e  { clip-path: path('M 0,50 L 24,50 A 74,74 0,0,0 24,0 L 0,0 z'); }
+.valid-bomb-placement-square.se { clip-path: path('M 0,0 L 0,24 A 74,74 0,0,0 24,0 z'); }
+.valid-bomb-placement-square.s  { clip-path: path('M 0,0 L 50,0 L 50,24 A 74,74 0,0,1 0,24 z'); }
+.valid-bomb-placement-square.sw { clip-path: path('M 50,0 L 50,24 A 74,74 0,0,1 26,0 z'); }
+.valid-bomb-placement-square.w  { clip-path: path('M 50,0 L 26,0 A 74,74 0,0,0 26,50 L 50,50 z'); }
+.valid-bomb-placement-square.nw { clip-path: path('M 50,50 L 50,26 A 74,74 0,0,0 26,50 z'); }
+.valid-bomb-placement-square.n  { clip-path: path('M 0,50 L 50,50 L 50,26 A 74,74 0,0,0 0,26 z'); }
+.valid-bomb-placement-square.ne { clip-path: path('M 0,50 L 0,26 A 74,74 0,0,1 24,50 z'); }
 
-.valid_bomb_placement_square .potential_bomb {
+.valid-bomb-placement-square .potential-bomb {
     opacity: 0.5;
 }
 
-.e  .potential_bomb { margin-top: 1rem; margin-left: 0.25rem; }
-.se .potential_bomb { margin-top: 0.1rem; margin-left: 0.1rem; }
-.s  .potential_bomb { margin-top: 0.25rem; margin-left: 1rem; }
-.sw .potential_bomb { margin-top: 0.1rem; margin-left: 2rem; }
-.w  .potential_bomb { margin-top: 1rem; margin-left: 2rem; }
-.nw .potential_bomb { margin-top: 1.9rem; margin-left: 2rem; }
-.n  .potential_bomb { margin-top: 1.9rem; margin-left: 1rem; }
-.ne .potential_bomb { margin-top: 1.9rem; margin-left: 0.1rem; }
-.
+.e  .potential-bomb { margin-top: 1rem; margin-left: 0.25rem; }
+.se .potential-bomb { margin-top: 0.1rem; margin-left: 0.1rem; }
+.s  .potential-bomb { margin-top: 0.25rem; margin-left: 1rem; }
+.sw .potential-bomb { margin-top: 0.1rem; margin-left: 2rem; }
+.w  .potential-bomb { margin-top: 1rem; margin-left: 2rem; }
+.nw .potential-bomb { margin-top: 1.9rem; margin-left: 2rem; }
+.n  .potential-bomb { margin-top: 1.9rem; margin-left: 1rem; }
+.ne .potential-bomb { margin-top: 1.9rem; margin-left: 0.1rem; }
 
 /* --- Turn-strip + HUD ---- */
 

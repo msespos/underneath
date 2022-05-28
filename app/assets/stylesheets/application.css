@@ -49,12 +49,12 @@ a {
 /* --- Move-related ---- */
 
 .active-halo {
-    background: radial-gradient(rgba(244,244,244,0.4),rgba(0,0,0,0));
+    background: radial-gradient(rgba(244,244,244,0.2),rgba(0,0,0,0));
     border-radius: 50%;
 }
 
 .valid-move-square {
-    background-color: rgba(78,177,254,0.25);
+    background-color: rgba(78,177,254,0.16);
     transition: 0.18s;
 }
 
@@ -76,13 +76,13 @@ a {
 }
 
 .valid-move-square.e  { clip-path: path('M 50,50 L 26,50 A 76,76 0,0,0 26,0 L 50,0 z'); }
-.valid-move-square.se { clip-path: path('M 50,50 L 0,50 L 0,26 A 76,76 0,0,0 26,0 L 50,0 z'); }
+.valid-move-square.se { clip-path: path('M 50,50 L 0,50 L 0,38 A 58,58 0,0,0 38,0 L 50,0 z'); }
 .valid-move-square.s  { clip-path: path('M 50,50 L 0,50 L 0,26 A 76,76 0,0,0 50,26 z'); }
-.valid-move-square.sw { clip-path: path('M 0,50 L 0,0 L 24,0 A 76,76 0,0,0 50,26 L 50,50 z'); }
+.valid-move-square.sw { clip-path: path('M 0,50 L 0,0 L 12,0 A 58,58 0,0,0 50,38 L 50,50 z'); }
 .valid-move-square.w  { clip-path: path('M 0,0 L 24,0 A 76,76 0,0,0 24,50 L 0,50 z'); }
-.valid-move-square.nw { clip-path: path('M 0,0 L 50,0 L 50,24 A 76,76 0,0,0 24,50 L 0,50 z'); }
+.valid-move-square.nw { clip-path: path('M 0,0 L 50,0 L 50,12 A 58,58 0,0,0 12,50 L 0,50 z'); }
 .valid-move-square.n  { clip-path: path('M 0,0 L 50,0 L 50,24 A 76,76 0,0,0 0,24 z'); }
-.valid-move-square.ne { clip-path: path('M 50,0 L 50,50 L 26,50 A 76,76 0,0,0 0,24 L 0,0 z'); }
+.valid-move-square.ne { clip-path: path('M 50,0 L 50,50 L 38,50 A 58,58 0,0,0 0,12 L 0,0 z'); }
 
 .valid-move-square.e .text {
     text-align: right;
@@ -142,7 +142,7 @@ a {
 }
 
 .valid-bomb-placement-square {
-    background-color: rgba(254,112,78,0.25);
+    background-color: rgba(254,112,78,0.14);
     transition: 0.18s;
 }
 
@@ -151,13 +151,13 @@ a {
 }
 
 .valid-bomb-placement-square.e  { clip-path: path('M 0,50 L 24,50 A 74,74 0,0,0 24,0 L 0,0 z'); }
-.valid-bomb-placement-square.se { clip-path: path('M 0,0 L 0,24 A 74,74 0,0,0 24,0 z'); }
+.valid-bomb-placement-square.se { clip-path: path('M 0,0 L 0,36 A 56,56 0,0,0 36,0 z'); }
 .valid-bomb-placement-square.s  { clip-path: path('M 0,0 L 50,0 L 50,24 A 74,74 0,0,1 0,24 z'); }
-.valid-bomb-placement-square.sw { clip-path: path('M 50,0 L 50,24 A 74,74 0,0,1 26,0 z'); }
+.valid-bomb-placement-square.sw { clip-path: path('M 50,0 L 50,36 A 56,56 0,0,1 14,0 z'); }
 .valid-bomb-placement-square.w  { clip-path: path('M 50,0 L 26,0 A 74,74 0,0,0 26,50 L 50,50 z'); }
-.valid-bomb-placement-square.nw { clip-path: path('M 50,50 L 50,26 A 74,74 0,0,0 26,50 z'); }
+.valid-bomb-placement-square.nw { clip-path: path('M 50,50 L 50,14 A 56,56 0,0,0 14,50 z'); }
 .valid-bomb-placement-square.n  { clip-path: path('M 0,50 L 50,50 L 50,26 A 74,74 0,0,0 0,26 z'); }
-.valid-bomb-placement-square.ne { clip-path: path('M 0,50 L 0,26 A 74,74 0,0,1 24,50 z'); }
+.valid-bomb-placement-square.ne { clip-path: path('M 0,50 L 0,14 A 56,56 0,0,1 36,50 z'); }
 
 .valid-bomb-placement-square .potential-bomb {
     opacity: 0.5;

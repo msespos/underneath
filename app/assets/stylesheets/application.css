@@ -53,6 +53,15 @@ a {
 
 .valid_move_square {
     background-color: rgba(78,177,254,0.25);
+    transition: 0.18s;
+}
+
+.valid_move_square:hover {
+    background-color: rgba(78,177,254,0.55);
+}
+
+.valid_move_square:hover .text {
+    color: rgba(78,177,254,0.8);
 }
 
 .valid_move_square .text {

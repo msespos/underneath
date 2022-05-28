@@ -209,6 +209,7 @@ class Game < ApplicationRecord
   def humans_view_state
     valid_moves = active_piece.valid_moves if active_piece_side == 'humans'
     local_active_piece = active_piece if active_piece_side == 'humans'
+    valid_bomb_placements = active_piece.valid_bomb_placements if active_piece_side == 'humans'
     { game: self.as_json.except('worm_message'),
       humans: humans,
       active_bombs: active_bombs,

@@ -22,9 +22,14 @@ class TurnStrip extends React.Component {
     }
     // actual numbers
     for (var i = 1; i < 99; i++) {
+      var addnlClass = '';
+      if (this.props.next_worm_emergence_turn == i) {
+        addnlClass = 'next-emergence';
+      }
+
       turnIndicators.push(
         <div key={"turn_indicator_" + i}
-             className="w-12 flex-none text-center">{i}</div>
+             className={"w-12 flex-none text-center " + addnlClass}>{i}</div>
       )
     }
     // 96/2 - 7/2 = 89/2 = 89/8 rem

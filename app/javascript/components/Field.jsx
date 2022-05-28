@@ -16,6 +16,7 @@ class Field extends React.Component {
       worm: props.worm,
       humans: props.humans,
       humans_left: props.humans_left,
+      next_worm_emergence_turn: props.next_worm_emergence_turn,
       face_up_cards: props.face_up_cards,
       face_down_cards: props.face_down_cards,
       rocks: props.rocks,
@@ -61,7 +62,8 @@ class Field extends React.Component {
                   valid_bomb_placements={this.state.valid_bomb_placements} />
   			<Board />
         <TurnStrip turn={this.state.game.turn} 
-                   phase={this.state.game.phase} />
+                   phase={this.state.game.phase}
+                   next_worm_emergence_turn={this.state.next_worm_emergence_turn} />
         <Hud active_piece={this.state.active_piece} 
              humans_bombs={this.state.game.humans_bombs} 
              humans_left={this.state.humans_left} 

@@ -192,6 +192,10 @@ a {
     border-radius: 50%;
 }
 
+.turn-strip .next-emergence {
+    color: red;
+    font-weight: bold;
+}
 .please-move {
     font-size: 140%;
 }

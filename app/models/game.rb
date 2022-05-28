@@ -214,6 +214,13 @@ class Game < ApplicationRecord
     valid_moves = active_piece.valid_moves if active_piece_side == 'humans'
     local_active_piece = active_piece if active_piece_side == 'humans'
     valid_bomb_placements = active_piece.valid_bomb_placements if active_piece_side == 'humans'
+    if on_worm_emergence_turn?
+      worms_x_position = worm.x_position
+      worms_y_position = worm.y_position
+    else
+      worms_x_position = 'hidden'
+      worms_y_position = 'hidden'
+    end
     { game: self.as_json.except('worm_message'),
       humans: humans,
       active_bombs: active_bombs,
@@ -223,6 +230,8 @@ class Game < ApplicationRecord
       valid_moves: valid_moves,
       valid_bomb_placements: valid_bomb_placements,
       humans_message: humans_message,
+      worms_x_position: worms_x_position,
+      worms_y_position: worms_y_position,
       next_worm_emergence_turn: next_worm_emergence_turn }
   end
 
@@ -267,5 +276,9 @@ class Game < ApplicationRecord
   # need to test
   def next_worm_emergence_turn
     turn - turn % 4 + 4
+  end
+
+  def on_worm_emergence_turn?
+    turn % 4 == 0
   end
 end

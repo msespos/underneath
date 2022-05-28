@@ -15,13 +15,14 @@ class Field extends React.Component {
       game: props.game,
       worm: props.worm,
       humans: props.humans,
+      humans_left: props.humans_left,
       face_up_cards: props.face_up_cards,
       face_down_cards: props.face_down_cards,
       rocks: props.rocks,
       active_bombs: props.active_bombs,
       active_piece: props.active_piece,
       valid_moves: props.valid_moves,
-      valid_bomb_placements: props.valid_bomb_placements,
+      valid_bomb_placements: props.valid_bomb_placements
     };
 
     const ref = this;
@@ -63,6 +64,7 @@ class Field extends React.Component {
                    phase={this.state.game.phase} />
         <Hud active_piece={this.state.active_piece} 
              humans_bombs={this.state.game.humans_bombs} 
+             humans_left={this.state.humans_left} 
              humans_message={this.state.humans_message} />
   		</div>
   	);

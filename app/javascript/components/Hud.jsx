@@ -20,6 +20,16 @@ class Hud extends React.Component {
       </div>)
     }
 
+    if (this.props.humans_left) {
+      hud_items.push(<div key="hud2" className="float-left w-16">
+          <img className="float-left"
+               src="/img/human.png" height="32" width="32" />
+          <div className="float-left human-count mt-1.5">
+            {this.props.humans_left}
+          </div>
+      </div>)
+    }
+
     if (this.props.humans_message) {
       hud_items.push(<div key="hud3" className="float-left w-40 game-message">
         {this.props.humans_message}

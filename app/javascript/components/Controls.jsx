@@ -42,7 +42,12 @@ const sendPlay = (gameId, type, deltaX, deltaY) => {
       'X-CSRF-Token': csrf
     },
     body: body
-  });
+  }).then(async response => {
+    if (!response.ok) {
+      console.log("Error from server!!",body);
+      setTimeout(() => { document.reload(); }, 1000);
+    }
+  })
 };
 
 function renderActiveHalo(x, y, perRow) {

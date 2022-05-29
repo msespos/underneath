@@ -107,4 +107,9 @@ class Human < Piece
   def last_move
     nil
   end
+
+  def visible_to_worm?
+    number_of_king_moves_away([x_position - game.worm.x_position,
+                               y_position - game.worm.y_position]) <= 2
+  end
 end

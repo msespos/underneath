@@ -246,10 +246,12 @@ class Game < ApplicationRecord
   def worms_view_state
     valid_moves = active_piece.valid_moves if active_piece_side == 'worm'
     local_active_piece = active_piece if active_piece_side == 'worm'
+    humans_if_visible = humans.select(&:visible_to_worm?)
     { game: self.as_json.except(*['humans_bombs',
                                   'last_revealed_card_message',
                                   'humans_message']),
       worm: worm,
+      humans: humans_if_visible,
       active_bombs: active_bombs,
       rocks: rocks_locations,
       active_piece: local_active_piece,

@@ -90,5 +90,13 @@ RSpec.describe Game, type: :model do
         expect(second_cards_face_status).to eq(false)
       end
     end
+    context 'when set_up_cards is run' do
+      it 'creates a total of 21 Rock cards' do
+        game.save
+        game.set_up_cards
+        number_of_rock_cards = game.cards.where(type: 'Rock').count
+        expect(number_of_rock_cards).to eq(21)
+      end
+    end
   end
 end

@@ -14,8 +14,8 @@ function renderEntity(type, index, piece, per_row) {
   const squareSize = 16*96/(4*per_row);
   const pieceOffset = (squareSize - 32)/2/(96*16/4);
 
-  const top = (100 * (x/per_row + pieceOffset)) + '%';
-  const left = (100 * (y/per_row + pieceOffset)) + '%';
+  const top = (100 * (y/per_row + pieceOffset)) + '%';
+  const left = (100 * (x/per_row + pieceOffset)) + '%';
 
   return (
     <div key={type + '_' + index}

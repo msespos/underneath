@@ -6,27 +6,27 @@ var arrows = {};
 arrows[0] = {};
 arrows[-1] = {};
 arrows[1] = {};
-arrows[0][-1]  = '←';
-arrows[0][+1]  = '→';
-arrows[-1][0]  = '↑';
-arrows[+1][0]  = '↓';
+arrows[0][-1]  = '↑';
+arrows[0][+1]  = '↓';
+arrows[-1][0]  = '←';
+arrows[+1][0]  = '→';
 arrows[-1][-1] = '↖';
-arrows[-1][+1] = '↗';
+arrows[-1][+1] = '↙';
 arrows[+1][+1] = '↘';
-arrows[+1][-1] = '↙';
+arrows[+1][-1] = '↗';
 
 var directionNames = {};
 directionNames[0] = {};
 directionNames[-1] = {};
 directionNames[1] = {};
-directionNames[0][-1]  = 'w';
-directionNames[0][+1]  = 'e';
-directionNames[-1][0]  = 'n';
-directionNames[+1][0]  = 's';
+directionNames[0][-1]  = 'n';
+directionNames[0][+1]  = 's';
+directionNames[-1][0]  = 'w';
+directionNames[+1][0]  = 'e';
 directionNames[-1][-1] = 'nw';
-directionNames[-1][+1] = 'ne';
+directionNames[-1][+1] = 'sw';
 directionNames[+1][+1] = 'se';
-directionNames[+1][-1] = 'sw';
+directionNames[+1][-1] = 'ne';
 
 // submit move to server
 const sendPlay = (gameId, type, deltaX, deltaY) => {
@@ -47,8 +47,8 @@ const sendPlay = (gameId, type, deltaX, deltaY) => {
 
 function renderActiveHalo(x, y, perRow) {
   const size = 100/perRow + '%';
-  const top = (100 * (x/perRow)) + '%';
-  const left = (100 * (y/perRow)) + '%';
+  const top = (100 * (y/perRow)) + '%';
+  const left = (100 * (x/perRow)) + '%';
   return (
     <div key="active-halo"
          className="active-halo"
@@ -61,8 +61,8 @@ function renderActiveHalo(x, y, perRow) {
 
 function renderMoveTarget(type, index, x, y, perRow, gameId, activeX, activeY) {
   const size = 100/perRow + '%'  
-  const top = (100 * (x/perRow)) + '%';
-  const left = (100 * (y/perRow)) + '%';
+  const top = (100 * (y/perRow)) + '%';
+  const left = (100 * (x/perRow)) + '%';
 
   const dx = x-activeX;
   const dy = y-activeY;
@@ -86,8 +86,8 @@ function renderMoveTarget(type, index, x, y, perRow, gameId, activeX, activeY) {
 
 function renderBombTarget(type, index, x, y, perRow, gameId, activeX, activeY) {
   const size = 100/perRow + '%'  
-  const top = (100 * (x/perRow)) + '%';
-  const left = (100 * (y/perRow)) + '%';
+  const top = (100 * (y/perRow)) + '%';
+  const left = (100 * (x/perRow)) + '%';
 
   const dx = x-activeX;
   const dy = y-activeY;

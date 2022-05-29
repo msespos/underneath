@@ -23,7 +23,9 @@ class Field extends React.Component {
       active_bombs: props.active_bombs,
       active_piece: props.active_piece,
       valid_moves: props.valid_moves,
-      valid_bomb_placements: props.valid_bomb_placements
+      valid_bomb_placements: props.valid_bomb_placements,
+      humans_message: props.humans_message,
+      worm_message: props.worm_message
     };
 
     const ref = this;
@@ -68,6 +70,7 @@ class Field extends React.Component {
              humans_bombs={this.state.game.humans_bombs} 
              humans_left={this.state.humans_left} 
              humans_message={this.state.humans_message}
+             worm_message={this.state.worm_message}
              last_revealed_card_message={this.state.game.last_revealed_card_message} />
   		</div>
   	);

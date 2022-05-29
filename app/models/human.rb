@@ -109,6 +109,7 @@ class Human < Piece
   end
 
   def visible_to_worm?
+    return false unless alive
     number_of_king_moves_away([x_position - game.worm.x_position,
                                y_position - game.worm.y_position]) <= 2
   end

@@ -58,7 +58,8 @@ class Field extends React.Component {
                   face_down_cards={this.state.face_down_cards}
                   face_up_cards={this.state.face_up_cards}
                   active_bombs={this.state.active_bombs} />
-        <Controls gameId={this.state.game.id} 
+        <Controls game_id={this.state.game.id} 
+                  game_status={this.state.game.status}
                   active_piece={this.state.active_piece}
                   valid_moves={this.state.valid_moves}
                   valid_bomb_placements={this.state.valid_bomb_placements} />
@@ -66,7 +67,8 @@ class Field extends React.Component {
         <TurnStrip turn={this.state.game.turn} 
                    phase={this.state.game.phase}
                    next_worm_emergence_turn={this.state.next_worm_emergence_turn} />
-        <Hud active_piece={this.state.active_piece} 
+        <Hud game_status={this.state.game.status}
+             active_piece={this.state.active_piece} 
              humans_bombs={this.state.game.humans_bombs} 
              humans_left={this.state.humans_left} 
              humans_message={this.state.humans_message}

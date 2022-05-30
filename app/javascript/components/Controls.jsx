@@ -120,6 +120,15 @@ class Controls extends React.Component {
   render () {
     const output = [];
 
+    // Game in play is a magic value. Everything else is done.
+    if (this.props.game_status !== "Game in play") {
+      output.push(
+        <div key="game_finish_banner"
+             className="w-96 h-16 mt-40 game-finish-banner">
+             <span>{this.props.game_status}</span>
+        </div>)
+    }
+
     if (this.props.active_piece) {
       output.push(
         renderActiveHalo(
@@ -140,7 +149,7 @@ class Controls extends React.Component {
             target[0],
             target[1],
             8,
-            this.props.gameId,
+            this.props.game_id,
             this.props.active_piece.x_position,
             this.props.active_piece.y_position)
         );
@@ -159,7 +168,7 @@ class Controls extends React.Component {
             target[0],
             target[1],
             8,
-            this.props.gameId,
+            this.props.game_id,
             this.props.active_piece.x_position,
             this.props.active_piece.y_position)
         );

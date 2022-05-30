@@ -172,6 +172,7 @@ a {
 .n  .potential-bomb { margin-top: 1.9rem; margin-left: 1rem; }
 .ne .potential-bomb { margin-top: 1.9rem; margin-left: 0.1rem; }
 
+
 /* --- Turn-strip + HUD ---- */
 
 .turn-strip {
@@ -195,12 +196,23 @@ a {
     color: red;
     font-weight: bold;
 }
-.please-move {
+.active-message {
     font-size: 140%;
 }
-.please-wait, .game-message {
+.idle-message, .game-message {
     opacity: 0.7;
     font-size: 70%;
     line-height: 105%;
     margin-top: 0.25rem;
+}
+
+.game-finish-banner {
+    background-color: rgba(20,10,0,0.5);
+    border-top: 2px solid rgba(250,200,140,0.5);
+    border-bottom: 2px solid rgba(250,200,140,0.5);
+    color: rgba(250,200,140,0.75);
+    font-size: 200%;
+    line-height: 200%;
+    text-transform: uppercase;
+    text-align: center;
 }

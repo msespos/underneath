@@ -16,7 +16,9 @@ class Human < Piece
 
   def valid_bomb_placement?(v)
     game.humans_bombs > 0 &&
-    valid_move?(v, position, last_move) &&
+    # Not valid_move? here because moving onto an emergent worm is
+    #  not a valid_move but it is bombable
+    valid_move_geometry?(v, position) &&
     !card_on?(self.position + Vector.elements(v))
   end
 

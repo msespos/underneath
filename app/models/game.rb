@@ -159,7 +159,7 @@ class Game < ApplicationRecord
 
   # need to test
   def bomb_emergent_worm(v)
-    if worm.emergent == true &&
+    if on_worm_emergence_turn? &&
       active_piece.x_position + v[0] == worm.x_position &&
       active_piece.y_position + v[1] == worm.y_position
       worm.die!

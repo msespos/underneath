@@ -139,7 +139,7 @@ class Worm < Piece
 
   # need to fix the verbose naming
   def accessible_squares_no_last_moves
-    accessible_squares.map { |e| e[0] }.uniq
+    accessible_squares.map { |e| Vector[*e[0]] }.uniq
   end
 
   def valid_moves_plus_directions
@@ -166,9 +166,9 @@ class Worm < Piece
     self.alive = false
     self.x_position = nil
     self.y_position = nil
-    self.save
+    self.save!
     game.worm_message = 'Your worm is dead'
     game.humans_message = 'You just killed the worm'
-    game.save
+    game.save!
   end
 end

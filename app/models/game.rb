@@ -170,8 +170,10 @@ class Game < ApplicationRecord
     if worm.alive == false
       self.status = 'Humans win'
     # fix verbose naming
-    elsif any_human_inaccessible_and_not_on_a_rock?
-      self.status = 'Humans win'
+    # TODO: fix bug + performance in this
+    # TODO: change to draw?
+    # elsif any_human_inaccessible_and_not_on_a_rock?
+    #  self.status = 'Humans win'
     elsif all_humans_dead?
       self.status = 'Worm wins'
     else

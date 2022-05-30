@@ -7,7 +7,11 @@
 				<div>
 					Game <%= g.id %>:
 					<% if @player_id.in? [g.worm_player_id, g.human_player_id] %>
-						<%= link_to "Play", g %>
+						<% if g.status == "Game in play" %>
+							<%= link_to "Play", g %>
+						<% else %>
+							<%= link_to "Review", g %>
+						<% end %>
 					<% else %>
 						<%= link_to "Join", "/games/#{g.id}/join", method: :post %>
 					<% end %>

@@ -12,6 +12,7 @@ class GamesController < ApplicationController
       players = [g.worm_player_id, g.human_player_id]
       (@player_id.in?(players) || nil.in?(players)) && players.any?
     end
+    @games = @games[0..11]
   end
 
   def show

@@ -7,3 +7,5 @@ The board is an 8x8 grid. The humans start spread out along one corner of the bo
 Throughout the game, the humans must position themselves strategically while gathering as many bombs as they can, while they wait for the worm to surface so that they can try to defeat it. The worm must use its vibration sensing abilities to make educated guesses as to where the humans are and try to eat them one by one.
 
 This game was conceived as a fun, weird, unconventional project for ME and AA to collaborate on in order to work on Ruby on Rails and OOP in particular (for ME in particular), as well as learn other technologies.
+
+Play it [here](https://floating-scrubland-32569.herokuapp.com/). Load a game in one browser window and join it in another. (If you are using one computer, use two separate browsers, though it won't be much fun as you'll be able to see both sides of the board.)

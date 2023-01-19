@@ -2,7 +2,7 @@
 
 Humans' view               | Worm's view
 :-------------------------:|:-------------------------:
-<img src="https://msespos.github.io/portfolio/imgs/underneath%20humans%20screenshot.png" alt="Screenshot of Underneath game, humans' view" width="200"/> | <img src="https://msespos.github.io/portfolio/imgs/underneath%20worm%20screenshot.png" alt="Screenshot of Underneath game, worm's view" width="200"/>
+<img src="https://msespos.github.io/portfolio/imgs/underneath%20humans%20screenshot.png" alt="Screenshot of Underneath game, humans' view" width="300"/> | <img src="https://msespos.github.io/portfolio/imgs/underneath%20worm%20screenshot.png" alt="Screenshot of Underneath game, worm's view" width="300"/>
 
 Underneath is a two player online board game, pitting four humans against one subterranean worm. One player controls the humans' movement (on the "surface"), and the other player controls the worm's (below the "surface", and breaking through to the "surface" every four turns). The humans win if at least one human defeats the worm with a bomb when it surfaces. The worm wins if it eats all of the humans over four different turns when it surfaces.
 

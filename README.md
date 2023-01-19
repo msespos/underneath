@@ -18,6 +18,6 @@ https://floating-scrubland-32569.herokuapp.com/
 
 Please allow a small wait time (typically less than 30 seconds) for Heroku's dyno to wake up.
 
-One player should load a game in one browser window, and the other player should join that game using a separate device. If you want to see both views on the same device, use two different browsers, though it won't be much fun as you'll be able to see both sides of the board.
+One player should load a game in one browser window, and the other player should join that game using a separate device. If you want to see both views on the same device, use two different browsers, though it won't be much fun as you'll be able to see both players' views at the same time.
 
 ***Massive thanks to AA for their contributions to this project, in the forms of creating the front end as well as mentoring ME throughout.***

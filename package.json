@@ -29,5 +29,8 @@
   },
   "engines": {
     "node": "16.20.0"
-  }
+  },
+  "scripts": {
+    "start": "node index.js"
+  } 
 }

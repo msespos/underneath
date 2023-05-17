@@ -2,6 +2,7 @@
   "name": "underneath",
   "private": true,
   "dependencies": {
+    "16": "^0.0.2",
     "@babel/preset-react": "^7.16.7",
     "@rails/actioncable": "^6.0.0",
     "@rails/activestorage": "^6.0.0",

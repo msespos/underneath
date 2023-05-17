@@ -25,8 +25,5 @@
     "autoprefixer": "^9.8.8",
     "postcss": "^7.0.39",
     "webpack-dev-server": "^3"
-  },
-  "engines": {
-    "node": "19.9.0"
   }
 }

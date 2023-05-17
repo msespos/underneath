@@ -26,6 +26,6 @@
     "webpack-dev-server": "^3"
   },
   "engines": {
-    "node": "16.18.1"
+    "node": "19.8.1"
   }
 }
